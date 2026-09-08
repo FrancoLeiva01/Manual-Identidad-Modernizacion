@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { BookOpen, Clock3, Folder } from "lucide-react";
+import { BookOpen, Clock3, Folder, Truck } from "lucide-react";
 
 export interface Miembro {
   nombre: string;
@@ -60,6 +60,42 @@ const equipoHemeroteca: Miembro[] = [
     nombre: "Nahuel",
     rol: "Front",
     imagen: "/caricaturas/nahuel.png",
+    color: "#DCFCE7",
+  },
+];
+
+const equipoRecursosHumanos: Miembro[] = [
+  {
+    nombre: "Esteban",
+    rol: "Front",
+    imagen: "/caricaturas/esteban.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Diego",
+    rol: "Back",
+    imagen: "/caricaturas/diego.png",
+    color: "#DCFCE7",
+  },
+];
+
+const equipoFoodTruck: Miembro[] = [
+  {
+    nombre: "Lautaro",
+    rol: "Back",
+    imagen: "/caricaturas/lautaro.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Maxi",
+    rol: "Front",
+    imagen: "/caricaturas/maxi.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Gonza",
+    rol: "Product Owner",
+    imagen: "/caricaturas/gonza.png",
     color: "#DCFCE7",
   },
 ];
@@ -129,29 +165,29 @@ ROLES Y PERMISOS
     estado: "en proceso",
   },
   {
-    id: "proyecto-3",
+    id: "RecursosHumanos",
     expediente: "EXP-0003/26",
-    nombre: "Proyecto 3",
+    nombre: "Recursos Humanos",
     color: "#475569",
     descripcionGeneral: "Descripción pendiente de completar.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
-    equipo: equipoHemeroteca,
+    equipo: equipoRecursosHumanos,
     lenguaje: "tsx",
     icono: Folder,
     estado: "En proceso",
   },
   {
-    id: "proyecto-4",
+    id: "FoodTruck",
     expediente: "EXP-0004/26",
-    nombre: "Proyecto 4",
+    nombre: "Food Truck",
     color: "#475569",
     descripcionGeneral: "Descripción pendiente de completar.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
-    equipo: equipoHemeroteca,
+    equipo: equipoFoodTruck,
     lenguaje: "tsx",
-    icono: Folder,
+    icono: Truck,
     estado: "en proceso",
   },
   {
