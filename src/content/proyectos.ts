@@ -16,8 +16,8 @@ export interface Proyecto {
   expediente: string;
   nombre: string;
   color: string;
-  patron?: "cuadriculado"; 
-  descripcion: string;
+  patron?: "cuadriculado";
+  descripcionGeneral: string;
   stack: string[];
   componentes: string[];
   equipo: Miembro[];
@@ -29,39 +29,72 @@ export interface Proyecto {
 // ACA CREAMOS CADA EQUIPO DE CADA PROYECTO
 
 const equipoRRHH_Asistencia: Miembro[] = [
-  { nombre: "Franco", rol: "Front (Ponele)", imagen: "/caricaturas/franco.png", color: "#DBEAFE" },
-  { nombre: "Gabi", rol: "Front", imagen: "/caricaturas/gabi.png", color: "#DCFCE7" },
-  { nombre: "Lucio", rol: "El Back-end Definitivo", imagen: "/caricaturas/lucio.png", color: "#FEF3C7" },
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Gabi",
+    rol: "Front",
+    imagen: "/caricaturas/gabi.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Lucio",
+    rol: "El Back-end Definitivo",
+    imagen: "/caricaturas/lucio.png",
+    color: "#FEF3C7",
+  },
 ];
 
 const equipoHemeroteca: Miembro[] = [
-  { nombre: "Franco", rol: "Front (Ponele)", imagen: "/equipo/franco.png", color: "#DBEAFE" },
-  { nombre: "Nahuel", rol: "Front", imagen: "/equipo/nahuel.png", color: "#DCFCE7" },
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Nahuel",
+    rol: "Front",
+    imagen: "/caricaturas/nahuel.png",
+    color: "#DCFCE7",
+  },
 ];
 
 export const proyectos: Proyecto[] = [
   {
     id: "Hemeroteca",
-    imagenes: ["/imagenesHemeroteca/hemeroteca.png", "/capturas/hemeroteca-2.png"],
+    imagenes: [
+      "/imagenesHemeroteca/hemeroteca.png",
+      "/capturas/hemeroteca-2.png",
+    ],
     expediente: "EXP-0001/26",
     nombre: "Hemeroteca Municipal",
     color: "#93C5FD",
     patron: "cuadriculado",
-    descripcion: "Este sistema de RRHH permite gestionar la asistencia de los empleados de manera eficiente y precisa, brindando herramientas para el registro, seguimiento y análisis de la asistencia laboral.",
+    descripcionGeneral:
+      "Este sistema de RRHH permite gestionar la asistencia de los empleados de manera eficiente y precisa, brindando herramientas para el registro, seguimiento y análisis de la asistencia laboral.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
     equipo: equipoHemeroteca,
-    lenguaje: ["tsx", "directus"],
+    lenguaje: ["tsx"],
     icono: BookOpen,
     estado: "Terminado",
   },
   {
     id: "rrhh-asistencia",
-    imagenes: ["/imagenesRRHH/LOGINrrhh.png", "/imagenesRRHH/adicionales.png", "/imagenesRRHH/calendario.png"],
+    imagenes: [
+      "/imagenesRRHH/LOGINrrhh.png",
+      "/imagenesRRHH/adicionales.png",
+      "/imagenesRRHH/calendario.png",
+    ],
     expediente: "EXP-0002/26",
-    nombre: "RRHH Asistencia",
+    nombre: "RRHH | Asistencia",
     color: "#475569",
-    descripcion: `Sistema de gestión de asistencia, adicionales y notificaciones para RRHH.
+    descripcionGeneral: `Sistema de gestión de asistencia, adicionales y notificaciones para RRHH.
 
 ADICIONALES (AFE, Extras, Resp. Patrimonial, Despacho)
 - Crear: arma la tabla buscando agentes por CUIL/legajo, o subiendo un Excel con las 4 hojas (se lee en el navegador, no se guarda solo — se revisa/edita antes de confirmar).
@@ -91,47 +124,47 @@ ROLES Y PERMISOS
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
     equipo: equipoRRHH_Asistencia,
-    lenguaje: ["tsx", "-"],
+    lenguaje: ["tsx"],
     icono: Clock3,
-    estado: "en trámite",
+    estado: "en proceso",
   },
   {
     id: "proyecto-3",
     expediente: "EXP-0003/26",
     nombre: "Proyecto 3",
     color: "#475569",
-    descripcion: "Descripción pendiente de completar.",
+    descripcionGeneral: "Descripción pendiente de completar.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
     equipo: equipoHemeroteca,
     lenguaje: "tsx",
     icono: Folder,
-    estado: "en trámite",
+    estado: "En proceso",
   },
   {
     id: "proyecto-4",
     expediente: "EXP-0004/26",
     nombre: "Proyecto 4",
     color: "#475569",
-    descripcion: "Descripción pendiente de completar.",
+    descripcionGeneral: "Descripción pendiente de completar.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
     equipo: equipoHemeroteca,
     lenguaje: "tsx",
     icono: Folder,
-    estado: "en trámite",
+    estado: "en proceso",
   },
   {
     id: "proyecto-5",
     expediente: "EXP-0005/26",
     nombre: "Proyecto 5",
     color: "#475569",
-    descripcion: "Descripción pendiente de completar.",
+    descripcionGeneral: "Descripción pendiente de completar.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
     equipo: equipoHemeroteca,
     lenguaje: "tsx",
     icono: Folder,
-    estado: "en trámite",
+    estado: "en proceso",
   },
 ];
