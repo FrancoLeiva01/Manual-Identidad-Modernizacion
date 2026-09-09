@@ -3,7 +3,7 @@ import { proyectos } from "../content/proyectos";
 
 export function Sidebar() {
   return (
-    <aside className="w-64 shrink-0 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 py-5 flex flex-col">
+    <aside className="w-64 shrink-0 sticky top-0 h-screen overflow-y-auto bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 py-5 flex flex-col">
       <div className="flex items-center px-5 pb-4 mb-3 border-b border-gray-200 dark:border-slate-700">
         <img
           src="/-Isologotipo_Catamarca Capital.png"
