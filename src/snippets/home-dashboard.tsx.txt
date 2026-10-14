@@ -1,0 +1,498 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Pie, PieChart, Tooltip, Cell, ResponsiveContainer } from "recharts";
+import { Users, ClipboardCheck, Clock3, Calendar, Search, X } from "lucide-react";
+import { getAxiosInstance, ApiClient } from "@/lib/axios-factory";
+import { SelectSecretaria } from "@/modules/empleados/components/select-secretaria";
+import { SelectDependencia } from "@/modules/empleados/components/select-dependencia";
+import { TablaResultado } from "./Tabla-Resultado";
+
+interface ProgresionCargaData {
+  periodo: string;
+  dependenciaId?: string;
+  dependenciaNombre?: string;
+  totalEmpleadosActivosRRHH: number;
+  totalLegajosConAsistencia: number;
+  totalLegajosPendientes: number;
+  porcentajeProgresion: number;
+}
+
+interface ProgresionCargaResponse {
+  message: string;
+  data: ProgresionCargaData;
+  isSuccess: boolean;
+}
+
+const fetchProgresionCarga = async (
+  mes: number,
+  anio: number,
+  dependenciaId: string
+) => {
+  const api = getAxiosInstance(ApiClient.CARGA);
+
+  const { data } = await api.get<ProgresionCargaResponse>(
+    "/reportes/progresion-carga/dependencia",
+    { params: { mes, anio, dep_actual: dependenciaId } }
+  );
+  return data.data;
+};
+
+const COLORS = {
+  base: "#cbd5e1", // slate-300
+  asistencia: "#16a34a", // green-600
+  pendientes: "#f59e0b", // amber-500
+};
+
+const MESES = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
+
+// Rango de años disponible para el filtro (ajustá según necesites)
+const buildYearRange = (spanBefore = 2, spanAfter = 0) => {
+  const currentYear = new Date().getFullYear();
+  const years: number[] = [];
+  for (let y = currentYear - spanBefore; y <= currentYear + spanAfter; y++) {
+    years.push(y);
+  }
+  return years;
+};
+
+interface KpiCardProps {
+  label: string;
+  value: number | undefined;
+  icon: React.ElementType;
+  accent: string;
+  onClick?: () => void;
+  active?: boolean;
+}
+
+const KpiCard = ({
+  label,
+  value,
+  icon: Icon,
+  accent,
+  onClick,
+  active,
+}: KpiCardProps) => {
+  const Wrapper = onClick ? "button" : "div";
+
+  return (
+    <Wrapper
+      type={onClick ? "button" : undefined}
+      onClick={onClick}
+      className={`flex items-center gap-4 rounded-xl border bg-white dark:bg-gray-900 p-4 text-left transition-colors ${onClick ? "cursor-pointer hover:border-gray-300 dark:hover:border-gray-600" : ""
+        } ${active
+          ? "border-orange-300 ring-2 ring-orange-200/20"
+          : "border-gray-200 dark:border-gray-700"
+        }`}
+    >
+      <div
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
+        style={{ backgroundColor: `${accent}1a`, color: accent }}
+      >
+        <Icon className="h-5 w-5" />
+      </div>
+      <div>
+        <p className="text-xs font-medium text-muted-foreground">{label}</p>
+        <p className="text-xl font-bold text-gray-900 dark:text-white">
+          {value !== undefined ? value.toLocaleString("es-AR") : "-"}
+        </p>
+      </div>
+    </Wrapper>
+  );
+};
+
+interface PeriodoFilterProps {
+  mes: number;
+  anio: number;
+  years: number[];
+  onMesChange: (mes: number) => void;
+  onAnioChange: (anio: number) => void;
+}
+
+const PeriodoFilter = ({
+  mes,
+  anio,
+  years,
+  onMesChange,
+  onAnioChange,
+}: PeriodoFilterProps) => (
+  <div className="inline-flex items-center gap-1 rounded-xl bg-white p-1.5 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+    <Calendar className="ml-2 mr-1 h-4 w-4 text-slate-500 dark:text-slate-400" />
+
+    {/* Mes */}
+    <div className="relative">
+      <select
+        value={mes}
+        onChange={(e) => onMesChange(Number(e.target.value))}
+        className="
+          appearance-none
+          cursor-pointer
+          rounded-lg
+          bg-slate-50
+          py-2
+          pl-3
+          pr-8
+          text-sm
+          font-semibold
+          text-slate-700
+          outline-none
+          transition-colors
+          hover:bg-slate-100
+          focus:bg-slate-50
+          focus:ring-2
+          focus:ring-slate-500/30
+          dark:bg-gray-800
+          dark:text-gray-100
+          dark:hover:bg-gray-700
+          dark:focus:bg-slate-950/40
+        "
+      >
+        {MESES.map((nombre, index) => (
+          <option
+            key={nombre}
+            value={index + 1}
+            className="bg-white text-slate-700 dark:bg-gray-900 dark:text-gray-100"
+          >
+            {nombre}
+          </option>
+        ))}
+      </select>
+
+      <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+        ▾
+      </span>
+    </div>
+
+    <span className="mx-1 h-6 w-px bg-slate-200 dark:bg-gray-700" />
+
+    {/* Año */}
+    <div className="relative">
+      <select
+        value={anio}
+        onChange={(e) => onAnioChange(Number(e.target.value))}
+        className="
+          appearance-none
+          cursor-pointer
+          rounded-lg
+          bg-slate-50
+          py-2
+          pl-3
+          pr-8
+          text-sm
+          font-semibold
+          text-slate-700
+          outline-none
+          transition-colors
+          hover:bg-slate-100
+          focus:bg-slate-50
+          focus:ring-2
+          focus:ring-slate-500/30
+          dark:bg-gray-800
+          dark:text-gray-100
+          dark:hover:bg-gray-700
+          dark:focus:bg-slate-950/40
+        "
+      >
+        {years.map((year) => (
+          <option
+            key={year}
+            value={year}
+            className="bg-white text-slate-700 dark:bg-gray-900 dark:text-gray-100"
+          >
+            {year}
+          </option>
+        ))}
+      </select>
+
+      <span className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400">
+        ▾
+      </span>
+    </div>
+  </div>
+);
+
+export const HomePage = () => {
+  const now = new Date();
+  const [mes, setMes] = useState(now.getMonth() + 1);
+  const [anio, setAnio] = useState(now.getFullYear());
+  const years = buildYearRange();
+
+  // Secretaria pide la dependencia
+  const [secretariaId, setSecretariaId] = useState<string>("");
+  const [dependenciaId, setDependenciaId] = useState<string>("");
+  const [dependenciaNombre, setDependenciaNombre] = useState<string>("");
+
+  // Solo mostramos datos cuando hay secretaria + dependencia elegidas
+  const filtroCompleto = Boolean(secretariaId && dependenciaId);
+
+  // Mostrar/ocultar la tabla de legajos pendientes
+  const [mostrarTablaPendientes, setMostrarTablaPendientes] = useState(false);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["progresion-carga", mes, anio, dependenciaId],
+    queryFn: () => fetchProgresionCarga(mes, anio, dependenciaId),
+    enabled: filtroCompleto,
+  });
+
+  const baseData = data
+    ? [{ name: "Empleados activos", value: data.totalEmpleadosActivosRRHH }]
+    : [];
+
+  const breakdownData = data
+    ? [
+      { name: "Con asistencia", value: data.totalLegajosConAsistencia },
+      { name: "Pendientes", value: data.totalLegajosPendientes },
+    ]
+    : [];
+
+  const periodoLabel = filtroCompleto
+    ? `${data?.periodo ?? "-"} - ${dependenciaNombre}`
+    : "-";
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Progresion Asistencia | Dashboard
+            </h1>
+            <p className="text-slate-400 uppercase text-sm">
+              Período {periodoLabel}
+            </p>
+          </div>
+
+          {/* Filtro de mes y año */}
+          <PeriodoFilter
+            mes={mes}
+            anio={anio}
+            years={years}
+            onMesChange={setMes}
+            onAnioChange={setAnio}
+          />
+        </div>
+
+        {/* Filtros de organigrama */}
+        <div className="flex flex-col sm:flex-row sm:items-end gap-4 rounded-xl border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 md:w-fit">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:w-100">
+            <SelectSecretaria
+              value={secretariaId}
+              onChange={(value) => {
+                setSecretariaId(value);
+                setDependenciaId("");
+                setDependenciaNombre("");
+                setMostrarTablaPendientes(false);
+              }}
+            />
+            <SelectDependencia
+              secretariaId={secretariaId}
+              value={dependenciaId}
+              onChange={(value) => {
+                const dependencia = JSON.parse(value);
+                setDependenciaId(dependencia.id);
+                setDependenciaNombre(dependencia.nombre);
+                setMostrarTablaPendientes(false);
+              }}
+            />
+          </div>
+
+          {filtroCompleto && (
+            <button
+              type="button"
+              onClick={() => {
+                setSecretariaId("");
+                setDependenciaId("");
+                setDependenciaNombre("");
+                setMostrarTablaPendientes(false);
+              }}
+              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-gray-200 dark:border-gray-700 text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-gray-500 transition-colors cursor-pointer"
+            >
+              <X className="h-3.5 w-3.5" />
+              Limpiar filtros
+            </button>
+          )}
+        </div>
+      </div>
+
+      {filtroCompleto && isLoading && (
+        <p className="text-sm text-muted-foreground">Cargando métricas...</p>
+      )}
+      {filtroCompleto && isError && (
+        <p className="text-sm text-red-500">
+          No se pudieron cargar las métricas.
+        </p>
+      )}
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* KPI cards */}
+        <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4 content-start">
+          <KpiCard
+            label="Empleados activos"
+            value={filtroCompleto ? data?.totalEmpleadosActivosRRHH : undefined}
+            icon={Users}
+            accent={COLORS.base}
+          />
+          <KpiCard
+            label="Con asistencia"
+            value={filtroCompleto ? data?.totalLegajosConAsistencia : undefined}
+            icon={ClipboardCheck}
+            accent={COLORS.asistencia}
+          />
+          <KpiCard
+            label="Pendientes de Asistencia"
+            value={filtroCompleto ? data?.totalLegajosPendientes : undefined}
+            icon={Clock3}
+            accent={COLORS.pendientes}
+            active={mostrarTablaPendientes}
+            onClick={
+              filtroCompleto
+                ? () => setMostrarTablaPendientes((prev) => !prev)
+                : undefined
+            }
+          />
+
+          <div className="sm:col-span-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
+            <div className="flex items-center justify-between mb-1">
+              <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                Progresión de carga
+              </h2>
+              <span className="text-sm font-bold text-gray-900 dark:text-white">
+                {filtroCompleto && data ? `${data.porcentajeProgresion}%` : "-"}
+              </span>
+            </div>
+            <div className="h-2 w-full rounded-full bg-gray-100 dark:bg-gray-800">
+              <div
+                className="h-2 rounded-full bg-emerald-500 transition-all"
+                style={{
+                  width:
+                    filtroCompleto && data
+                      ? `${Math.min(data.porcentajeProgresion, 100)}%`
+                      : "0%",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Gráfico de torta de dos niveles */}
+        <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-4">
+          <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
+            Composición de legajos
+          </h2>
+
+          {!filtroCompleto || !data ? (
+            <div className="flex h-64 flex-col items-center justify-center gap-2 text-center">
+              <Search className="h-8 w-8 text-gray-300 dark:text-gray-600" />
+              <p className="text-sm text-muted-foreground max-w-50">
+                Seleccioná una secretaría y dependencia para ver los datos
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="relative h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    {/* Anillo interno: referencia del total de empleados activos */}
+                    <Pie
+                      data={baseData}
+                      dataKey="value"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="45%"
+                      outerRadius="55%"
+                      fill={COLORS.base}
+                      stroke="white"
+                      isAnimationActive={false}
+                    />
+                    {/* Anillo externo: desglose con asistencia vs pendientes */}
+                    <Pie
+                      data={breakdownData}
+                      dataKey="value"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="62%"
+                      outerRadius="85%"
+                      stroke="white"
+                      paddingAngle={2}
+                    >
+                      {breakdownData.map((entry) => (
+                        <Cell
+                          key={entry.name}
+                          fill={
+                            entry.name === "Con asistencia"
+                              ? COLORS.asistencia
+                              : COLORS.pendientes
+                          }
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      formatter={(value, name) => [
+                        Number(value ?? 0).toLocaleString("es-AR"),
+                        name,
+                      ]}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-2xl font-bold text-gray-900 dark:text-white">
+                    {data.porcentajeProgresion}%
+                  </span>
+                  <span className="text-xs text-muted-foreground">Cargado</span>
+                </div>
+              </div>
+
+              {/* Referencias */}
+              <div className="mt-2 flex flex-col gap-1.5 text-xs">
+                <div className="flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: COLORS.asistencia }}
+                  />
+                  <span className="text-gray-600 dark:text-gray-300">
+                    Con asistencia: {data.totalLegajosConAsistencia}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: COLORS.pendientes }}
+                  />
+                  <span className="text-gray-600 dark:text-gray-300">
+                    Pendientes: {data.totalLegajosPendientes}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className="h-2.5 w-2.5 rounded-full"
+                    style={{ backgroundColor: COLORS.base }}
+                  />
+                  <span className="text-gray-600 dark:text-gray-300">
+                    Total empleados activos: {data.totalEmpleadosActivosRRHH}
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      {filtroCompleto && mostrarTablaPendientes && (
+        <TablaResultado mes={mes} anio={anio} dependenciaId={dependenciaId} />
+      )}
+    </div>
+  );
+};

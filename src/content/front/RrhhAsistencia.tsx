@@ -1,4 +1,12 @@
-import { CodeBlock } from "../../components/codeBlock";
+// import { CodeBlock } from "../../components/codeBlock";
+import { CodeBlockColapsable } from "../../components/codeBlockColapsable";
+import loginPageCode from "../../snippets/login-page.tsx.txt?raw";
+import topNavCode from "../../snippets/top-nav.tsx.txt?raw";
+import sidebarCode from "../../snippets/sidebar.tsx.txt?raw";
+import dashboardCode from "../../snippets/home-dashboard.tsx.txt?raw";
+import listadoAgentesCode from "../../snippets/listado-agentes.tsx.txt?raw";
+
+
 
 function Subtitulo({ children }: { children: string }) {
   return (
@@ -46,24 +54,6 @@ export default function FrontRrhhAsistencia() {
         UPDATE, DELETE).
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <img
-          src="/imagenesRRHH/estilos1.png"
-          alt="Pantalla 1 - Sistema RRHH Asistencia"
-          className="border border-gray-200 dark:border-slate-700 object-cover w-full h-auto"
-        />
-        <img
-          src="/imagenesRRHH/estilos2.png"
-          alt="Pantalla 2 - Sistema RRHH Asistencia"
-          className="border border-gray-200 dark:border-slate-700 object-cover w-full h-auto"
-        />
-        <img
-          src="/imagenesRRHH/estilos3.png"
-          alt="Pantalla 3 - Sistema RRHH Asistencia"
-          className="border border-gray-200 dark:border-slate-700 object-cover w-full h-auto"
-        />
-      </div>
-
       {/* ================= LOGIN ================= */}
       <Subtitulo>Login</Subtitulo>
       <p className="text-gray-900 dark:text-slate-100 leading-relaxed text-xl my-1">
@@ -72,16 +62,20 @@ export default function FrontRrhhAsistencia() {
         pie con la leyenda de la Municipalidad de San Fernando del Valle de
         Catamarca y links a Términos de uso / Política de privacidad.
       </p>
-      <ImagenSeccion
-        src="/imagenesRRHH/Login.png"
-        alt="Login del sistema RRHH"
-      />
-      <CodeBlock
-        codigo={"// Pegá acá el código del formulario de login"}
-        lenguaje="tsx"
-      />
+      <p className="text-gray-900 dark:text-slate-100 leading-relaxed text-xl my-1">
+        En el caso de querer verlo, accede al link:{" "}
+        <a
+          className="text-cyan-600 dark:text-cyan-400 underline"
+          href="https://rrhh-asistencia.apps.cc.gob.ar/login"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://rrhh-asistencia.apps.cc.gob.ar/login
+        </a>
+      </p>
+      <CodeBlockColapsable codigo={loginPageCode} lenguaje="tsx" />
 
-      {/* ================= LAYOUT GENERAL ================= */}
+      {/* ================= LAYOUT GENERAL (TOP-NAV Y SIDEBAR) ================= */}
       <Subtitulo>Layout general (sidebar + topbar)</Subtitulo>
       <p className="text-gray-900 dark:text-slate-100 leading-relaxed text-xl my-1">
         El sidebar se organiza en grupos colapsables bajo el label "PRINCIPAL":
@@ -89,18 +83,11 @@ export default function FrontRrhhAsistencia() {
         Horarios, Reportes), Adicionales (AFE, Extras, Resp. Patrimonial,
         Despacho), Parámetros (Estados, Horarios, Feriados, Logs) y Ayuda
         (Manual de Uso). El ítem activo se resalta en celeste. Arriba, la topbar
-        tiene breadcrumb (ej. "RRHH &gt; Dashboard"), campana de notificaciones
-        con contador, toggle de tema claro/oscuro y avatar de usuario.
+        tiene breadcrumb (ej. "RRHH | Dashboard"), campana de notificaciones con
+        contador, toggle de tema claro/oscuro y avatar de usuario.
       </p>
-      <ImagenSeccion
-        src="/imagenesRRHH/Layout.png"
-        alt="Layout general: sidebar y topbar"
-      />
-      <CodeBlock codigo={"// Pegá acá el código del sidebar"} lenguaje="tsx" />
-      <CodeBlock
-        codigo={"// Pegá acá el código de la topbar / breadcrumb"}
-        lenguaje="tsx"
-      />
+      <CodeBlockColapsable codigo={sidebarCode} lenguaje="sidebar.tsx" />
+      <CodeBlockColapsable codigo={topNavCode} lenguaje="top-nav.tsx" />
 
       {/* ================= DASHBOARD ================= */}
       <Subtitulo>Dashboard</Subtitulo>
@@ -112,18 +99,11 @@ export default function FrontRrhhAsistencia() {
         antes de mostrar datos (estado vacío con ícono de búsqueda). Arriba a la
         derecha, selector de mes y año.
       </p>
-      <ImagenSeccion
+      {/* <ImagenSeccion
         src="/imagenesRRHH/Dash.png"
         alt="Dashboard de RRHH Asistencia"
-      />
-      <CodeBlock
-        codigo={"// Pegá acá el código de las cards de KPI"}
-        lenguaje="tsx"
-      />
-      <CodeBlock
-        codigo={"// Pegá acá el código del panel de Composición de legajos"}
-        lenguaje="tsx"
-      />
+      /> */}
+      <CodeBlockColapsable codigo={dashboardCode} lenguaje="home-dashboard.tsx" />
 
       {/* ================= LISTADO DE AGENTES ================= */}
       <Subtitulo>Listado de agentes</Subtitulo>
@@ -137,11 +117,11 @@ export default function FrontRrhhAsistencia() {
         src="/imagenesRRHH/ListadoAgentes.png"
         alt="Listado de agentes"
       />
-      <CodeBlock
-        codigo={"// Pegá acá el código de los filtros"}
-        lenguaje="tsx"
+      <CodeBlockColapsable
+        codigo={listadoAgentesCode}
+        lenguaje="asistencia-listado.tsx"
       />
-      <CodeBlock
+      <CodeBlockColapsable
         codigo={"// Pegá acá el código de la tabla de agentes"}
         lenguaje="tsx"
       />
@@ -163,17 +143,17 @@ export default function FrontRrhhAsistencia() {
         src="/imagenesRRHH/adicionales.png"
         alt="Adicionales - AFE"
       />
-      <CodeBlock
+      <CodeBlockColapsable
         codigo={
           "// Pegá acá el código de las pestañas Crear/Historial/Reportes"
         }
         lenguaje="tsx"
       />
-      <CodeBlock
+      <CodeBlockColapsable
         codigo={"// Pegá acá el código de la tabla editable de Adicionales"}
         lenguaje="tsx"
       />
-      <CodeBlock
+      <CodeBlockColapsable
         codigo={"// Pegá acá el código del uploader de Excel"}
         lenguaje="tsx"
       />
@@ -191,7 +171,7 @@ export default function FrontRrhhAsistencia() {
         src="/imagenesRRHH/Notificaciones.png"
         alt="Notificaciones"
       />
-      <CodeBlock
+      <CodeBlockColapsable
         codigo={"// Pegá acá el código de la tarjeta de notificación"}
         lenguaje="tsx"
       />

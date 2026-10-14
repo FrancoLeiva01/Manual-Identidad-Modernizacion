@@ -1,0 +1,284 @@
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import {
+  Menu,
+  Home,
+  ChartBar,
+  Newspaper,
+  PersonStandingIcon,
+  Settings,
+  ClockArrowUp,
+  Calendar1,
+  Table,
+  ClockPlusIcon,
+  Code2Icon,
+  HelpCircle,
+  BookIcon,
+  BookMarked,
+  UserSearch,
+  FileText,
+  UserPlus2,
+} from 'lucide-react';
+import logoCapitalDark from '@/assets/images/logo-capital-dark.webp';
+import logoCapitalLight from '@/assets/images/logo-capital-light.webp';
+import { ExpandableNavItem } from './expandable-nav-item';
+import { cn } from '@/lib/utils';
+import { usePermisos } from '@/modules/auth/hooks/use-permisos';
+
+export function Sidebar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const { esUsuarioAsistencia } = usePermisos();
+
+  function handleNavigation() {
+    setIsMobileMenuOpen(false);
+  }
+
+  function NavItem({
+    href,
+    icon: Icon,
+    children,
+  }: {
+    href: string;
+    icon: any;
+    children: React.ReactNode;
+  }) {
+    const activo = location.pathname === href || location.pathname.startsWith(`${href}/`);
+
+
+
+    useEffect(() => {
+
+      const clavesABorrar = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const clave = localStorage.key(i);
+        if (clave && clave.startsWith('asistencia-registro-')) {
+          clavesABorrar.push(clave);
+        }
+        if (clave && clave.startsWith('asistencia-adicionales-')) {
+          clavesABorrar.push(clave);
+        }
+        if (clave && clave.startsWith('asistencia-docente-registro-')) {
+          clavesABorrar.push(clave);
+        }
+        if (clave && clave.startsWith('asistencia-adicionales-')) {
+          clavesABorrar.push(clave);
+        }
+      }
+      // Ahora sí, borrar
+      clavesABorrar.forEach(clave => localStorage.removeItem(clave));
+    }, [location])
+
+    return (
+      <Link
+        to={href}
+        onClick={handleNavigation}
+        className={cn(
+          'flex items-center px-3 py-2 text-[15px] font-medium rounded-md transition-all duration-150',
+          activo
+            ? 'bg-primary/10 text-primary font-semibold shadow-xs'
+            : 'text-slate-800 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800/60',
+        )}
+      >
+        <Icon className={cn('h-4.5 w-4.5 mr-3 shrink-0 transition-colors', activo ? 'text-primary' : 'text-slate-600')} />
+        <span>{children}</span>
+      </Link>
+    );
+  }
+
+  return (
+    <>
+      <button
+        type="button"
+        className="xl:hidden fixed left-4 z-70 p-2 mt-3 rounded-lg bg-background shadow-md hover:cursor-pointer hover:bg-accent transition-colors"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        <Menu className="h-5 w-5 text-muted-foreground" />
+      </button>
+
+      <nav
+        className={`
+          fixed inset-y-0 left-0 z-70 w-64 bg-background transform transition-transform duration-200 ease-in-out
+          xl:translate-x-0 xl:sticky xl:top-0 xl:h-screen flex flex-col overflow-y-auto
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
+        {/* Header / Logo */}
+        <Link
+          to="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="h-16 px-6 flex items-center border-b border-border bg-slate-50/50 dark:bg-slate-900/40 shrink-0"
+        >
+          <div className="flex items-center gap-3">
+            <img
+              src={logoCapitalDark}
+              alt="Logo Capital"
+              width={150}
+              height={38}
+              className="shrink-0 hidden dark:block"
+            />
+            <img
+              src={logoCapitalLight}
+              alt="Logo Capital"
+              width={150}
+              height={38}
+              className="shrink-0 block dark:hidden"
+            />
+          </div>
+        </Link>
+
+        {/* Navigation Content */}
+        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-4">
+          {/* SECCIÓN PRINCIPAL */}
+          <div className="space-y-1">
+            <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/60 select-none">
+              Principal
+            </p>
+            <NavItem href="/dashboard" icon={Home}>
+              Dashboard
+            </NavItem>
+          </div>
+
+          {/* SECCIÓN GESTIÓN */}
+          <div className="space-y-1">
+            <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/60 select-none">
+              Gestión
+            </p>
+
+            <ExpandableNavItem
+              menuKey="Asistencias"
+              icon={Newspaper}
+              handleNavigation={handleNavigation}
+              subItems={[
+                {
+                  href: '/asistencia/agentes',
+                  icon: PersonStandingIcon,
+                  label: 'Planta Permanente',
+                },
+                {
+                  href: '/cargar-horarios',
+                  icon: ClockPlusIcon,
+                  label: 'Cargar Horarios',
+                },
+                {
+                  href: '/asistencia/reportes',
+                  icon: Newspaper,
+                  label: 'Reportes',
+                },
+              ]}
+            >
+              Asistencias
+            </ExpandableNavItem>
+
+            <ExpandableNavItem
+              menuKey="Docentes"
+              icon={BookMarked}
+              handleNavigation={handleNavigation}
+              subItems={[
+                {
+                  href: '/asistencia/docentes',
+                  icon: BookMarked,
+                  label: 'Listado Docentes',
+                },
+                {
+                  href: '/cargar-docentes',
+                  icon: ClockPlusIcon,
+                  label: 'Cargar Horarios',
+                },
+                {
+                  href: '/asistencia/docentes/informes',
+                  icon: FileText,
+                  label: 'Informes',
+                },
+              ]}
+            >
+              Docentes
+            </ExpandableNavItem>
+
+            <ExpandableNavItem
+              menuKey="Adicionales"
+              icon={ClockArrowUp}
+              handleNavigation={handleNavigation}
+              subItems={[
+                {
+                  href: '/adicionales/afe',
+                  icon: Table,
+                  label: 'AFE',
+                },
+                {
+                  href: '/adicionales/extras',
+                  icon: Table,
+                  label: 'Extras',
+                },
+                {
+                  href: '/adicionales/patrimonial',
+                  icon: Table,
+                  label: 'Resp. Patrimonial',
+                },
+                {
+                  href: '/adicionales/despacho',
+                  icon: Table,
+                  label: 'Despacho',
+                },
+                {
+                  href: '/adicionales/consulta-legajo',
+                  icon: UserSearch,
+                  label: 'Consultar Legajo',
+                },
+              ]}
+            >
+              Adicionales
+            </ExpandableNavItem>
+          </div>
+
+          {/* SECCIÓN CONFIGURACIÓN Y SISTEMA */}
+          <div className="space-y-1">
+            <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/60 select-none">
+              Sistema
+            </p>
+
+            <ExpandableNavItem
+              menuKey="Parametros"
+              icon={Settings}
+              handleNavigation={handleNavigation}
+              subItems={[
+                { href: '/asignar-dependencia', icon: UserPlus2, label: 'Asignar Dependencia' },
+                { href: '/estados-asistencias', icon: ChartBar, label: 'Estados' },
+                ...(esUsuarioAsistencia
+                  ? []
+                  : [{ href: '/plantillas-turno', icon: ClockArrowUp, label: 'Horarios' }]),
+                { href: '/feriados', icon: Calendar1, label: 'Feriados' },
+                ...(esUsuarioAsistencia ? [] : [{ href: '/logs', icon: Code2Icon, label: 'Logs' }]),
+              ]}
+            >
+              Parámetros
+            </ExpandableNavItem>
+
+            <ExpandableNavItem
+              menuKey="Ayuda"
+              icon={HelpCircle}
+              handleNavigation={handleNavigation}
+              subItems={[
+                {
+                  href: '/manualUso.pdf',
+                  icon: BookIcon,
+                  label: 'Manual de Uso',
+                },
+              ]}
+            >
+              Ayuda
+            </ExpandableNavItem>
+          </div>
+        </div>
+      </nav>
+
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-50 z-65 xl:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+    </>
+  );
+}

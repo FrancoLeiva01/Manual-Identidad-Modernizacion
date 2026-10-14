@@ -1,0 +1,160 @@
+
+import { EmpleadoFilter } from '@/modules/empleados/components/empleadoFilter';
+import { useEmpleado } from '@/modules/empleados/hooks/use-empleados';
+import type { Empleado } from '@/modules/empleados/interfaces/empleados-interfaces';
+import { ConfigTable } from '@/shared/components';
+import type { EntityConfig } from '@/shared/types';
+import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Badge } from '@/components/ui/badge';
+import { Building2 } from 'lucide-react';
+
+const AsistenciaListado = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const {
+    data,
+    currentParams,
+    updateParams,
+    clearFilters,
+    pagination,
+    isFetching,
+    isLoading,
+  } = useEmpleado();
+
+  useEffect(() => {
+    sessionStorage.setItem('asistencia_listado_url', location.pathname + location.search);
+
+    const clavesABorrar = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const clave = localStorage.key(i);
+      if (clave && clave.startsWith('asistencia-registro-')) {
+        clavesABorrar.push(clave);
+      }
+      if (clave && clave.startsWith('asistencia-adicionales-')) {
+        clavesABorrar.push(clave);
+      }
+    }
+    // Ahora sí, borrar
+    clavesABorrar.forEach(clave => localStorage.removeItem(clave));
+  }, [location.pathname, location.search]);
+
+  const config: EntityConfig<Empleado> = {
+    title: 'Listado de Agentes',
+    description: 'Listado de agentes inscriptos en el sistema de asistencia',
+    searchPlaceholder: 'Buscar por algún criterio',
+
+    columns: [
+      {
+        key: 'NumeroLegajo',
+        label: 'Legajo',
+        render: (_, empleado) => (
+          <Badge
+            variant="outline"
+            className="text-sm font-semibold dark:bg-slate-800 text-slate-900 dark:text-slate-300 border-slate-300 dark:border-slate-700 px-3 py-1"
+          >
+            {empleado.NumeroLegajo}
+          </Badge>
+        ),
+      },
+      {
+        key: 'Apellido',
+        label: 'Nombre completo',
+        render: (_, empleado) => (
+          <div className="flex flex-col">
+            <span className="font-semibold text-slate-900 dark:text-slate-100">
+              {empleado.Nombre} {empleado.Apellido}
+            </span>
+            {empleado.Cuil && (
+              <span className="text-xs italic text-muted-foreground font-mono">
+                CUIT: {empleado.Cuil}
+              </span>
+            )}
+          </div>
+        ),
+      },
+      {
+        key: 'dep_actual_nombre',
+        label: 'Dependencia',
+        render: (_, empleado) =>
+          empleado.dep_actual_nombre ? (
+            <div className="flex items-center gap-1.5 max-w-xs" title={empleado.dep_actual_nombre}>
+              <Building2 className="w-4 h-4 text-slate-400 shrink-0" />
+              <span className="text-xs text-slate-700 dark:text-slate-300 truncate italic">
+                {empleado.dep_actual_nombre}
+              </span>
+            </div>
+          ) : (
+            <span className="text-muted-foreground text-xs">-</span>
+          ),
+      },
+      {
+        key: 'situacion_revista',
+        label: 'Situación Revista',
+        render: (_, empleado) => {
+          if (!empleado.situacion_revista) return <span className="text-muted-foreground text-xs">-</span>;
+          const sit = empleado.situacion_revista.toUpperCase();
+          const esPlantaPermanente = sit.includes('PLANTA') || sit.includes('PERMANENTE');
+          return (
+            <Badge
+              variant="outline"
+              className={`text-xs font-semibold px-3 py-1 shrink-0 ${
+                esPlantaPermanente
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-300 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
+                  : 'bg-red-50 text-red-700 border-red-300 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800'
+              }`}
+            >
+              {empleado.situacion_revista}
+            </Badge>
+          );
+        },
+      },
+
+    ],
+    actions: [
+      {
+        type: 'view',
+        label: 'Ver Asistencia',
+        onClick: (empleado) => navigate(`/asistencia/agente/${empleado.NumeroLegajo}`),
+        variant: 'outline',
+      },
+      {
+        type: 'edit',
+        label: 'Cargar Asistencia',
+        onClick: (empleado) => navigate(`/asistencia/cargar/${empleado.NumeroLegajo}`),
+        variant: 'outline',
+      }
+      , {
+        type: 'custom',
+        label: 'Settear Parametros',
+        onClick: (empleado) => navigate(`/asistencia/settear-parametros/${empleado.NumeroLegajo}`),
+        variant: 'outline',
+      },
+      {
+        type: 'activate',
+        label: 'Ver Asistencia Nuevo',
+        onClick: (empleado) => navigate(`/asistencia-nuevo/agente/${empleado.NumeroLegajo}`),
+        variant: 'outline',
+      },
+
+    ],
+  };
+  return (
+    <>
+
+      <ConfigTable
+        data={data}
+        config={config}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        currentParams={currentParams}
+        onUpdateParams={updateParams}
+        onClearFilters={clearFilters}
+        pagination={pagination}
+        FilterComponent={EmpleadoFilter}
+      />
+    </>
+  );
+};
+
+export { AsistenciaListado };
