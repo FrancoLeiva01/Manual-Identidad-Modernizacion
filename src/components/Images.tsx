@@ -10,8 +10,8 @@ export function MasImagenes({ imagenes = [] }: MasImagenesProps) {
   const casilleros = [0, 1, 2];
 
   return (
-    <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-5">
-      <p className="mb-3 font-semibold text-sm text-gray-900 dark:text-slate-100">
+    <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-5 rounded-2xl shadow-md">
+      <p className="mb-3 font-semibold text-md text-gray-900 dark:text-slate-100">
         Imagenes del Sistema
       </p>
       <div className="flex flex-col gap-3.5">

@@ -157,7 +157,7 @@ ROLES Y PERMISOS
 - Login contra RRHH externo, con el rol real de Asistencia pedido aparte a /roles/mi-rol.
 - ADMIN ve todo; USUARIO_ASISTENCIA tiene el sidebar recortado (sin Horarios ni Logs).
 - Usuario sin rol cargado en Asistencia: se desloguea automático con mensaje claro, sin dejarlo entrar a ninguna pantalla.`,
-    stack: ["React", "TypeScript"],
+    stack: ["React", "TypeScript", "NestJS", "PostgreSQL"],
     componentes: ["Componente 1", "Componente 2"],
     equipo: equipoRRHH_Asistencia,
     lenguaje: ["tsx"],

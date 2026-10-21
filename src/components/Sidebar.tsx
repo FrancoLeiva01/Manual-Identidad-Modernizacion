@@ -1,49 +1,108 @@
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { proyectos } from "../content/proyectos";
 
 export function Sidebar() {
+  const [colapsado, setColapsado] = useState(false);
+
   return (
-    <aside className="w-64 shrink-0 sticky top-0 h-screen overflow-y-auto bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 py-5 flex flex-col">
-      <div className="flex items-center px-5 pb-4 mb-3 border-b border-gray-200 dark:border-slate-700">
-        <Link to="/" className="flex items-center">
-          <img
-            src="/-Isologotipo_Catamarca Capital.png"
-            alt="Catamarca Capital"
-            className="h-full w-auto object-contain dark:hidden"
-          />
-          <img
-            src="/-Isologotipo_Catamarca Capital_blanco.png"
-            alt="Catamarca Capital"
-            className="hidden h-full w-auto object-contain dark:block"
-          />
-        </Link>
-      </div>
+    <div className="sticky top-0 z-10 h-screen shrink-0 p-3">
+      <aside
+        className={
+          "flex h-full flex-col rounded-2xl bg-slate-900/85 py-5 shadow-2xl backdrop-blur-md transition-[width] duration-300 " +
+          (colapsado ? "w-20" : "w-64")
+        }
+      >
+        {/* HEADER: logo + botón colapsar */}
+        <div
+          className={
+            "mb-6 flex items-center px-4 " +
+            (colapsado ? "justify-center" : "justify-between gap-2")
+          }
+        >
+          {!colapsado && (
+            <Link to="/" className="flex min-w-0 items-center">
+              <img
+                src="/-Isologotipo_Catamarca Capital_blanco.png"
+                alt="Catamarca Capital"
+                className="h-18 w-auto object-contain"
+              />
+            </Link>
+          )}
+          <button
+            type="button"
+            onClick={() => setColapsado((c) => !c)}
+            aria-label={colapsado ? "Expandir sidebar" : "Colapsar sidebar"}
+            className="shrink-0 rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
+          >
+            {colapsado ? (
+              <PanelLeftOpen size={20} />
+            ) : (
+              <PanelLeftClose size={20} />
+            )}
+          </button>
+        </div>
 
-      <p className="mx-5 mb-2 text-[13px] font-bold tracking-wide uppercase text-gray-400 dark:text-slate-500">
-        Proyectos:
-      </p>
+        {/* TÍTULO DE SECCIÓN (línea cuando está colapsado) */}
+        {colapsado ? (
+          <hr className="mx-5 mb-3 border-slate-100" />
+        ) : (
+          <p className="mx-5 mb-2 text-sm font-semibold text-slate-400">
+            Proyectos
+          </p>
+        )}
 
-      <nav className="flex flex-col gap-1 px-3">
-        {proyectos.map((p) => {
-          const Icono = p.icono;
-          return (
-            <NavLink
-              key={p.id}
-              to={`/expediente/${p.id}`}
-              title={p.expediente}
-              className={({ isActive }) =>
-                "flex items-center gap-3 px-3 py-3 rounded-lg text-md font-medium no-underline transition-colors " +
-                (isActive
-                  ? "bg-slate-200/60 dark:bg-purple-400 text-purple-500 dark:text-slate-100"
-                  : "text-gray-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700")
-              }
+        {/* NAV */}
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto px-3">
+          {proyectos.map((p) => {
+            const Icono = p.icono;
+            return (
+              <NavLink
+                key={p.id}
+                to={`/expediente/${p.id}`}
+                title={colapsado ? p.nombre : p.expediente}
+                className={({ isActive }) =>
+                  "flex items-center gap-3 rounded-lg py-2.5 text-sm font-medium no-underline transition-colors " +
+                  (colapsado ? "justify-center px-0 " : "px-3 ") +
+                  (isActive
+                    ? "bg-white text-slate-900"
+                    : "text-slate-300 hover:bg-slate-800 hover:text-white")
+                }
+              >
+                <Icono size={20} className="shrink-0" />
+                {!colapsado && <span className="truncate">{p.nombre}</span>}
+              </NavLink>
+            );
+          })}
+        </nav>
+
+        {/* FOOTER: card tipo "usuario" */}
+        <div className="mt-4 px-3">
+          {colapsado ? (
+            <div
+              title="Secretaría de Modernización"
+              className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white"
             >
-              <Icono size={18} />
-              <span>{p.nombre}</span>
-            </NavLink>
-          );
-        })}
-      </nav>
-    </aside>
+              FL
+            </div>
+          ) : (
+            <div className="flex items-center gap-3 rounded-lg bg-white px-3 py-2.5">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white">
+                FL
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-slate-900">
+                  Franco Leiva
+                </p>
+                <p className="truncate text-xs text-slate-500">
+                  Equipo de Desarrollo
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
   );
 }
