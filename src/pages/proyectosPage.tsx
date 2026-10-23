@@ -38,7 +38,7 @@ export function ProyectoPage() {
       {/* Capa para que el contenido se lea bien encima de la foto */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-white/70 backdrop-blur-[2px] dark:bg-slate-950/75"
+        className="pointer-events-none fixed inset-0 z-0 bg-white/20 backdrop-blur-[2px] dark:bg-slate-950/75"
       />
 
       {/* CONTENIDO */}

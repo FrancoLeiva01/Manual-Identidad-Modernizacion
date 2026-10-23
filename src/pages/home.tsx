@@ -8,7 +8,7 @@ const DROPBOX_URL =
 const secciones = [
   {
     titulo: "Footers",
-    url: "#",
+    url: "/footers",
     img: "/cardsHome/footers.png",
     tinte: "bg-orange-600/55 group-hover:bg-orange-600/40",
   },
@@ -52,7 +52,7 @@ export function Home() {
       {/* Degradé desde la izquierda para que el texto del hero se lea */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent"
+        className="pointer-events-none fixed inset-0 z-0 bg-white/10"
       />
 
       {/* CONTENIDO por encima */}
@@ -61,7 +61,7 @@ export function Home() {
         <section className="mt-8 max-w-3xl py-12 md:py-20">
           <div className="mb-6 h-1 w-16 rounded-full bg-orange-500" />
 
-          <p className="mb-2 text-xs font-bold tracking-[0.25em] text-slate-300">
+          <p className="mb-2 text-xs font-bold tracking-[0.25em] text-slate-100 dark:text-slate-100">
             SECRETARÍA DE MODERNIZACIÓN
           </p>
 

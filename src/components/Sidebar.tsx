@@ -3,6 +3,10 @@ import { Link, NavLink } from "react-router-dom";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { proyectos } from "../content/proyectos";
 
+// Cambiá estas rutas por los logos que correspondan
+const LOGO_CLARO = "/-Isologotipo_Catamarca Capital.png";
+const LOGO_OSCURO = "/-Isologotipo_Catamarca Capital_blanco.png";
+
 export function Sidebar() {
   const [colapsado, setColapsado] = useState(false);
 
@@ -10,7 +14,7 @@ export function Sidebar() {
     <div className="sticky top-0 z-10 h-screen shrink-0 p-3">
       <aside
         className={
-          "flex h-full flex-col rounded-2xl bg-slate-900/85 py-5 shadow-2xl backdrop-blur-md transition-[width] duration-300 " +
+          "flex h-full flex-col rounded-2xl bg-white/80 dark:bg-slate-950/80 py-5 shadow-2xl transition-[width] duration-300 " +
           (colapsado ? "w-20" : "w-64")
         }
       >
@@ -23,10 +27,17 @@ export function Sidebar() {
         >
           {!colapsado && (
             <Link to="/" className="flex min-w-0 items-center">
+              {/* Modo claro */}
               <img
-                src="/-Isologotipo_Catamarca Capital_blanco.png"
+                src={LOGO_CLARO}
                 alt="Catamarca Capital"
-                className="h-18 w-auto object-contain"
+                className="h-18 w-auto object-contain dark:hidden"
+              />
+              {/* Modo oscuro */}
+              <img
+                src={LOGO_OSCURO}
+                alt="Catamarca Capital"
+                className="hidden h-18 w-auto object-contain dark:block"
               />
             </Link>
           )}
@@ -34,7 +45,7 @@ export function Sidebar() {
             type="button"
             onClick={() => setColapsado((c) => !c)}
             aria-label={colapsado ? "Expandir sidebar" : "Colapsar sidebar"}
-            className="shrink-0 rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
+            className="shrink-0 rounded-lg p-2 text-slate-800 dark:text-slate-100 transition-colors hover:bg-slate-800 hover:text-white"
           >
             {colapsado ? (
               <PanelLeftOpen size={20} />
@@ -44,12 +55,13 @@ export function Sidebar() {
           </button>
         </div>
 
-        {/* TÍTULO DE SECCIÓN (línea cuando está colapsado) */}
-        {colapsado ? (
-          <hr className="mx-5 mb-3 border-slate-100" />
-        ) : (
-          <p className="mx-5 mb-2 text-sm font-semibold text-slate-400">
-            Proyectos
+        {/* DIVIDER (siempre visible) */}
+        <hr className="mx-5 mb-3 -mt-4 border-slate-400 dark:border-slate-400" />
+
+        {/* TÍTULO DE SECCIÓN (solo expandido) */}
+        {!colapsado && (
+          <p className="mx-5 mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+            Proyectos:
           </p>
         )}
 
@@ -67,7 +79,7 @@ export function Sidebar() {
                   (colapsado ? "justify-center px-0 " : "px-3 ") +
                   (isActive
                     ? "bg-white text-slate-900"
-                    : "text-slate-300 hover:bg-slate-800 hover:text-white")
+                    : "text-slate-700 dark:text-slate-200 hover:bg-slate-800 hover:text-white")
                 }
               >
                 <Icono size={20} className="shrink-0" />

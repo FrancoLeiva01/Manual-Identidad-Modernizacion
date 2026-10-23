@@ -1,0 +1,21 @@
+export default function FooterSimple() {
+  return (
+    <footer className="border-t border-gray-200 bg-white px-6 py-6">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
+        <img
+          src="/-Isologotipo_Catamarca Capital.png"
+          alt="Catamarca Capital"
+          className="h-10 w-auto"
+        />
+        <nav className="flex gap-6 text-sm text-gray-600">
+          <a href="#" className="hover:text-sky-700">Inicio</a>
+          <a href="#" className="hover:text-sky-700">Trámites</a>
+          <a href="#" className="hover:text-sky-700">Contacto</a>
+        </nav>
+        <p className="text-sm text-gray-500">
+          © {new Date().getFullYear()} Municipalidad de Catamarca
+        </p>
+      </div>
+    </footer>
+  );
+}

@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import { Navbar } from "./components/Navbar";
-import { Home } from "./pages/home";
+import { Home } from "./pages/Home";
 import { ProyectoPage } from "./pages/proyectosPage";
+import { Footers } from "./pages/Footers";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/expediente/:id" element={<ProyectoPage />} />
+            <Route path="/footers" element={<Footers />} />
           </Routes>
         </main>
         <Navbar />
