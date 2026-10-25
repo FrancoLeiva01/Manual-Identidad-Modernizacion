@@ -1,0 +1,116 @@
+import { useState } from "react";
+import { Bell, ChevronDown, LogOut, Settings, User } from "lucide-react";
+
+const links = ["Inicio", "Agentes", "Asistencias", "Reportes"];
+
+// Saludo según la hora del día
+function saludo() {
+  const h = new Date().getHours();
+  if (h < 12) return "Buen día";
+  if (h < 20) return "Buenas tardes";
+  return "Buenas noches";
+}
+
+export default function NavbarSimpatico() {
+  const [activo, setActivo] = useState("Inicio");
+  const [menu, setMenu] = useState(false);
+  const notificaciones = 3;
+
+  return (
+    <header className="sticky top-0 z-20 px-4 pt-4">
+      {/* Barra flotante tipo pastilla */}
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full bg-white px-3 py-2 shadow-lg ring-1 ring-slate-200">
+        <div className="flex items-center gap-2 pl-2">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-sky-600 text-sm font-black text-white">
+            RH
+          </div>
+          <span className="hidden font-bold text-slate-800 sm:block">
+            Portal RRHH
+          </span>
+        </div>
+
+        {/* Links con pastilla en el activo */}
+        <nav className="hidden items-center gap-1 rounded-full bg-slate-100 p-1 md:flex">
+          {links.map((l) => (
+            <button
+              key={l}
+              type="button"
+              onClick={() => setActivo(l)}
+              className={
+                "rounded-full px-4 py-1.5 text-sm font-medium transition " +
+                (activo === l
+                  ? "bg-white text-sky-700 shadow-sm"
+                  : "text-slate-600 hover:text-slate-900")
+              }
+            >
+              {l}
+            </button>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          {/* Campanita con contador */}
+          <button
+            type="button"
+            aria-label="Notificaciones"
+            className="relative rounded-full p-2 text-slate-600 transition hover:bg-slate-100"
+          >
+            <Bell size={20} />
+            {notificaciones > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-orange-500 px-1 text-[10px] font-bold text-white ring-2 ring-white">
+                {notificaciones}
+              </span>
+            )}
+          </button>
+
+          {/* Usuario con menú */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setMenu(!menu)}
+              className="flex items-center gap-2 rounded-full py-1 pr-2 pl-1 transition hover:bg-slate-100"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 text-xs font-bold text-orange-600">
+                FL
+              </div>
+              <div className="hidden text-left leading-tight lg:block">
+                <p className="text-[11px] text-slate-500">{saludo()},</p>
+                <p className="text-sm font-semibold text-slate-800">Franco</p>
+              </div>
+              <ChevronDown
+                size={16}
+                className={"text-slate-500 transition " + (menu ? "rotate-180" : "")}
+              />
+            </button>
+
+            {menu && (
+              <div className="absolute right-0 mt-3 w-48 overflow-hidden rounded-2xl bg-white py-2 shadow-xl ring-1 ring-slate-200">
+                {[
+                  { icono: User, label: "Mi perfil" },
+                  { icono: Settings, label: "Configuración" },
+                ].map(({ icono: Icono, label }) => (
+                  <a
+                    key={label}
+                    href="#"
+                    className="flex items-center gap-3 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                  >
+                    <Icono size={16} className="text-slate-400" />
+                    {label}
+                  </a>
+                ))}
+                <hr className="my-1 border-slate-100" />
+                <a
+                  href="#"
+                  className="flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                >
+                  <LogOut size={16} />
+                  Cerrar sesión
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}

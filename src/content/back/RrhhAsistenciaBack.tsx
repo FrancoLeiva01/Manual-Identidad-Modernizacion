@@ -3,7 +3,7 @@ import { CodeBlock } from "../../components/codeBlock";
 export default function BackRrhhAsistencia() {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-gray-900 dark:text-slate-100 leading-relaxed">
+      <p className="text-texto leading-relaxed">
         Acá sinceramente nose que poner porque no entiendo NADA de lo que hace
         Lucio, pero el es crack, asi que vamos a limitarnos a hacer una especie
         de Stack Tecnologico de lo que usa Lucio (si el quiere un dia pasar un
@@ -14,7 +14,7 @@ export default function BackRrhhAsistencia() {
       <img
         src="/imagenesRRHH/LohagoTodo.png"
         alt="Descripción de la imagen"
-        className="rounded-lg border border-gray-200 dark:border-slate-700 max-w-xl mx-auto"
+        className="rounded-lg border border-borde max-w-xl mx-auto"
       />
 
       <CodeBlock

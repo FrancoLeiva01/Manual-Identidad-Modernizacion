@@ -1,0 +1,111 @@
+import { ArrowUp, Clock, Mail, MapPin, Phone } from "lucide-react";
+
+const links = [
+  { label: "Inicio", href: "#" },
+  { label: "Trámites", href: "#" },
+  { label: "Noticias", href: "#" },
+  { label: "Preguntas frecuentes", href: "#" },
+];
+
+export default function FooterInstitucional() {
+  const volverArriba = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  return (
+    <footer className="relative bg-slate-900 text-slate-300">
+      {/* Franja de color institucional */}
+      <div className="h-1.5 w-full bg-gradient-to-r from-orange-500 via-amber-400 to-sky-500" />
+
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Marca */}
+        <div className="space-y-4">
+          <img
+            src="/-Isologotipo_Catamarca Capital_blanco.png"
+            alt="Catamarca Capital"
+            className="h-14 w-auto"
+          />
+          <p className="max-w-xs text-sm leading-relaxed text-slate-400">
+            Secretaría de Gabinete y Modernización. Hacemos que los trámites
+            sean un poco menos trámite.
+          </p>
+        </div>
+
+        {/* Navegación */}
+        <div>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-white">
+            Navegación
+          </h4>
+          <ul className="space-y-2.5 text-sm">
+            {links.map((l) => (
+              <li key={l.label}>
+                <a
+                  href={l.href}
+                  className="group inline-flex items-center gap-2 transition-colors hover:text-orange-400"
+                >
+                  <span className="h-px w-3 bg-slate-600 transition-all group-hover:w-5 group-hover:bg-orange-400" />
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contacto */}
+        <div>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-white">
+            Contacto
+          </h4>
+          <ul className="space-y-3 text-sm">
+            <li className="flex items-start gap-3">
+              <MapPin size={18} className="mt-0.5 shrink-0 text-orange-400" />
+              San Fernando del Valle de Catamarca, CP K4700
+            </li>
+            <li className="flex items-center gap-3">
+              <Phone size={18} className="shrink-0 text-orange-400" />
+              (383) 400-0000
+            </li>
+            <li className="flex items-center gap-3">
+              <Mail size={18} className="shrink-0 text-orange-400" />
+              modernizacion@catamarcacapital.gob.ar
+            </li>
+          </ul>
+        </div>
+
+        {/* Horarios */}
+        <div>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-white">
+            Atención al público
+          </h4>
+          <div className="rounded-xl border border-slate-700 bg-slate-800/60 p-4">
+            <div className="flex items-center gap-2 text-sm font-semibold text-white">
+              <Clock size={16} className="text-sky-400" />
+              Lunes a viernes
+            </div>
+            <p className="mt-1 text-2xl font-black text-white">7:00 – 13:00</p>
+            <p className="mt-1 text-xs text-slate-400">
+              Después de las 13 hs, solo responde el mate.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Barra inferior */}
+      <div className="border-t border-slate-800">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-5 text-xs text-slate-500 md:flex-row">
+          <p>
+            © {new Date().getFullYear()} Municipalidad de San Fernando del Valle
+            de Catamarca
+          </p>
+          <p>Hecho con ☕ y mate por el Equipo de Desarrollo</p>
+          <button
+            type="button"
+            onClick={volverArriba}
+            aria-label="Volver arriba"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg transition hover:-translate-y-1 hover:bg-orange-400"
+          >
+            <ArrowUp size={18} />
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+}

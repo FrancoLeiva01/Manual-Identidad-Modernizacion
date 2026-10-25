@@ -6,9 +6,9 @@ import { MasImagenes } from "../components/Images";
 import { Tabs } from "../components/tabs";
 import { contenidoFront, contenidoBack } from "../content/registro";
 
-type TabId = "general" | "front" | "back";
+import { FondoFoto } from "../components/fondoFoto";
 
-const BG_IMG = "/nodo.jpeg";
+type TabId = "general" | "front" | "back";
 
 export function ProyectoPage() {
   const { id } = useParams();
@@ -29,17 +29,7 @@ export function ProyectoPage() {
   return (
     <div className="relative min-h-screen">
       {/* FONDO: misma imagen del Home, fija detrás de todo (y debajo del sidebar) */}
-      <img
-        src={BG_IMG}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 h-full w-full object-cover mask-[linear-gradient(to_bottom,black,transparent_400%)]"
-      />
-      {/* Capa para que el contenido se lea bien encima de la foto */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-white/20 backdrop-blur-[2px] dark:bg-slate-950/75"
-      />
+      <FondoFoto />
 
       {/* CONTENIDO */}
       <div
@@ -47,10 +37,10 @@ export function ProyectoPage() {
         key={proyecto.id}
       >
         <div className="mb-5">
-          <p className="mb-1 text-xs tracking-wide uppercase text-gray-600 dark:text-slate-300">
+          <p className="mb-1 text-xs tracking-wide uppercase text-slate-200">
             {proyecto.expediente} · {proyecto.estado}
           </p>
-          <h1 className="mb-1.5 text-5xl flex justify-center mt-5 font-bold text-gray-900 dark:text-slate-100">
+          <h1 className="mb-1.5 text-5xl flex justify-center mt-5 font-bold text-white drop-shadow-lg">
             {proyecto.nombre}
           </h1>
         </div>
@@ -71,18 +61,18 @@ export function ProyectoPage() {
 
           {tab === "general" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
-              <div className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-5 rounded-2xl shadow-md">
-                <p className="mb-2 text-[22px] tracking-wide font-bold uppercase text-cyan-600 dark:text-cyan-400">
+              <div className="bg-superficie border border-borde p-5 rounded-2xl shadow-md">
+                <p className="mb-2 text-[22px] tracking-wide font-bold uppercase text-acento">
                   Descripción
                 </p>
-                <p className="whitespace-pre-line text-gray-900 dark:text-slate-100 leading-relaxed m-0">
+                <p className="whitespace-pre-line text-texto leading-relaxed m-0">
                   {proyecto.descripcionGeneral}
                 </p>
                 <div className="mt-3.5 flex flex-wrap gap-2">
                   {proyecto.stack.map((s) => (
                     <span
                       key={s}
-                      className="text-xs bg-cyan-100 dark:bg-purple-600 border border-gray-100 dark:border-purple-600 text-gray-700 dark:text-slate-300 rounded-full px-2.5 py-1"
+                      className="text-xs font-medium bg-acento/10 border border-acento/30 text-acento rounded-full px-2.5 py-1"
                     >
                       {s}
                     </span>
@@ -94,32 +84,30 @@ export function ProyectoPage() {
             </div>
           )}
 
-          {tab === "front" && (
-            <Suspense
-              fallback={<p className="text-sm text-gray-500">Cargando…</p>}
-            >
-              {Front ? (
-                <Front />
-              ) : (
-                <p className="text-sm text-gray-600 dark:text-slate-400">
-                  Contenido de Front pendiente para este proyecto.
-                </p>
-              )}
-            </Suspense>
-          )}
-
-          {tab === "back" && (
-            <Suspense
-              fallback={<p className="text-sm text-gray-500">Cargando…</p>}
-            >
-              {Back ? (
-                <Back />
-              ) : (
-                <p className="text-sm text-gray-600 dark:text-slate-400">
-                  Contenido de Back pendiente para este proyecto.
-                </p>
-              )}
-            </Suspense>
+          {/* Front y Back van dentro de una card para que el texto se lea sobre la foto */}
+          {tab !== "general" && (
+            <div className="bg-superficie border border-borde p-6 rounded-2xl shadow-md">
+              <Suspense
+                fallback={<p className="text-sm text-texto-suave">Cargando…</p>}
+              >
+                {tab === "front" &&
+                  (Front ? (
+                    <Front />
+                  ) : (
+                    <p className="text-sm text-texto-suave">
+                      Contenido de Front pendiente para este proyecto.
+                    </p>
+                  ))}
+                {tab === "back" &&
+                  (Back ? (
+                    <Back />
+                  ) : (
+                    <p className="text-sm text-texto-suave">
+                      Contenido de Back pendiente para este proyecto.
+                    </p>
+                  ))}
+              </Suspense>
+            </div>
           )}
         </div>
       </div>

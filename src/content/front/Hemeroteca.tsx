@@ -5,7 +5,7 @@ import { CodeBlock } from "../../components/codeBlock";
 export default function FrontHemeroteca() {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-gray-900 dark:text-slate-100 leading-relaxed">
+      <p className="text-texto leading-relaxed">
         Acá va el detalle de diseño y componentes del front de Hemeroteca.
       </p>
       <CodeBlock

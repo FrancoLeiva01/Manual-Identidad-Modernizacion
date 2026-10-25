@@ -1,0 +1,175 @@
+import { useState } from "react";
+import {
+  BarChart3,
+  Bell,
+  FolderKanban,
+  Home,
+  LogOut,
+  MessageSquare,
+  PanelLeftClose,
+  PanelLeftOpen,
+  Settings,
+} from "lucide-react";
+
+const secciones = [
+  {
+    titulo: "General",
+    items: [
+      { icono: Home, label: "Inicio" },
+      { icono: BarChart3, label: "Estadísticas" },
+      { icono: FolderKanban, label: "Proyectos", badge: "Nuevo" },
+    ],
+  },
+  {
+    titulo: "Comunicación",
+    items: [
+      { icono: MessageSquare, label: "Mensajes", badge: "4" },
+      { icono: Bell, label: "Avisos" },
+    ],
+  },
+];
+
+// Sidebar oscuro tipo vidrio, colapsable a íconos con tooltips
+export default function SidebarModerno() {
+  const [colapsado, setColapsado] = useState(false);
+  const [activo, setActivo] = useState("Inicio");
+
+  return (
+    <div className="sticky top-0 h-screen shrink-0 p-3">
+      <aside
+        className={
+          "relative flex h-full flex-col overflow-hidden rounded-3xl bg-slate-950/90 p-3 text-slate-300 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl transition-[width] duration-300 " +
+          (colapsado ? "w-20" : "w-68")
+        }
+      >
+        {/* Brillo decorativo de fondo */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 -left-24 h-56 w-56 rounded-full bg-orange-500/20 blur-3xl"
+        />
+
+        {/* Header */}
+        <div
+          className={
+            "relative mb-6 flex items-center " +
+            (colapsado ? "flex-col gap-3" : "justify-between px-2")
+          }
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-pink-500 font-black text-white shadow-lg shadow-orange-500/30">
+              C
+            </div>
+            {!colapsado && (
+              <span className="text-lg font-bold tracking-tight text-white">
+                Capital
+              </span>
+            )}
+          </div>
+          <button
+            type="button"
+            onClick={() => setColapsado(!colapsado)}
+            aria-label={colapsado ? "Expandir" : "Colapsar"}
+            className="rounded-xl p-2 text-slate-400 transition hover:bg-white/10 hover:text-white"
+          >
+            {colapsado ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
+          </button>
+        </div>
+
+        {/* Navegación */}
+        <nav className="relative flex-1 space-y-6 overflow-y-auto overflow-x-hidden">
+          {secciones.map((s) => (
+            <div key={s.titulo}>
+              {!colapsado && (
+                <p className="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+                  {s.titulo}
+                </p>
+              )}
+              <div className="space-y-1">
+                {s.items.map(({ icono: Icono, label, badge }) => {
+                  const esActivo = activo === label;
+                  return (
+                    <button
+                      key={label}
+                      type="button"
+                      onClick={() => setActivo(label)}
+                      className={
+                        "group relative flex w-full items-center gap-3 rounded-xl py-2.5 text-sm font-medium transition " +
+                        (colapsado ? "justify-center px-0 " : "px-3 ") +
+                        (esActivo
+                          ? "bg-white/10 text-white"
+                          : "hover:bg-white/5 hover:text-white")
+                      }
+                    >
+                      {/* Barra lateral del activo */}
+                      <span
+                        className={
+                          "absolute top-1/2 left-0 h-5 w-1 -translate-y-1/2 rounded-r-full bg-gradient-to-b from-orange-400 to-pink-500 transition-opacity " +
+                          (esActivo ? "opacity-100" : "opacity-0")
+                        }
+                      />
+                      <Icono
+                        size={20}
+                        className={"shrink-0 " + (esActivo ? "text-orange-400" : "")}
+                      />
+                      {!colapsado && <span className="flex-1 text-left">{label}</span>}
+                      {!colapsado && badge && (
+                        <span className="rounded-full bg-orange-500/15 px-2 py-0.5 text-[10px] font-semibold text-orange-300 ring-1 ring-orange-500/30">
+                          {badge}
+                        </span>
+                      )}
+
+                      {/* Tooltip cuando está colapsado */}
+                      {colapsado && (
+                        <span className="pointer-events-none absolute left-full z-10 ml-4 rounded-lg bg-slate-800 px-2.5 py-1.5 text-xs whitespace-nowrap text-white opacity-0 shadow-lg transition group-hover:opacity-100">
+                          {label}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </nav>
+
+        {/* Usuario */}
+        <div
+          className={
+            "relative mt-4 flex items-center gap-3 rounded-2xl bg-white/5 p-2 ring-1 ring-white/10 " +
+            (colapsado ? "justify-center" : "")
+          }
+        >
+          <div className="relative shrink-0">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-700 text-sm font-bold text-white">
+              FL
+            </div>
+            {/* Puntito de "en línea" */}
+            <span className="absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full bg-emerald-400 ring-2 ring-slate-950" />
+          </div>
+          {!colapsado && (
+            <>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-white">Franco Leiva</p>
+                <p className="truncate text-xs text-slate-500">Desarrollo</p>
+              </div>
+              <button
+                type="button"
+                aria-label="Configuración"
+                className="rounded-lg p-1.5 text-slate-400 transition hover:bg-white/10 hover:text-white"
+              >
+                <Settings size={16} />
+              </button>
+              <button
+                type="button"
+                aria-label="Cerrar sesión"
+                className="rounded-lg p-1.5 text-slate-400 transition hover:bg-red-500/20 hover:text-red-300"
+              >
+                <LogOut size={16} />
+              </button>
+            </>
+          )}
+        </div>
+      </aside>
+    </div>
+  );
+}

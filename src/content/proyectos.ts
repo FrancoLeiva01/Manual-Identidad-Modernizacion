@@ -1,5 +1,12 @@
 import type { ComponentType } from "react";
-import { BookOpen, Clock3, Folder, Truck } from "lucide-react";
+import {
+  BookOpen,
+  Clock3,
+  Folder,
+  LayoutDashboard,
+  Truck,
+  Wallet,
+} from "lucide-react";
 
 export interface Miembro {
   nombre: string;
@@ -100,6 +107,19 @@ const equipoFoodTruck: Miembro[] = [
   },
 ];
 
+// Equipos pendientes de cargar: sin `imagen` se muestra un marco vacío
+const equipoSiprom: Miembro[] = [
+  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
+  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
+  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+];
+
+const equipoDashes: Miembro[] = [
+  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
+  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
+  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+];
+
 export const proyectos: Proyecto[] = [
   {
     id: "Hemeroteca",
@@ -191,16 +211,29 @@ ROLES Y PERMISOS
     estado: "en proceso",
   },
   {
-    id: "proyecto-5",
+    id: "Siprom",
     expediente: "EXP-0005/26",
-    nombre: "Proyecto 5",
+    nombre: "Siprom",
     color: "#475569",
     descripcionGeneral: "Descripción pendiente de completar.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
-    equipo: equipoHemeroteca,
+    equipo: equipoSiprom,
     lenguaje: "tsx",
-    icono: Folder,
+    icono: Wallet,
+    estado: "en proceso",
+  },
+  {
+    id: "Dashes",
+    expediente: "EXP-0006/26",
+    nombre: "Dashes",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoDashes,
+    lenguaje: "tsx",
+    icono: LayoutDashboard,
     estado: "en proceso",
   },
 ];

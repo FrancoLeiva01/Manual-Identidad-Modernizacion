@@ -1,0 +1,159 @@
+import { useEffect, useRef, useState } from "react";
+import { Moon, Search, Sparkles, Sun } from "lucide-react";
+
+const links = ["Inicio", "Servicios", "Agenda", "Noticias", "Contacto"];
+
+export default function NavbarModerno() {
+  const [activo, setActivo] = useState(0);
+  const [scrolleado, setScrolleado] = useState(false);
+  const [oscuro, setOscuro] = useState(false);
+  const [buscando, setBuscando] = useState(false);
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [indicador, setIndicador] = useState({ left: 0, width: 0 });
+
+  // Se achica y gana sombra al bajar
+  useEffect(() => {
+    const onScroll = () => setScrolleado(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // El indicador se desliza hasta el link activo
+  useEffect(() => {
+    const el = refs.current[activo];
+    if (el) setIndicador({ left: el.offsetLeft, width: el.offsetWidth });
+  }, [activo]);
+
+  // Atajo Ctrl/⌘ + K para abrir la búsqueda
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setBuscando(true);
+      }
+      if (e.key === "Escape") setBuscando(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return (
+    <header
+      className={
+        "sticky top-0 z-30 transition-all duration-300 " +
+        (scrolleado ? "py-2" : "py-4")
+      }
+    >
+      <div
+        className={
+          "relative mx-auto flex max-w-6xl items-center justify-between gap-6 rounded-2xl px-4 transition-all duration-300 " +
+          (scrolleado
+            ? "h-14 bg-white/70 shadow-lg shadow-slate-900/5 ring-1 ring-slate-900/5 backdrop-blur-xl"
+            : "h-16 bg-transparent")
+        }
+      >
+        {/* Marca con degradé */}
+        <a href="#" className="flex items-center gap-2">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-pink-500 text-white shadow-md shadow-orange-500/30">
+            <Sparkles size={18} />
+          </div>
+          <span className="text-lg font-black tracking-tight text-slate-900">
+            Capital<span className="text-orange-500">.</span>
+          </span>
+        </a>
+
+        {/* Links con indicador deslizante */}
+        <nav className="relative hidden items-center md:flex">
+          <span
+            aria-hidden="true"
+            className="absolute inset-y-1 rounded-lg bg-slate-900/5 transition-all duration-300 ease-out"
+            style={{ left: indicador.left, width: indicador.width }}
+          />
+          {links.map((l, i) => (
+            <button
+              key={l}
+              ref={(el) => {
+                refs.current[i] = el;
+              }}
+              type="button"
+              onClick={() => setActivo(i)}
+              className={
+                "relative px-4 py-2 text-sm font-medium transition-colors " +
+                (activo === i ? "text-slate-900" : "text-slate-500 hover:text-slate-900")
+              }
+            >
+              {l}
+            </button>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          {/* Botón de búsqueda con atajo */}
+          <button
+            type="button"
+            onClick={() => setBuscando(true)}
+            className="hidden items-center gap-2 rounded-xl bg-slate-900/5 py-2 pr-2 pl-3 text-sm text-slate-500 transition hover:bg-slate-900/10 lg:flex"
+          >
+            <Search size={16} />
+            Buscar…
+            <kbd className="rounded-md bg-white px-1.5 py-0.5 font-sans text-[11px] text-slate-500 shadow-sm ring-1 ring-slate-200">
+              Ctrl K
+            </kbd>
+          </button>
+
+          {/* Tema con ícono que gira */}
+          <button
+            type="button"
+            onClick={() => setOscuro(!oscuro)}
+            aria-label="Cambiar tema"
+            className="rounded-xl p-2 text-slate-600 transition hover:bg-slate-900/5"
+          >
+            <span className={"block transition-transform duration-500 " + (oscuro ? "rotate-180" : "")}>
+              {oscuro ? <Sun size={18} /> : <Moon size={18} />}
+            </span>
+          </button>
+
+          <a
+            href="#"
+            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Ingresar
+          </a>
+        </div>
+
+        {/* Línea de degradé abajo */}
+        <div
+          aria-hidden="true"
+          className={
+            "absolute inset-x-6 -bottom-px h-px bg-gradient-to-r from-transparent via-orange-500/60 to-transparent transition-opacity duration-300 " +
+            (scrolleado ? "opacity-100" : "opacity-0")
+          }
+        />
+      </div>
+
+      {/* Buscador (Ctrl K para abrir, Esc o click afuera para cerrar) */}
+      {buscando && (
+        <div
+          onClick={() => setBuscando(false)}
+          className="fixed inset-0 z-40 flex items-start justify-center bg-slate-900/40 px-4 pt-24 backdrop-blur-sm"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex w-full max-w-lg items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-slate-200"
+          >
+            <Search size={18} className="text-slate-400" />
+            <input
+              autoFocus
+              placeholder="¿Qué estás buscando?"
+              className="flex-1 bg-transparent text-slate-900 outline-none placeholder:text-slate-400"
+            />
+            <kbd className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-500">
+              Esc
+            </kbd>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}

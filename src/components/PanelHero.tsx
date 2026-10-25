@@ -1,3 +1,4 @@
+import { UserRound } from "lucide-react";
 import type { Proyecto } from "../content/proyectos";
 
 interface PanelHeroProps {
@@ -10,7 +11,7 @@ export function PanelHero({ proyecto }: PanelHeroProps) {
       {proyecto.equipo.map((persona) => (
         <div
           key={persona.nombre}
-          className="rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800"
+          className="rounded-xl border border-borde overflow-hidden bg-superficie"
         >
           {persona.imagen ? (
             <img
@@ -19,20 +20,17 @@ export function PanelHero({ proyecto }: PanelHeroProps) {
               className="w-full h-48 object-cover"
             />
           ) : (
-            <div
-              className="w-full h-48 flex items-center justify-center"
-              style={{ background: persona.color }}
-            >
-              <span className="text-4xl font-bold text-slate-700/60">
-                {persona.nombre.charAt(0).toUpperCase()}
-              </span>
+            // Marco vacío a la espera de la foto
+            <div className="m-3 mb-0 h-45 flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-borde bg-superficie-suave text-texto-suave">
+              <UserRound size={40} strokeWidth={1.5} />
+              <span className="text-xs">Imagen pendiente</span>
             </div>
           )}
           <div className="p-3">
-            <p className="font-semibold text-sm m-0 text-gray-900 dark:text-slate-100">
+            <p className="font-semibold text-sm m-0 text-texto">
               {persona.nombre}
             </p>
-            <p className="text-xs text-gray-500 dark:text-slate-400 mt-0.5 m-0">
+            <p className="text-xs text-texto-suave mt-0.5 m-0">
               {persona.rol}
             </p>
           </div>

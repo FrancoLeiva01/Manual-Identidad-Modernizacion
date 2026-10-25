@@ -1,2 +1,84 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  PALETA DEL MANUAL
+  Cada color se define una sola vez acá, con su valor para modo claro (:root)
+  y para modo oscuro (.dark). En los componentes se usan por nombre:
+  bg-fondo, bg-superficie, text-texto, border-borde, text-acento, etc.
+  Para cambiar un color en toda la app, se cambia solo en este archivo.
+*/
+:root {
+  /* Fondos */
+  --fondo: #f1f5f9; /* fondo general de la app */
+  --superficie: #ffffff; /* cards, paneles, pestaña activa */
+  --superficie-suave: #f8fafc; /* placeholders, zonas internas de una card */
+  --vidrio: rgb(255 255 255 / 0.45); /* sidebar flotante */
+  --hover: #e2e8f0; /* hover de items de navegación */
+
+  /* Texto */
+  --texto: #0f172a;
+  --texto-suave: #64748b;
+
+  /* Bordes */
+  --borde: #e2e8f0;
+
+  /* Acentos */
+  --acento: #0891b2; /* cyan: títulos de sección, links, pestañas */
+  --marca: #f97316; /* naranja institucional */
+
+  /* Item activo del sidebar */
+  --activo: #0f172a;
+  --activo-texto: #ffffff;
+
+  /* Velo sobre la foto de fondo: azul noche suave, sin lavar la imagen */
+  --velo-desde: rgb(15 23 42 / 0.6);
+  --velo-hasta: rgb(15 23 42 / 0.15);
+  --panel-foto: rgb(255 255 255 / 0.45); /* paneles de vidrio encima de la foto (igual que el sidebar) */
+}
+
+.dark {
+  color-scheme: dark;
+
+  --fondo: #0b1120;
+  --superficie: #1e293b;
+  --superficie-suave: #0f172a;
+  --vidrio: rgb(2 6 23 / 0.85);
+  --hover: #1e293b;
+
+  --texto: #f1f5f9;
+  --texto-suave: #94a3b8;
+
+  --borde: #334155;
+
+  --acento: #22d3ee;
+  --marca: #fb923c;
+
+  --activo: #ffffff;
+  --activo-texto: #0f172a;
+
+  --velo-desde: rgb(2 6 23 / 0.85);
+  --velo-hasta: rgb(2 6 23 / 0.6);
+  --panel-foto: rgb(2 6 23 / 0.6);
+}
+
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-superficie-suave: var(--superficie-suave);
+  --color-vidrio: var(--vidrio);
+  --color-hover: var(--hover);
+  --color-texto: var(--texto);
+  --color-texto-suave: var(--texto-suave);
+  --color-borde: var(--borde);
+  --color-acento: var(--acento);
+  --color-marca: var(--marca);
+  --color-activo: var(--activo);
+  --color-activo-texto: var(--activo-texto);
+  --color-panel-foto: var(--panel-foto);
+}
+
+body {
+  background-color: var(--fondo);
+  color: var(--texto);
+}

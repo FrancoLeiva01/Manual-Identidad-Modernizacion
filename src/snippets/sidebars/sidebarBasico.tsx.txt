@@ -1,0 +1,44 @@
+import { useState } from "react";
+import { FileText, Home, Settings, Users } from "lucide-react";
+
+const items = [
+  { icono: Home, label: "Inicio" },
+  { icono: Users, label: "Agentes" },
+  { icono: FileText, label: "Reportes" },
+  { icono: Settings, label: "Configuración" },
+];
+
+// Tarjeta flotante compacta: mide lo que mide su contenido, no todo el alto
+export default function SidebarBasico() {
+  const [activo, setActivo] = useState("Inicio");
+
+  return (
+    <aside className="sticky top-4 m-4 w-60 self-start rounded-2xl border border-gray-200 bg-white p-4 shadow-md">
+      <img
+        src="/-Isologotipo_Catamarca Capital.png"
+        alt="Catamarca Capital"
+        className="mx-auto mb-4 h-12 w-auto"
+      />
+      <hr className="mb-3 border-gray-200" />
+
+      <nav className="flex flex-col gap-1">
+        {items.map(({ icono: Icono, label }) => (
+          <button
+            key={label}
+            type="button"
+            onClick={() => setActivo(label)}
+            className={
+              "flex items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium " +
+              (activo === label
+                ? "bg-sky-700 text-white"
+                : "text-gray-700 hover:bg-gray-100")
+            }
+          >
+            <Icono size={18} />
+            {label}
+          </button>
+        ))}
+      </nav>
+    </aside>
+  );
+}

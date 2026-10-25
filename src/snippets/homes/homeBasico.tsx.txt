@@ -1,0 +1,70 @@
+const kpis = [
+  { label: "Agentes activos", valor: 1248 },
+  { label: "Asistencias cargadas", valor: 1102 },
+  { label: "Pendientes", valor: 146 },
+];
+
+const ultimos = [
+  { legajo: "0231", nombre: "Pérez, Ana", fecha: "24/10/2026", estado: "Cargado" },
+  { legajo: "0455", nombre: "Gómez, Luis", fecha: "24/10/2026", estado: "Pendiente" },
+  { legajo: "0612", nombre: "Díaz, Marta", fecha: "23/10/2026", estado: "Cargado" },
+  { legajo: "0789", nombre: "Ruiz, Pablo", fecha: "23/10/2026", estado: "Cargado" },
+];
+
+// Sin animaciones ni degradés: pensado para cualquier monitor
+export default function HomeBasico() {
+  return (
+    <main className="mx-auto max-w-6xl p-6">
+      <h1 className="text-2xl font-bold text-gray-900">Inicio</h1>
+      <p className="mt-1 text-sm text-gray-600">Resumen del mes en curso.</p>
+
+      {/* KPIs */}
+      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        {kpis.map((k) => (
+          <div key={k.label} className="rounded-lg border border-gray-300 bg-white p-5">
+            <p className="text-sm text-gray-600">{k.label}</p>
+            <p className="mt-1 text-3xl font-bold text-gray-900">
+              {k.valor.toLocaleString("es-AR")}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Tabla */}
+      <section className="mt-8 rounded-lg border border-gray-300 bg-white">
+        <h2 className="border-b border-gray-300 px-5 py-3 font-semibold text-gray-900">
+          Últimas cargas
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-gray-100 text-gray-700">
+              <tr>
+                <th className="px-5 py-2 font-semibold">Legajo</th>
+                <th className="px-5 py-2 font-semibold">Nombre</th>
+                <th className="px-5 py-2 font-semibold">Fecha</th>
+                <th className="px-5 py-2 font-semibold">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ultimos.map((u) => (
+                <tr key={u.legajo} className="border-t border-gray-200">
+                  <td className="px-5 py-2 text-gray-900">{u.legajo}</td>
+                  <td className="px-5 py-2 text-gray-900">{u.nombre}</td>
+                  <td className="px-5 py-2 text-gray-700">{u.fecha}</td>
+                  <td
+                    className={
+                      "px-5 py-2 font-medium " +
+                      (u.estado === "Pendiente" ? "text-red-700" : "text-green-700")
+                    }
+                  >
+                    {u.estado}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  );
+}

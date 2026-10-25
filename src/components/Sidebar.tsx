@@ -14,7 +14,7 @@ export function Sidebar() {
     <div className="sticky top-0 z-10 h-screen shrink-0 p-3">
       <aside
         className={
-          "flex h-full flex-col rounded-2xl bg-white/80 dark:bg-slate-950/80 py-5 shadow-2xl transition-[width] duration-300 " +
+          "flex h-full flex-col rounded-2xl bg-vidrio backdrop-blur-md py-5 shadow-2xl transition-[width] duration-300 " +
           (colapsado ? "w-20" : "w-64")
         }
       >
@@ -45,7 +45,7 @@ export function Sidebar() {
             type="button"
             onClick={() => setColapsado((c) => !c)}
             aria-label={colapsado ? "Expandir sidebar" : "Colapsar sidebar"}
-            className="shrink-0 rounded-lg p-2 text-slate-800 dark:text-slate-100 transition-colors hover:bg-slate-800 hover:text-white"
+            className="shrink-0 rounded-lg p-2 text-texto transition-colors hover:bg-hover"
           >
             {colapsado ? (
               <PanelLeftOpen size={20} />
@@ -56,11 +56,11 @@ export function Sidebar() {
         </div>
 
         {/* DIVIDER (siempre visible) */}
-        <hr className="mx-5 mb-3 -mt-4 border-slate-400 dark:border-slate-400" />
+        <hr className="mx-5 mb-3 -mt-4 border-borde" />
 
         {/* TÍTULO DE SECCIÓN (solo expandido) */}
         {!colapsado && (
-          <p className="mx-5 mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
+          <p className="mx-5 mb-2 text-sm font-semibold text-texto-suave">
             Proyectos:
           </p>
         )}
@@ -78,8 +78,8 @@ export function Sidebar() {
                   "flex items-center gap-3 rounded-lg py-2.5 text-sm font-medium no-underline transition-colors " +
                   (colapsado ? "justify-center px-0 " : "px-3 ") +
                   (isActive
-                    ? "bg-white text-slate-900"
-                    : "text-slate-700 dark:text-slate-200 hover:bg-slate-800 hover:text-white")
+                    ? "bg-activo text-activo-texto"
+                    : "text-texto hover:bg-hover")
                 }
               >
                 <Icono size={20} className="shrink-0" />
@@ -94,20 +94,20 @@ export function Sidebar() {
           {colapsado ? (
             <div
               title="Secretaría de Modernización"
-              className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white"
+              className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-marca text-sm font-bold text-white"
             >
               FL
             </div>
           ) : (
-            <div className="flex items-center gap-3 rounded-lg bg-white px-3 py-2.5">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white">
+            <div className="flex items-center gap-3 rounded-lg border border-borde bg-superficie px-3 py-2.5">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-marca text-sm font-bold text-white">
                 FL
               </div>
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-slate-900">
+                <p className="truncate text-sm font-semibold text-texto">
                   Franco Leiva
                 </p>
-                <p className="truncate text-xs text-slate-500">
+                <p className="truncate text-xs text-texto-suave">
                   Equipo de Desarrollo
                 </p>
               </div>

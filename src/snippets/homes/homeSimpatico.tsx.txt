@@ -1,0 +1,118 @@
+import {
+  CalendarPlus,
+  ClipboardCheck,
+  Clock,
+  FileSpreadsheet,
+  Lightbulb,
+  UserPlus,
+  Users,
+} from "lucide-react";
+
+const kpis = [
+  { label: "Agentes activos", valor: "1.248", icono: Users, color: "bg-sky-100 text-sky-700" },
+  { label: "Con asistencia", valor: "1.102", icono: ClipboardCheck, color: "bg-emerald-100 text-emerald-700" },
+  { label: "Pendientes", valor: "146", icono: Clock, color: "bg-orange-100 text-orange-700" },
+];
+
+const acciones = [
+  { label: "Cargar horarios", icono: CalendarPlus },
+  { label: "Nuevo agente", icono: UserPlus },
+  { label: "Subir Excel", icono: FileSpreadsheet },
+];
+
+function saludo() {
+  const h = new Date().getHours();
+  if (h < 12) return { texto: "Buen día", emoji: "☀️" };
+  if (h < 20) return { texto: "Buenas tardes", emoji: "🧉" };
+  return { texto: "Buenas noches", emoji: "🌙" };
+}
+
+export default function HomeSimpatico() {
+  const s = saludo();
+  const cargado = 1102;
+  const total = 1248;
+  const porcentaje = Math.round((cargado / total) * 100);
+
+  return (
+    <main className="mx-auto max-w-6xl space-y-6 p-6">
+      {/* Saludo */}
+      <section className="flex flex-col justify-between gap-4 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 md:flex-row md:items-center">
+        <div>
+          <p className="text-sm font-medium text-slate-500">
+            {new Date().toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })}
+          </p>
+          <h1 className="mt-1 text-3xl font-bold text-slate-900">
+            {s.texto}, Franco {s.emoji}
+          </h1>
+          <p className="mt-1 text-slate-600">
+            Quedan <strong className="text-orange-600">{total - cargado} agentes</strong> sin
+            asistencia este mes. ¡Vamos que se puede!
+          </p>
+        </div>
+
+        {/* Progreso del mes */}
+        <div className="w-full max-w-xs rounded-2xl bg-slate-50 p-4">
+          <div className="flex justify-between text-sm">
+            <span className="font-medium text-slate-700">Progreso de carga</span>
+            <span className="font-bold text-sky-700">{porcentaje}%</span>
+          </div>
+          <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-slate-200">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-sky-500 to-emerald-500"
+              style={{ width: porcentaje + "%" }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* KPIs */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        {kpis.map(({ label, valor, icono: Icono, color }) => (
+          <div
+            key={label}
+            className="flex items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <div className={"flex h-12 w-12 items-center justify-center rounded-2xl " + color}>
+              <Icono size={22} />
+            </div>
+            <div>
+              <p className="text-sm text-slate-500">{label}</p>
+              <p className="text-2xl font-bold text-slate-900">{valor}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        {/* Accesos rápidos */}
+        <section className="rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 md:col-span-2">
+          <h2 className="font-semibold text-slate-900">Accesos rápidos</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            {acciones.map(({ label, icono: Icono }) => (
+              <button
+                key={label}
+                type="button"
+                className="group flex flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-slate-200 p-5 text-sm font-medium text-slate-600 transition hover:border-sky-400 hover:bg-sky-50 hover:text-sky-700"
+              >
+                <Icono size={26} className="transition group-hover:scale-110" />
+                {label}
+              </button>
+            ))}
+          </div>
+        </section>
+
+        {/* Tip del día */}
+        <section className="rounded-2xl bg-amber-50 p-5 ring-1 ring-amber-200">
+          <div className="flex items-center gap-2 font-semibold text-amber-800">
+            <Lightbulb size={18} />
+            Tip del día
+          </div>
+          <p className="mt-2 text-sm leading-relaxed text-amber-900">
+            Podés subir el Excel con las 4 hojas de una y revisar todo antes de
+            guardar. Nada se guarda hasta que confirmes.
+          </p>
+        </section>
+      </div>
+    </main>
+  );
+}

@@ -17,7 +17,8 @@ export function Tabs<T extends string>({
   onChange,
 }: TabsProps<T>) {
   return (
-    <div className="flex items-center gap-2 border-b border-gray-200 dark:border-slate-700">
+    // Va encima de la foto de fondo: las pestañas inactivas usan texto claro
+    <div className="flex items-center gap-2 border-b border-white/20">
       {tabs.map((t) => (
         <button
           key={t.id}
@@ -25,8 +26,8 @@ export function Tabs<T extends string>({
           className={
             "px-4 py-2 -mb-px text-lg font-bold rounded-t-md border transition-colors uppercase " +
             (activo === t.id
-              ? "border-cyan-500 text-cyan-600 dark:text-cyan-400 bg-white dark:bg-slate-800"
-              : "border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200")
+              ? "border-acento text-acento bg-superficie"
+              : "border-transparent text-white/70 hover:text-white")
           }
         >
           {t.label}
