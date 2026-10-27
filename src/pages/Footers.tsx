@@ -1,4 +1,4 @@
-import { CodeBlockColapsable } from "../components/codeBlockColapsable";
+import { CodeBlockColapsable } from "../components/proyectoPage/codeBlockColapsable";
 import { SeccionLayout, Subtitulo } from "../components/seccionLayout";
 import footerSimpleCode from "../snippets/footers/footerSimple.tsx.txt?raw";
 import footerHemerotecaCode from "../snippets/footers/footerHemeroteca.tsx.txt?raw";

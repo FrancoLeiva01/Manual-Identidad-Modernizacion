@@ -4,17 +4,14 @@ import { ChevronLeft, ChevronRight, UserRound } from "lucide-react";
 export interface FotoEquipo {
   nombre: string;
   rol?: string;
-  imagen?: string; // sin imagen se muestra un marco vacío
+  imagen?: string; 
 }
 
 interface CarruselEquipoProps {
   fotos: FotoEquipo[];
-  intervalo?: number; // ms entre cada avance automático
+  intervalo?: number; 
 }
 
-// Carrusel horizontal con flechas y avance automático.
-// Se pausa al pasar el mouse y no se mueve solo si el usuario
-// tiene activado "reducir movimiento" en su sistema.
 export function CarruselEquipo({ fotos, intervalo = 4000 }: CarruselEquipoProps) {
   const pista = useRef<HTMLDivElement>(null);
   const [pausado, setPausado] = useState(false);
@@ -57,11 +54,14 @@ export function CarruselEquipo({ fotos, intervalo = 4000 }: CarruselEquipoProps)
             className="w-44 shrink-0 snap-start overflow-hidden rounded-xl border border-borde bg-superficie shadow-md sm:w-52"
           >
             {f.imagen ? (
-              <img
-                src={f.imagen}
-                alt={f.nombre}
-                className="aspect-square w-full object-cover"
-              />
+              <div className="m-2 mb-0 flex aspect-square items-center justify-center overflow-hidden rounded-lg bg-superficie-suave">
+                <img
+                  src={f.imagen}
+                  alt={f.nombre}
+                  loading="lazy"
+                  className="h-full w-full object-contain object-center"
+                />
+              </div>
             ) : (
               <div className="m-2 mb-0 flex aspect-square flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-borde bg-superficie-suave text-texto-suave">
                 <UserRound size={36} strokeWidth={1.5} />

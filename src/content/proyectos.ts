@@ -84,6 +84,12 @@ const equipoRecursosHumanos: Miembro[] = [
     imagen: "/caricaturas/diego.png",
     color: "#DCFCE7",
   },
+    {
+    nombre: "Reynoso",
+    rol: "El Negro",
+    imagen: "/caricaturas/reynoso.png",
+    color: "#DCFCE7",
+  },
 ];
 
 const equipoFoodTruck: Miembro[] = [
@@ -124,17 +130,41 @@ export const proyectos: Proyecto[] = [
   {
     id: "Hemeroteca",
     imagenes: [
-      "/imagenesHemeroteca/hemeroteca.png",
-      "/capturas/hemeroteca-2.png",
+      "/hemeroteca/hemeroteca1.png",
+      "/hemeroteca/hemeroteca2.png",
+      "/hemeroteca/hemeroteca3.png",
     ],
     expediente: "EXP-0001/26",
     nombre: "Hemeroteca Municipal",
     color: "#93C5FD",
     patron: "cuadriculado",
-    descripcionGeneral:
-      "Este sistema de RRHH permite gestionar la asistencia de los empleados de manera eficiente y precisa, brindando herramientas para el registro, seguimiento y análisis de la asistencia laboral.",
-    stack: ["React", "TypeScript"],
-    componentes: ["Componente 1", "Componente 2"],
+    descripcionGeneral: `Sitio web de la Hemeroteca Municipal de Catamarca, pensado para resguardar y difundir los diarios y libros que se van digitalizando, con acceso abierto para toda la comunidad.
+
+ESTILO EDITORIAL
+- Estética de periódico: titulares en tipografía serif, encabezado tipo portada con fecha y lugar, y paleta en tonos papel.
+- Navegación simple: Inicio, Catálogo, Hemeroteca Digital y Nosotros, más accesos directos a Solicitar Turno y al Archivo General Municipal.
+
+TABLÓN DE NOVEDADES
+- Columna lateral con las últimas novedades (nuevas colecciones, digitalizaciones en curso, herramientas), armada como un tablón de anuncios para darle un toque original.
+
+CARRUSEL PRINCIPAL
+- Noticia destacada con imágenes de portadas históricas, contador de diapositivas, flechas y avance automático.
+
+SECCIONES
+- 4 cards que llevan a Catálogo, Detrás de la foto (ciclo de entrevistas en video), Nuestras Prácticas y Hemeroteca Digital.
+
+CONTENIDO E INFORMACIÓN
+- Bloques de noticias e institucionales (trabajo interdisciplinario, convenios y alianzas).
+- Sección de ubicación con mapa embebido, dirección, contacto y botón "Cómo llegar".
+- Contenido cargado y administrado desde Directus, para que el equipo pueda actualizar novedades y noticias sin tocar código.`,
+    stack: ["React", "TypeScript", "Tailwind CSS", "Motion", "Directus"],
+    componentes: [
+      "Tablón de novedades",
+      "Carrusel de noticias",
+      "Cards de secciones",
+      "Mapa de ubicación",
+      "Footer editorial",
+    ],
     equipo: equipoHemeroteca,
     lenguaje: ["tsx"],
     icono: BookOpen,
@@ -143,9 +173,9 @@ export const proyectos: Proyecto[] = [
   {
     id: "rrhh-asistencia",
     imagenes: [
-      "/imagenesRRHH/LOGINrrhh.png",
-      "/imagenesRRHH/adicionales.png",
-      "/imagenesRRHH/calendario.png",
+      "/imagenesRRHHAsistencia/LOGINrrhh.png",
+      "/imagenesRRHHAsistencia/adicionales.png",
+      "/imagenesRRHHAsistencia/calendario.png",
     ],
     expediente: "EXP-0002/26",
     nombre: "RRHH | Asistencia",
@@ -186,12 +216,46 @@ ROLES Y PERMISOS
   },
   {
     id: "RecursosHumanos",
+       imagenes: [
+      "/imagenesRRHH/RRHH1.png",
+      "/imagenesRRHH/RRHH2.png",
+      "/imagenesRRHH/RRHH3.png",
+    ],
     expediente: "EXP-0003/26",
     nombre: "Recursos Humanos",
     color: "#475569",
-    descripcionGeneral: "Descripción pendiente de completar.",
-    stack: ["React", "TypeScript"],
-    componentes: ["Componente 1", "Componente 2"],
+    descripcionGeneral: `Sistema integral de Recursos Humanos para gestionar el personal municipal: legajos, licencias y medicina laboral, todo desde un mismo panel.
+
+DASHBOARD
+- Tarjetas destacadas con el total de personal activo y los legajos dados de baja.
+- Planta de personal: permanente, no permanente, funcionarios y docentes (con cargos y horas cátedra).
+- Situación de revista: adscriptos, afectación, cambio de función, licencia por cargo de mayor jerarquía, licencia minera y tareas pasivas.
+
+LICENCIAS
+- Nueva licencia, administración y extensión de licencias.
+- Notificaciones y auditoría de licencias.
+
+LEGAJOS
+- Alta de nuevos legajos, gestión y búsqueda de legajos.
+- Auditoría de los cambios realizados sobre cada legajo.
+
+MEDICINA LABORAL
+- Nueva orden médica, agenda médica y ficha médica del agente.
+- Notificaciones y auditoría de medicina laboral.
+
+PARÁMETROS
+- ABM de motivos, diagnósticos y artículos usados por el resto de los módulos.
+
+INTERFAZ
+- Sidebar con menús desplegables por módulo y breadcrumb de navegación.
+- Campanita de notificaciones con contador y modo claro/oscuro.`,
+    stack: ["React", "NestJS", "Tailwind CSS"],
+    componentes: [
+      "Dashboard de indicadores",
+      "Sidebar desplegable",
+      "Cards de métricas",
+      "Notificaciones",
+    ],
     equipo: equipoRecursosHumanos,
     lenguaje: "tsx",
     icono: Folder,

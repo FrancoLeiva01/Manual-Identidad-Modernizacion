@@ -7,10 +7,12 @@ import { Footers } from "./pages/Footers";
 import { Navbars } from "./pages/Navbars";
 import { Homes } from "./pages/Homes";
 import { Sidebars } from "./pages/Sidebars";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="flex min-h-screen bg-fondo">
         <Sidebar />
         <main className="flex-1 min-w-0">

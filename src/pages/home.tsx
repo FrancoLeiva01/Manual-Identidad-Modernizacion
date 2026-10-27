@@ -1,7 +1,7 @@
 import { Check, ExternalLink, FolderOpen, Globe, Monitor } from "lucide-react";
 import { Link } from "react-router-dom";
-import { FondoFoto } from "../components/fondoFoto";
-import { CarruselEquipo, type FotoEquipo } from "../components/carruselEquipo";
+import { FondoFoto } from "../components/home/fondoFoto";
+import { CarruselEquipo, type FotoEquipo } from "../components/home/carruselEquipo";
 
 // ─── Contenido editable ────────────────────────────────────────────────
 const DROPBOX_URL =
@@ -69,28 +69,57 @@ const guias = [
   },
 ];
 
-// Fotos del equipo para el carrusel: agregá `imagen: "/equipo/nombre.jpg"` a cada uno
+// Fotos del equipo para el carrusel: las caricaturas están en /public/caricaturas
 const equipo: FotoEquipo[] = [
-  { nombre: "Franco", rol: "Front" },
-  { nombre: "Gabi", rol: "Front" },
-  { nombre: "Lucio", rol: "Back" },
-  { nombre: "Nahuel", rol: "Front" },
-  { nombre: "Esteban", rol: "Front" },
-  { nombre: "Diego", rol: "Back" },
-  { nombre: "Lautaro", rol: "Back" },
-  { nombre: "Maxi", rol: "Front" },
-  { nombre: "Gonza", rol: "Product Owner" },
+  { nombre: "Franco", rol: "Front", imagen: "/caricaturas/franco.png" },
+  { nombre: "Gabi", rol: "Front", imagen: "/caricaturas/gabi.png" },
+  { nombre: "Lucio", rol: "Back", imagen: "/caricaturas/lucio.png" },
+  { nombre: "Nahuel", rol: "Front", imagen: "/caricaturas/nahuel.png" },
+  { nombre: "Esteban", rol: "Front", imagen: "/caricaturas/esteban.png" },
+  { nombre: "Diego", rol: "Back", imagen: "/caricaturas/diego.png" },
+  { nombre: "Lautaro", rol: "Back", imagen: "/caricaturas/lautaro.png" },
+  { nombre: "Maxi", rol: "Front", imagen: "/caricaturas/maxi.png" },
+  { nombre: "Gonza", rol: "Product Owner", imagen: "/caricaturas/gonza.png" },
   { nombre: "Integrante 10" },
   { nombre: "Integrante 11" },
   { nombre: "Integrante 12" },
 ];
 
-const datos = [
-  { label: "Área", valor: "Secretaría de Modernización" },
-  { label: "Mantiene", valor: "Equipo de Desarrollo" },
-  { label: "Última actualización", valor: "Octubre 2026" },
-];
+// Card que va en la columna derecha, debajo de Dropbox
+const skills: Seccion = {
+  titulo: "Skills",
+  url: "https://github.com/sfvc/modernizacion-skills/tree/main/skills",
+  img: "/cardsHome/skills.webp",
+  tinte: "bg-rose-600/55 group-hover:bg-rose-600/40",
+};
 // ───────────────────────────────────────────────────────────────────────
+
+type Seccion = (typeof secciones)[number];
+
+function TarjetaSeccion({ seccion: s }: { seccion: Seccion }) {
+  return (
+    <Link
+      to={s.url}
+      className="group relative flex min-h-36 items-center justify-center overflow-hidden rounded-xl p-5 shadow-md focus-visible:outline-2 focus-visible:outline-white"
+    >
+      {/* Imagen borrosa */}
+      <img
+        src={s.img}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full scale-110 object-cover transition-transform duration-500 group-hover:scale-125"
+      />
+      {/* Tinte de color */}
+      <div
+        className={"absolute inset-0 transition-colors duration-300 " + s.tinte}
+      />
+      {/* Título */}
+      <span className="relative text-2xl font-extrabold uppercase tracking-wide text-white drop-shadow-md">
+        {s.titulo}
+      </span>
+    </Link>
+  );
+}
 
 export function Home() {
   return (
@@ -129,29 +158,7 @@ export function Home() {
           {/* 4 secciones de componentes */}
           <div className="grid gap-4 sm:grid-cols-2">
             {secciones.map((s) => (
-              <Link
-                key={s.titulo}
-                to={s.url}
-                className="group relative flex min-h-36 items-center justify-center overflow-hidden rounded-xl p-5 shadow-md focus-visible:outline-2 focus-visible:outline-white"
-              >
-                {/* Imagen borrosa */}
-                <img
-                  src={s.img}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 h-full w-full scale-110 object-cover transition-transform duration-500 group-hover:scale-125"
-                />
-                {/* Tinte de color */}
-                <div
-                  className={
-                    "absolute inset-0 transition-colors duration-300 " + s.tinte
-                  }
-                />
-                {/* Título */}
-                <span className="relative text-2xl font-extrabold uppercase tracking-wide text-white drop-shadow-md">
-                  {s.titulo}
-                </span>
-              </Link>
+              <TarjetaSeccion key={s.titulo} seccion={s} />
             ))}
           </div>
 
@@ -180,17 +187,8 @@ export function Home() {
               </span>
             </a>
 
-            {/* Datos */}
-            <dl className="divide-y divide-borde rounded-xl border border-borde bg-superficie">
-              {datos.map((d) => (
-                <div key={d.label} className="px-5 py-3">
-                  <dt className="text-xs text-texto-suave">{d.label}</dt>
-                  <dd className="font-medium text-texto">
-                    {d.valor}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            {/* Skills */}
+            <TarjetaSeccion seccion={skills} />
           </aside>
         </section>
 
@@ -252,10 +250,10 @@ export function Home() {
           </div>
 
           <p className="mt-6 rounded-lg border-l-4 border-marca bg-superficie/70 px-4 py-3 text-sm leading-relaxed text-texto">
-            <strong className="text-texto">Regla general:</strong> si no
-            sabés en qué equipos se va a usar un sistema, diseñá pensando en
-            el peor caso. Lo básico bien hecho funciona en todos lados; lo
-            vistoso solo luce si la pantalla acompaña.
+            <strong className="text-texto">Regla general:</strong> si no sabés
+            en qué equipos se va a usar un sistema, diseñá pensando en el peor
+            caso. Lo básico bien hecho funciona en todos lados; lo vistoso solo
+            luce si la pantalla acompaña.
           </p>
         </section>
 

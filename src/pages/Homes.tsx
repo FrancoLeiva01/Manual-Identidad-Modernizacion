@@ -1,4 +1,4 @@
-import { CodeBlockColapsable } from "../components/codeBlockColapsable";
+import { CodeBlockColapsable } from "../components/proyectoPage/codeBlockColapsable";
 import { SeccionLayout, Subtitulo } from "../components/seccionLayout";
 import homeBasicoCode from "../snippets/homes/homeBasico.tsx.txt?raw";
 import homeSimpaticoCode from "../snippets/homes/homeSimpatico.tsx.txt?raw";

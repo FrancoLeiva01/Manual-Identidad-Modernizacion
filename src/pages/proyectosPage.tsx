@@ -1,14 +1,14 @@
 import { Suspense, useState } from "react";
 import { useParams } from "react-router-dom";
 import { proyectos } from "../content/proyectos";
-import { PanelHero } from "../components/PanelHero";
-import { MasImagenes } from "../components/Images";
-import { Tabs } from "../components/tabs";
-import { contenidoFront, contenidoBack } from "../content/registro";
+import { PanelHero } from "../components/home/PanelHero";
+import { MasImagenes } from "../components/proyectoPage/Images";
+import { Tabs } from "../components/proyectoPage/tabs";
+import { contenidoFront } from "../content/registro";
 
-import { FondoFoto } from "../components/fondoFoto";
+import { FondoFoto } from "../components/home/fondoFoto";
 
-type TabId = "general" | "front" | "back";
+type TabId = "general" | "front";
 
 export function ProyectoPage() {
   const { id } = useParams();
@@ -24,7 +24,6 @@ export function ProyectoPage() {
   }
 
   const Front = contenidoFront[proyecto.id];
-  const Back = contenidoBack[proyecto.id];
 
   return (
     <div className="relative min-h-screen">
@@ -53,7 +52,6 @@ export function ProyectoPage() {
             tabs={[
               { id: "general", label: "General" },
               { id: "front", label: "Front" },
-              { id: "back", label: "Back" },
             ]}
             activo={tab}
             onChange={setTab}
@@ -84,7 +82,7 @@ export function ProyectoPage() {
             </div>
           )}
 
-          {/* Front y Back van dentro de una card para que el texto se lea sobre la foto */}
+          {/* Front va dentro de una card para que el texto se lea sobre la foto */}
           {tab !== "general" && (
             <div className="bg-superficie border border-borde p-6 rounded-2xl shadow-md">
               <Suspense
@@ -96,14 +94,6 @@ export function ProyectoPage() {
                   ) : (
                     <p className="text-sm text-texto-suave">
                       Contenido de Front pendiente para este proyecto.
-                    </p>
-                  ))}
-                {tab === "back" &&
-                  (Back ? (
-                    <Back />
-                  ) : (
-                    <p className="text-sm text-texto-suave">
-                      Contenido de Back pendiente para este proyecto.
                     </p>
                   ))}
               </Suspense>

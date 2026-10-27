@@ -1,4 +1,4 @@
-import { CodeBlock } from "../../components/codeBlock";
+import { CodeBlock } from "../../components/proyectoPage/codeBlock";
 
 // Contenido de la pestaña FRONT para Hemeroteca.
 // Escribí acá lo que quieras: texto, varios CodeBlock, lo que sea.

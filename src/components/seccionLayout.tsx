@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { FondoFoto } from "./fondoFoto";
+import { FondoFoto } from "./home/fondoFoto";
 
 // Layout común de las secciones de componentes (/footers, /navbars, /homes, /sidebars)
 interface SeccionLayoutProps {

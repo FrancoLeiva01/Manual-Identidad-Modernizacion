@@ -14,7 +14,7 @@ export function Sidebar() {
     <div className="sticky top-0 z-10 h-screen shrink-0 p-3">
       <aside
         className={
-          "flex h-full flex-col rounded-2xl bg-vidrio backdrop-blur-md py-5 shadow-2xl transition-[width] duration-300 " +
+          "flex h-full flex-col rounded-2xl bg-vidrio backdrop-blur-sm py-5 shadow-2xl transition-[width] duration-300 " +
           (colapsado ? "w-20" : "w-64")
         }
       >
@@ -56,11 +56,11 @@ export function Sidebar() {
         </div>
 
         {/* DIVIDER (siempre visible) */}
-        <hr className="mx-5 mb-3 -mt-4 border-borde" />
+        <hr className="mx-5 mb-3 -mt-4 border-white/30" />
 
         {/* TÍTULO DE SECCIÓN (solo expandido) */}
         {!colapsado && (
-          <p className="mx-5 mb-2 text-sm font-semibold text-texto-suave">
+          <p className="mx-5 mb-2 text-sm font-semibold text-slate-800 dark:text-slate-200">
             Proyectos:
           </p>
         )}

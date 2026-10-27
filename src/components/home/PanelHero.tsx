@@ -14,11 +14,14 @@ export function PanelHero({ proyecto }: PanelHeroProps) {
           className="rounded-xl border border-borde overflow-hidden bg-superficie"
         >
           {persona.imagen ? (
-            <img
-              src={persona.imagen}
-              alt={persona.nombre}
-              className="w-full h-48 object-cover"
-            />
+            <div className="m-3 mb-0 h-45 flex items-center justify-center overflow-hidden rounded-lg bg-superficie-suave">
+              <img
+                src={persona.imagen}
+                alt={persona.nombre}
+                loading="lazy"
+                className="h-full w-full object-contain object-center"
+              />
+            </div>
           ) : (
             // Marco vacío a la espera de la foto
             <div className="m-3 mb-0 h-45 flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-borde bg-superficie-suave text-texto-suave">
