@@ -204,12 +204,22 @@ const equipoCapitalDatos: Miembro[] = [
 ];
 
 const equipoMultasEnCalle: Miembro[] = [
-  // {
-  //   nombre: "Franco",
-  //   rol: "QA",
-  //   imagen: "/caricaturas/franco.png",
-  //   color: "#DBEAFE",
-  // },
+  {
+    nombre: "Coriotto 1",
+    rol: "Frontend",
+    imagen: "/caricaturas/coriotto1.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Coriotto 2",
+    rol: "Backend",
+    imagen: "/caricaturas/coriotto2.png",
+    color: "#FEF3C7",
+  },
+
+];
+
+const equipoRedesTransporte: Miembro[] = [
   {
     nombre: "Maxi",
     rol: "Frontend",
@@ -228,12 +238,6 @@ const equipoMultasEnCalle: Miembro[] = [
     imagen: "/caricaturas/gonza.png",
     color: "#DBEAFE",
   },
-];
-
-const equipoRedesTransporte: Miembro[] = [
-  { nombre: "Lautaro", rol: "Backend", color: "#DBEAFE" },
-  { nombre: "Maxi", rol: "Frontend", color: "#DCFCE7" },
-  { nombre: "Gonza", rol: "Product Owner", color: "#FEF3C7" },
 ];
 
 const equipoAGM: Miembro[] = [
@@ -437,7 +441,7 @@ INTERFAZ
   },
   {
     id: "RedesTransporte",
-        imagenes: [
+    imagenes: [
       "/redTransporte/redTransporte1.png",
       "/redTransporte/redTransporte2.png",
       "/redTransporte/redTransporte3.png",
