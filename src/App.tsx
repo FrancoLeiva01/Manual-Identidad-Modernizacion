@@ -3,10 +3,10 @@ import { Sidebar } from "./components/Sidebar";
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/home";
 import { ProyectoPage } from "./pages/proyectosPage";
-import { Footers } from "./pages/Footers";
-import { Navbars } from "./pages/Navbars";
-import { Homes } from "./pages/Homes";
-import { Sidebars } from "./pages/Sidebars";
+import { Footers } from "./pages/FootersPage";
+import { Navbars } from "./pages/NavbarsPage";
+import { Homes } from "./pages/HomesPage";
+import { Sidebars } from "./pages/SidebarsPage";
 import { ScrollToTop } from "./components/ScrollToTop";
 
 function App() {

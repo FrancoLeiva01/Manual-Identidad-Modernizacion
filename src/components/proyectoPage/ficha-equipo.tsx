@@ -1,4 +1,4 @@
-import type { Miembro } from "../content/proyectos";
+import type { Miembro } from "../../content/proyectos";
 
 interface FichaEquipoProps {
   equipo: Miembro[];

@@ -1,5 +1,5 @@
 // import { CodeBlock } from "../../components/codeBlock";
-import { CodeBlockColapsable } from "../../components/codeBlockColapsable";
+import { CodeBlockColapsable } from "../../components/proyectoPage/codeBlockColapsable";
 import loginPageCode from "../../snippets/login-page.tsx.txt?raw";
 import topNavCode from "../../snippets/top-nav.tsx.txt?raw";
 import sidebarCode from "../../snippets/sidebar.tsx.txt?raw";
@@ -42,7 +42,7 @@ export default function FrontRrhhAsistencia() {
         huevos...es culpa de el.
       </p>
       <img
-        src="/imagenesRRHH/diseñoRRHH.png"
+        src="/imagenesRRHHAsistencia/diseñoRRHH.png"
         alt="Sistema RRHH Principal (responsabilidad de Esteban)"
         className="border border-borde object-cover w-full h-auto"
       />
@@ -100,7 +100,7 @@ export default function FrontRrhhAsistencia() {
         derecha, selector de mes y año.
       </p>
       {/* <ImagenSeccion
-        src="/imagenesRRHH/Dash.png"
+        src="/imagenesRRHHAsistencia/Dash.png"
         alt="Dashboard de RRHH Asistencia"
       /> */}
       <CodeBlockColapsable codigo={dashboardCode} lenguaje="home-dashboard.tsx" />
@@ -114,7 +114,7 @@ export default function FrontRrhhAsistencia() {
         completo, CUIL y Acciones (menú "...").
       </p>
       <ImagenSeccion
-        src="/imagenesRRHH/ListadoAgentes.png"
+        src="/imagenesRRHHAsistencia/ListadoAgentes.png"
         alt="Listado de agentes"
       />
       <CodeBlockColapsable
@@ -140,7 +140,7 @@ export default function FrontRrhhAsistencia() {
         "Reportes" está pendiente de desarrollo.
       </p>
       <ImagenSeccion
-        src="/imagenesRRHH/adicionales.png"
+        src="/imagenesRRHHAsistencia/adicionales.png"
         alt="Adicionales - AFE"
       />
       <CodeBlockColapsable
@@ -168,7 +168,7 @@ export default function FrontRrhhAsistencia() {
         chips de estado "Leída" / "Procesado" en vez de los botones.
       </p>
       <ImagenSeccion
-        src="/imagenesRRHH/Notificaciones.png"
+        src="/imagenesRRHHAsistencia/Notificaciones.png"
         alt="Notificaciones"
       />
       <CodeBlockColapsable

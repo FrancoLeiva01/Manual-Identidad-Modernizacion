@@ -84,7 +84,7 @@ export function CarruselEquipo({ fotos, intervalo = 4000 }: CarruselEquipoProps)
         type="button"
         onClick={() => mover(-1)}
         aria-label="Anterior"
-        className="absolute top-1/2 -left-3 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-superficie text-texto shadow-lg ring-1 ring-borde transition hover:scale-105"
+        className="absolute top-1/2 -left-3 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-superficie text-texto shadow-lg ring-1 ring-borde transition hover:scale-105 cursor-pointer"
       >
         <ChevronLeft size={20} />
       </button>
@@ -92,7 +92,7 @@ export function CarruselEquipo({ fotos, intervalo = 4000 }: CarruselEquipoProps)
         type="button"
         onClick={() => mover(1)}
         aria-label="Siguiente"
-        className="absolute top-1/2 -right-3 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-superficie text-texto shadow-lg ring-1 ring-borde transition hover:scale-105"
+        className="absolute top-1/2 -right-3 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-superficie text-texto shadow-lg ring-1 ring-borde transition hover:scale-105 cursor-pointer"
       >
         <ChevronRight size={20} />
       </button>

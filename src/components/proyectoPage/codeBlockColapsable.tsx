@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { CodeBlock } from "./proyectoPage/codeBlock";
+import { CodeBlock } from "./codeBlock";
 
 interface Props {
   codigo: string;

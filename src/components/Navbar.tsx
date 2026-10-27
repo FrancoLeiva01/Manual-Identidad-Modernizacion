@@ -37,7 +37,7 @@ export function Navbar() {
       <button
         onClick={() => setOscuro((v) => !v)}
         title={oscuro ? "Modo claro" : "Modo oscuro"}
-        className="p-2 rounded-full text-white hover:bg-slate-600 transition-colors"
+        className="p-2 rounded-full text-white hover:bg-slate-600 transition-colors cursor-pointer"
       >
         {oscuro ? <Sun size={18} /> : <Moon size={18} />}
       </button>

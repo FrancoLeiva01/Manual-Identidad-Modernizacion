@@ -1,5 +1,5 @@
 import { UserRound } from "lucide-react";
-import type { Proyecto } from "../content/proyectos";
+import type { Proyecto } from "../../content/proyectos";
 
 interface PanelHeroProps {
   proyecto: Proyecto;
