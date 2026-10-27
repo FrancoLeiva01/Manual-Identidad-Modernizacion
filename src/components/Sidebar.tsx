@@ -45,7 +45,7 @@ export function Sidebar() {
             type="button"
             onClick={() => setColapsado((c) => !c)}
             aria-label={colapsado ? "Expandir sidebar" : "Colapsar sidebar"}
-            className="shrink-0 rounded-lg p-2 text-texto transition-colors hover:bg-hover"
+            className="shrink-0 rounded-lg p-2 text-texto transition-colors hover:bg-hover cursor-pointer"
           >
             {colapsado ? (
               <PanelLeftOpen size={20} />

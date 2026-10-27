@@ -1,9 +1,18 @@
 import type { ComponentType } from "react";
 import {
+  Archive,
   BookOpen,
+  BookSearch,
+  Bus,
+  Car,
   Clock3,
+  CoinsIcon,
+  Database,
   Folder,
+  HandCoins,
+  Landmark,
   LayoutDashboard,
+  Receipt,
   Truck,
   Wallet,
 } from "lucide-react";
@@ -16,6 +25,11 @@ export interface Miembro {
 }
 
 export type EstadoTipo = "OK" | "PELIGRO" | "CAOS";
+
+export interface Link {
+  label: string;
+  url: string;
+}
 
 export interface Proyecto {
   id: string;
@@ -31,6 +45,7 @@ export interface Proyecto {
   lenguaje: string | string[];
   icono: ComponentType<{ size?: number; className?: string }>;
   estado: string;
+  links?: Link[];
 }
 
 // ACA CREAMOS CADA EQUIPO DE CADA PROYECTO
@@ -52,6 +67,48 @@ const equipoRRHH_Asistencia: Miembro[] = [
     nombre: "Lucio",
     rol: "El Back-end Definitivo",
     imagen: "/caricaturas/lucio.png",
+    color: "#FEF3C7",
+  },
+];
+
+const equipoCajaDeCredito: Miembro[] = [
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Gabi",
+    rol: "Front",
+    imagen: "/caricaturas/gabi.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Lucio",
+    rol: "El Back-end Definitivo",
+    imagen: "/caricaturas/lucio.png",
+    color: "#FEF3C7",
+  },
+];
+
+const equipoPatrimonioUrbano: Miembro[] = [
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Lautaro",
+    rol: "Back",
+    imagen: "/caricaturas/lautaro.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Juan",
+    rol: "El Jefe",
+    imagen: "/caricaturas/juan.png",
     color: "#FEF3C7",
   },
 ];
@@ -84,10 +141,25 @@ const equipoRecursosHumanos: Miembro[] = [
     imagen: "/caricaturas/diego.png",
     color: "#DCFCE7",
   },
-    {
+  {
     nombre: "Reynoso",
     rol: "El Negro",
     imagen: "/caricaturas/reynoso.png",
+    color: "#DCFCE7",
+  },
+];
+
+const equipoCorralon: Miembro[] = [
+  {
+    nombre: "Nahuel",
+    rol: "Front",
+    imagen: "/caricaturas/nahuel.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Diego",
+    rol: "Back",
+    imagen: "/caricaturas/diego.png",
     color: "#DCFCE7",
   },
 ];
@@ -121,6 +193,57 @@ const equipoSiprom: Miembro[] = [
 ];
 
 const equipoDashes: Miembro[] = [
+  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
+  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
+  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+];
+
+const equipoCapitalDatos: Miembro[] = [
+  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
+  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
+  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+];
+
+const equipoMultasEnCalle: Miembro[] = [
+  // {
+  //   nombre: "Franco",
+  //   rol: "QA",
+  //   imagen: "/caricaturas/franco.png",
+  //   color: "#DBEAFE",
+  // },
+  {
+    nombre: "Maxi",
+    rol: "Frontend",
+    imagen: "/caricaturas/maxi.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Lautaro",
+    rol: "Backend",
+    imagen: "/caricaturas/lautaro.png",
+    color: "#FEF3C7",
+  },
+  {
+    nombre: "Gonza",
+    rol: "Analista de Sistemas",
+    imagen: "/caricaturas/gonza.png",
+    color: "#DBEAFE",
+  },
+];
+
+const equipoRedesTransporte: Miembro[] = [
+  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
+  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
+  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+];
+
+const equipoAGM: Miembro[] = [
+  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
+  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
+  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+];
+
+const equipoSubsidios: Miembro[] = [
   { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
   { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
   { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
@@ -216,7 +339,7 @@ ROLES Y PERMISOS
   },
   {
     id: "RecursosHumanos",
-       imagenes: [
+    imagenes: [
       "/imagenesRRHH/RRHH1.png",
       "/imagenesRRHH/RRHH2.png",
       "/imagenesRRHH/RRHH3.png",
@@ -298,6 +421,150 @@ INTERFAZ
     equipo: equipoDashes,
     lenguaje: "tsx",
     icono: LayoutDashboard,
+    estado: "en proceso",
+  },
+  {
+    id: "CapitalDatos",
+    expediente: "EXP-0007/26",
+    nombre: "Capital Datos",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoCapitalDatos,
+    lenguaje: "tsx",
+    icono: Database,
+    estado: "en proceso",
+  },
+  {
+    id: "MultasEnCalle",
+        imagenes: [
+      "/redTransporte/redTransporte1.png",
+      "/redTransporte/redTransporte2.png",
+      "/redTransporte/redTransporte3.png",
+    ],
+    expediente: "EXP-0008/26",
+    nombre: "Multas en Calle",
+    color: "#475569",
+    descripcionGeneral: `Sistema para gestionar la inscripción, habilitación y fiscalización de los servicios de transporte de personas por redes (tipo Uber/Cabify) en el ámbito municipal, en cumplimiento con las ordenanzas locales y normativas de seguridad vial.
+
+REGISTROS
+- El sistema se centra en tres registros: Empresas (ERTUP), Conductores y Vehículos.
+
+PORTAL PÚBLICO
+- Los actores externos (empresas, conductores, propietarios y pasajeros/inspectores) cargan datos y documentación obligatoria y hacen el seguimiento de sus trámites.
+
+PANEL ADMINISTRATIVO
+- El personal municipal revisa, aprueba o rechaza solicitudes con fundamentación y cita a inspección vehicular.
+
+VERIFICACIÓN QR
+- Generación de un código QR único para la verificación pública e instantánea de la habilitación.
+
+BENEFICIO ESPERADO
+- Control integral y legal sobre el transporte de personas por redes: registro, habilitación y fiscalización de empresas, conductores y vehículos.
+- Trazabilidad de la gestión administrativa a través de la interrelación de los tres registros.
+- Seguridad del servicio: inspectores y usuarios verifican al instante el estado de habilitación de la credencial del responsable mediante el QR.
+
+ORGANIZACIÓN
+- Área solicitante: Protección Ciudadana (Transporte Público).
+- Programa: Transporte / Tránsito.
+- Tipo: Externo · Nivel de seguridad: Bajo · Turno: Mañana.`,
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoMultasEnCalle,
+    lenguaje: "tsx",
+    icono: Receipt,
+    estado: "Activo",
+    links: [
+      {
+        label: "Pagina en Cuestion",
+        url: "https://red-transporte.apps.cc.gob.ar/",
+      },
+      {
+        label: "Carpeta Drive del Proyecto",
+        url: "https://drive.google.com/drive/folders/1GMNGaSZR3BYHKqwaisoV_8wzJOQh3Ll8",
+      },
+    ],
+  },
+  {
+    id: "RedesTransporte",
+    expediente: "EXP-0009/26",
+    nombre: "Redes y Transporte",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoRedesTransporte,
+    lenguaje: "tsx",
+    icono: Bus,
+    estado: "en proceso",
+  },
+  {
+    id: "AGM",
+    expediente: "EXP-0010/26",
+    nombre: "AGM",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoAGM,
+    lenguaje: "tsx",
+    icono: BookSearch,
+    estado: "en proceso",
+  },
+  {
+    id: "Subsidios",
+    expediente: "EXP-0011/26",
+    nombre: "Subsidios",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoSubsidios,
+    lenguaje: "tsx",
+    icono: HandCoins,
+    estado: "en proceso",
+  },
+
+  {
+    id: "Caja de Credito",
+    expediente: "EXP-0011/26",
+    nombre: "Caja de Credito",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoCajaDeCredito,
+    lenguaje: "tsx",
+    icono: CoinsIcon,
+    estado: "en proceso",
+  },
+
+  {
+    id: "Patrimonio Urbano",
+    expediente: "EXP-0011/26",
+    nombre: "Patrimonio Urbano",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoPatrimonioUrbano,
+    lenguaje: "tsx",
+    icono: Landmark,
+    estado: "en proceso",
+  },
+
+  {
+    id: "Corralon",
+    expediente: "EXP-0011/26",
+    nombre: "Corralon",
+    color: "#475569",
+    descripcionGeneral: "Descripción pendiente de completar.",
+    stack: ["React", "TypeScript"],
+    componentes: ["Componente 1", "Componente 2"],
+    equipo: equipoCorralon,
+    lenguaje: "tsx",
+    icono: Car,
     estado: "en proceso",
   },
 ];

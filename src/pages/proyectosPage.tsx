@@ -1,5 +1,6 @@
 import { Suspense, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ExternalLink } from "lucide-react";
 import { proyectos } from "../content/proyectos";
 import { PanelHero } from "../components/home/PanelHero";
 import { MasImagenes } from "../components/proyectoPage/Images";
@@ -76,6 +77,34 @@ export function ProyectoPage() {
                     </span>
                   ))}
                 </div>
+
+                {proyecto.links && proyecto.links.length > 0 && (
+                  <div className="mt-5 pt-4 border-t border-borde">
+                    <p className="mb-2 text-sm tracking-wide font-bold uppercase text-acento">
+                      Links
+                    </p>
+                    <ul className="flex flex-col gap-2 m-0 p-0 list-none">
+                      {proyecto.links.map((l) => (
+                        <li key={l.url}>
+                          <a
+                            href={l.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-start gap-2 text-sm text-texto hover:text-acento"
+                          >
+                            <ExternalLink size={16} className="mt-0.5 shrink-0" />
+                            <span className="min-w-0">
+                              <span className="font-semibold">{l.label}</span>
+                              <span className="block break-all text-texto-suave">
+                                {l.url}
+                              </span>
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               <MasImagenes imagenes={proyecto.imagenes} />
