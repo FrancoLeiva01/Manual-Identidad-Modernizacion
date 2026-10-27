@@ -4,6 +4,7 @@ import {
   BookSearch,
   Bus,
   Car,
+  CarFront,
   Clock3,
   CoinsIcon,
   Database,
@@ -11,7 +12,6 @@ import {
   HandCoins,
   Landmark,
   LayoutDashboard,
-  Receipt,
   Truck,
   Wallet,
 } from "lucide-react";
@@ -231,9 +231,9 @@ const equipoMultasEnCalle: Miembro[] = [
 ];
 
 const equipoRedesTransporte: Miembro[] = [
-  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
-  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
-  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+  { nombre: "Lautaro", rol: "Backend", color: "#DBEAFE" },
+  { nombre: "Maxi", rol: "Frontend", color: "#DCFCE7" },
+  { nombre: "Gonza", rol: "Product Owner", color: "#FEF3C7" },
 ];
 
 const equipoAGM: Miembro[] = [
@@ -436,14 +436,14 @@ INTERFAZ
     estado: "en proceso",
   },
   {
-    id: "MultasEnCalle",
+    id: "RedesTransporte",
         imagenes: [
       "/redTransporte/redTransporte1.png",
       "/redTransporte/redTransporte2.png",
       "/redTransporte/redTransporte3.png",
     ],
     expediente: "EXP-0008/26",
-    nombre: "Multas en Calle",
+    nombre: "Redes y Transporte",
     color: "#475569",
     descripcionGeneral: `Sistema para gestionar la inscripción, habilitación y fiscalización de los servicios de transporte de personas por redes (tipo Uber/Cabify) en el ámbito municipal, en cumplimiento con las ordenanzas locales y normativas de seguridad vial.
 
@@ -470,9 +470,9 @@ ORGANIZACIÓN
 - Tipo: Externo · Nivel de seguridad: Bajo · Turno: Mañana.`,
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
-    equipo: equipoMultasEnCalle,
+    equipo: equipoRedesTransporte,
     lenguaje: "tsx",
-    icono: Receipt,
+    icono: CarFront,
     estado: "Activo",
     links: [
       {
@@ -486,14 +486,14 @@ ORGANIZACIÓN
     ],
   },
   {
-    id: "RedesTransporte",
+    id: "MultasEnCalle",
     expediente: "EXP-0009/26",
-    nombre: "Redes y Transporte",
+    nombre: "Multas en Calle",
     color: "#475569",
     descripcionGeneral: "Descripción pendiente de completar.",
     stack: ["React", "TypeScript"],
     componentes: ["Componente 1", "Componente 2"],
-    equipo: equipoRedesTransporte,
+    equipo: equipoMultasEnCalle,
     lenguaje: "tsx",
     icono: Bus,
     estado: "en proceso",
