@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
+import { ChevronRight, Menu, PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
 import { proyectos } from "../content/proyectos";
 
 // Cambiá estas rutas por los logos que correspondan
@@ -117,15 +117,33 @@ export function Sidebar() {
                   onClick={cerrar}
                   title={mini ? p.nombre : p.expediente}
                   className={({ isActive }) =>
-                    "flex items-center gap-3 rounded-lg py-2.5 text-sm font-medium no-underline transition-colors " +
+                    "group flex items-center gap-3 rounded-lg py-2.5 text-sm font-medium no-underline transition-colors " +
                     (mini ? "justify-center px-0 " : "px-3 ") +
                     (isActive
                       ? "bg-activo text-activo-texto"
                       : "text-texto hover:bg-hover")
                   }
                 >
-                  <Icono size={20} className="shrink-0" />
-                  {!mini && <span className="truncate">{p.nombre}</span>}
+                  {({ isActive }) => (
+                    <>
+                      <Icono size={20} className="shrink-0" />
+                      {!mini && (
+                        <>
+                          <span className="min-w-0 flex-1 truncate">{p.nombre}</span>
+                          {/* Detalle: flechita que se asoma al pasar o en el activo */}
+                          <ChevronRight
+                            size={16}
+                            className={
+                              "shrink-0 transition-all duration-200 " +
+                              (isActive
+                                ? "opacity-100"
+                                : "opacity-40 group-hover:translate-x-0.5 group-hover:opacity-100")
+                            }
+                          />
+                        </>
+                      )}
+                    </>
+                  )}
                 </NavLink>
               );
             })}

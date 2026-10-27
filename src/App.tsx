@@ -8,6 +8,8 @@ import { Navbars } from "./pages/NavbarsPage";
 import { Homes } from "./pages/HomesPage";
 import { Sidebars } from "./pages/SidebarsPage";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { Buscador } from "./components/Buscador";
+import { KitUI } from "./pages/KitUIPage";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
       <div className="flex min-h-screen bg-fondo">
         <Sidebar />
         <main className="flex-1 min-w-0">
+          <Buscador />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/expediente/:id" element={<ProyectoPage />} />
@@ -23,6 +26,7 @@ function App() {
             <Route path="/navbars" element={<Navbars />} />
             <Route path="/homes" element={<Homes />} />
             <Route path="/sidebars" element={<Sidebars />} />
+            <Route path="/ui" element={<KitUI />} />
           </Routes>
         </main>
         <Navbar />

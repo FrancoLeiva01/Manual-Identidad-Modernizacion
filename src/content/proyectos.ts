@@ -184,23 +184,69 @@ const equipoFoodTruck: Miembro[] = [
   },
 ];
 
-// Equipos pendientes de cargar: sin `imagen` se muestra un marco vacío
+// Sin `imagen` se muestra un marco vacío ("Imagen pendiente")
 const equipoSiprom: Miembro[] = [
-  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
-  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
-  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+  {
+    nombre: "Maxi",
+    rol: "Front",
+    imagen: "/caricaturas/maxi.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Lautaro",
+    rol: "Back",
+    imagen: "/caricaturas/lautaro.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Gonza",
+    rol: "Product Owner",
+    imagen: "/caricaturas/gonza.png",
+    color: "#FEF3C7",
+  },
+  // Los 2 chicos nuevos: completar nombre, rol e imagen cuando estén
+  { nombre: "Nuevo integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
+  { nombre: "Nuevo integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
 ];
 
 const equipoDashes: Miembro[] = [
-  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
-  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
-  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+  {
+    nombre: "Borquez",
+    rol: "Rol por definir",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Nahuel",
+    rol: "Front",
+    imagen: "/caricaturas/nahuel.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#FEF3C7",
+  },
 ];
 
 const equipoCapitalDatos: Miembro[] = [
-  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
-  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
-  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Nahuel",
+    rol: "Front",
+    imagen: "/caricaturas/nahuel.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Juan",
+    rol: "El Jefe",
+    color: "#FEF3C7",
+  },
 ];
 
 const equipoMultasEnCalle: Miembro[] = [
@@ -241,15 +287,45 @@ const equipoRedesTransporte: Miembro[] = [
 ];
 
 const equipoAGM: Miembro[] = [
-  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
-  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
-  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+  {
+    nombre: "Lucio",
+    rol: "El Back-end Definitivo",
+    imagen: "/caricaturas/lucio.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Gabi",
+    rol: "Front",
+    imagen: "/caricaturas/gabi.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#FEF3C7",
+  },
 ];
 
 const equipoSubsidios: Miembro[] = [
-  { nombre: "Integrante 1", rol: "Rol por definir", color: "#DBEAFE" },
-  { nombre: "Integrante 2", rol: "Rol por definir", color: "#DCFCE7" },
-  { nombre: "Integrante 3", rol: "Rol por definir", color: "#FEF3C7" },
+  {
+    nombre: "Diego",
+    rol: "Back",
+    imagen: "/caricaturas/diego.png",
+    color: "#DBEAFE",
+  },
+  {
+    nombre: "Gabi",
+    rol: "Front",
+    imagen: "/caricaturas/gabi.png",
+    color: "#DCFCE7",
+  },
+  {
+    nombre: "Franco",
+    rol: "Front (Ponele)",
+    imagen: "/caricaturas/franco.png",
+    color: "#FEF3C7",
+  },
 ];
 
 export const proyectos: Proyecto[] = [

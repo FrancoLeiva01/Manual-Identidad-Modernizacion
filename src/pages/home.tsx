@@ -1,7 +1,16 @@
-import { Check, ExternalLink, FolderOpen, Globe, Monitor } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Component,
+  ExternalLink,
+  FolderOpen,
+  Globe,
+  Monitor,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { FondoFoto } from "../components/home/fondoFoto";
 import { CarruselEquipo, type FotoEquipo } from "../components/home/carruselEquipo";
+import { Fundamentos } from "../components/home/fundamentos";
 
 // ─── Contenido editable ────────────────────────────────────────────────
 const DROPBOX_URL =
@@ -160,6 +169,37 @@ export function Home() {
             {secciones.map((s) => (
               <TarjetaSeccion key={s.titulo} seccion={s} />
             ))}
+
+            {/* Kit UI: ocupa todo el ancho debajo de las 4 */}
+            <Link
+              to="/ui"
+              className="group relative flex items-center gap-4 overflow-hidden rounded-xl p-5 shadow-md focus-visible:outline-2 focus-visible:outline-white sm:col-span-2"
+            >
+              {/* Imagen de fondo */}
+              <img
+                src="/cardsHome/ui2.png"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full scale-110 object-cover transition-transform duration-500 group-hover:scale-125"
+              />
+              {/* Tinte de color */}
+              <div className="absolute inset-0 bg-slate-100/20 transition-colors duration-300" />
+              <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-white/10 text-[#45B5DB]">
+                <Component size={26} />
+              </div>
+              <div className="relative min-w-0 flex-1">
+                <span className="block text-2xl font-extrabold uppercase tracking-wide text-white drop-shadow-md">
+                  Kit UI
+                </span>
+                <span className="block text-sm text-white/90 drop-shadow-md">
+                  Botones, formularios, tablas y alertas para descargar y usar.
+                </span>
+              </div>
+              <ArrowRight
+                size={24}
+                className="relative shrink-0 text-white transition-transform group-hover:translate-x-1"
+              />
+            </Link>
           </div>
 
           <aside className="space-y-6">
@@ -256,6 +296,9 @@ export function Home() {
             luce si la pantalla acompaña.
           </p>
         </section>
+
+        {/* FUNDAMENTOS: colores, tipografía y logo para una página estilo Muni */}
+        <Fundamentos />
 
         {/* EQUIPO */}
         <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-5 backdrop-blur-md sm:p-8 md:p-12">

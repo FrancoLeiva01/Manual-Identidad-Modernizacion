@@ -18,7 +18,7 @@ export function ProyectoPage() {
 
   if (!proyecto) {
     return (
-      <div className="px-4 pt-20 pb-12 max-w-full mx-auto sm:px-8 md:pt-4">
+      <div className="px-4 pt-20 pb-12 max-w-full mx-auto sm:px-8">
         <p>Expediente no encontrado. Se lo llevó Mesa de Entradas.</p>
       </div>
     );
@@ -33,7 +33,7 @@ export function ProyectoPage() {
 
       {/* CONTENIDO */}
       <div
-        className="relative px-4 pt-20 pb-12 max-w-350 mx-auto sm:px-8 md:pt-4"
+        className="relative px-4 pt-20 pb-12 max-w-350 mx-auto sm:px-8"
         key={proyecto.id}
       >
         <div className="mb-5">

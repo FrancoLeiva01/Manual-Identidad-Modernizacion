@@ -21,7 +21,7 @@ export function SeccionLayout({
       <FondoFoto />
 
       {/* CONTENIDO */}
-      <div className="relative px-4 pt-20 pb-12 max-w-full mx-auto sm:px-8 md:pt-12">
+      <div className="relative px-4 pt-20 pb-12 max-w-full mx-auto sm:px-8">
         <Link
           to="/"
           className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white"
