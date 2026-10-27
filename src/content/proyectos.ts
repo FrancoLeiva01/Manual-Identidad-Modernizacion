@@ -1,6 +1,5 @@
 import type { ComponentType } from "react";
 import {
-  Archive,
   BookOpen,
   BookSearch,
   Bus,
