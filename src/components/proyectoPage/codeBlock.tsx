@@ -25,7 +25,7 @@ export function CodeBlock({ codigo, lenguaje = "tsx" }: CodeBlockProps) {
           {copiado ? "copiado ✓" : "copiar"}
         </button>
       </div>
-      <pre className="m-0 p-4 text-[13px] text-gray-200 overflow-x-auto">
+      <pre className="m-0 p-3 text-xs sm:p-4 sm:text-[13px] text-gray-200 overflow-x-auto">
         <code>{codigo}</code>
       </pre>
     </div>

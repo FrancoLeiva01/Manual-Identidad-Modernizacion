@@ -13,7 +13,7 @@ export function Sidebars() {
       <div className="flex flex-col gap-2">
         {/* ================= BASICO ================= */}
         <Subtitulo>El Basicon</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Tarjeta flotante compacta: mide lo que mide su contenido, no todo el
           alto de la pantalla. Logo y lista de links, nada mas.
         </p>
@@ -24,7 +24,7 @@ export function Sidebars() {
 
         {/* ================= SIMPATICO ================= */}
         <Subtitulo>El Simpatico</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Alto completo con margen alrededor, grupos que se despliegan con
           animacion, contadores de pendientes y tarjeta de ayuda abajo.
         </p>
@@ -35,7 +35,7 @@ export function Sidebars() {
 
         {/* ================= MODERNO ================= */}
         <Subtitulo>El Moderno</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Oscuro tipo vidrio, se colapsa a iconos con tooltips, barra de color
           en el item activo, etiquetas y tarjeta de usuario con estado "en
           linea".

@@ -128,9 +128,9 @@ export function Home() {
       <FondoFoto />
 
       {/* CONTENIDO por encima */}
-      <div className="relative px-8 pt-12 pb-12 max-w-full mx-auto">
+      <div className="relative px-4 pt-12 pb-12 max-w-full mx-auto sm:px-8">
         {/* HERO */}
-        <section className="mt-8 max-w-3xl py-12 md:py-20">
+        <section className="mt-8 max-w-3xl py-8 sm:py-12 md:py-20">
           <div className="mb-6 h-1 w-16 rounded-full bg-marca" />
 
           <p className="mb-2 text-xs font-bold tracking-[0.25em] text-slate-100">
@@ -140,12 +140,12 @@ export function Home() {
           <p className="mb-3 text-lg uppercase tracking-wide font-bold text-marca">
             Te damos la bienvenida al
           </p>
-          <h1 className="text-5xl font-black uppercase leading-[0.9] text-white drop-shadow-lg md:text-8xl">
+          <h1 className="text-4xl font-black uppercase leading-[0.9] text-white drop-shadow-lg sm:text-6xl md:text-8xl">
             Manual de
             <br />
             Identidad
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed font-medium text-slate-200">
+          <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed font-medium text-slate-200">
             Todos los proyectos de la oficina en un solo lugar: qué estilos
             usamos, qué componentes se pueden reutilizar y quién tiene la culpa
             de cada decisión de diseño. Navegá por el sidebar de la izquierda
@@ -154,7 +154,7 @@ export function Home() {
         </section>
 
         {/* INFO */}
-        <section className="mt-40 grid gap-8 md:grid-cols-[1fr_320px] border border-white/30 rounded-xl bg-panel-foto backdrop-blur-md p-8 md:p-12">
+        <section className="mt-16 grid gap-8 md:mt-40 xl:grid-cols-[1fr_320px] border border-white/30 rounded-xl bg-panel-foto backdrop-blur-md p-5 sm:p-8 md:p-12">
           {/* 4 secciones de componentes */}
           <div className="grid gap-4 sm:grid-cols-2">
             {secciones.map((s) => (
@@ -193,8 +193,8 @@ export function Home() {
         </section>
 
         {/* GUÍA: cuánto diseño según quién usa el sistema */}
-        <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-8 backdrop-blur-md md:p-12">
-          <h2 className="text-2xl font-black uppercase tracking-wide text-texto">
+        <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-5 backdrop-blur-md sm:p-8 md:p-12">
+          <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wide text-texto">
             Antes de diseñar: ¿quién lo va a usar?
           </h2>
           <p className="mt-2 max-w-3xl leading-relaxed text-texto">
@@ -212,7 +212,7 @@ export function Home() {
                 <article
                   key={g.titulo}
                   className={
-                    "rounded-xl border border-borde bg-superficie p-6 border-t-4 " +
+                    "rounded-xl border border-borde bg-superficie p-5 sm:p-6 border-t-4 " +
                     g.borde
                   }
                 >
@@ -258,8 +258,8 @@ export function Home() {
         </section>
 
         {/* EQUIPO */}
-        <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-8 backdrop-blur-md md:p-12">
-          <h2 className="text-2xl font-black uppercase tracking-wide text-texto">
+        <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-5 backdrop-blur-md sm:p-8 md:p-12">
+          <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wide text-texto">
             El equipo
           </h2>
           <p className="mt-2 mb-6 max-w-3xl leading-relaxed text-texto">

@@ -10,7 +10,7 @@ import listadoAgentesCode from "../../snippets/listado-agentes.tsx.txt?raw";
 
 function Subtitulo({ children }: { children: string }) {
   return (
-    <p className="mt-2 text-3xl font-bold uppercase tracking-wide text-acento">
+    <p className="mt-2 text-2xl sm:text-3xl font-bold uppercase tracking-wide text-acento">
       {children}
     </p>
   );
@@ -29,12 +29,12 @@ function ImagenSeccion({ src, alt }: { src: string; alt: string }) {
 export default function FrontRrhhAsistencia() {
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-texto leading-relaxed text-xl">
+      <p className="text-texto leading-relaxed text-base sm:text-xl">
         Aqui en esta seccion del Front donde vamos a mostrar imagenes del
         sistema, paleta de colores y componentes que sean de utilidad si es que
         necesitan reutilizar algo de este proyecto.
       </p>
-      <p className="text-texto leading-relaxed text-xl my-5">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-5">
         Este Proyecto casi en su totalidad los estilos y colores son
         responsabilidad de <strong className="text-orange-500">Esteban</strong>{" "}
         porque el hizo el Recursos Humanos Principal (este sistema de Asistencia
@@ -46,7 +46,7 @@ export default function FrontRrhhAsistencia() {
         alt="Sistema RRHH Principal (responsabilidad de Esteban)"
         className="border border-borde object-cover w-full h-auto"
       />
-      <p className="text-texto leading-relaxed text-xl my-5">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-5">
         Mayormente en estos proyectos de{" "}
         <strong className="text-acento">Recursos Humanos</strong> Predominan
         los colores basicos como Blanco, Cyan y azul, ademas del amarillo verde
@@ -56,13 +56,13 @@ export default function FrontRrhhAsistencia() {
 
       {/* ================= LOGIN ================= */}
       <Subtitulo>Login</Subtitulo>
-      <p className="text-texto leading-relaxed text-xl my-1">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-1">
         Pantalla de acceso simple: logo del sistema ("RH Portal"), usuario y
         contraseña (con botón de mostrar/ocultar), botón "Iniciar Sesión" y un
         pie con la leyenda de la Municipalidad de San Fernando del Valle de
         Catamarca y links a Términos de uso / Política de privacidad.
       </p>
-      <p className="text-texto leading-relaxed text-xl my-1">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-1">
         En el caso de querer verlo, accede al link:{" "}
         <a
           className="text-acento underline"
@@ -77,7 +77,7 @@ export default function FrontRrhhAsistencia() {
 
       {/* ================= LAYOUT GENERAL (TOP-NAV Y SIDEBAR) ================= */}
       <Subtitulo>Layout general (sidebar + topbar)</Subtitulo>
-      <p className="text-texto leading-relaxed text-xl my-1">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-1">
         El sidebar se organiza en grupos colapsables bajo el label "PRINCIPAL":
         Dashboard suelto, y después Asistencias (Listado de agentes, Cargar
         Horarios, Reportes), Adicionales (AFE, Extras, Resp. Patrimonial,
@@ -91,7 +91,7 @@ export default function FrontRrhhAsistencia() {
 
       {/* ================= DASHBOARD ================= */}
       <Subtitulo>Dashboard</Subtitulo>
-      <p className="text-texto leading-relaxed text-xl my-1">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-1">
         Filtro obligatorio de Secretaría y Dependencia arriba de todo. Debajo, 3
         cards de KPI (Empleados activos, Con asistencia, Pendientes de
         Asistencia), una barra de "Progresión de carga", y a la derecha un panel
@@ -107,7 +107,7 @@ export default function FrontRrhhAsistencia() {
 
       {/* ================= LISTADO DE AGENTES ================= */}
       <Subtitulo>Listado de agentes</Subtitulo>
-      <p className="text-texto leading-relaxed text-xl my-1">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-1">
         Filtros por Apellido, CUIL, Número de Legajo, Lugar de Trabajo (con
         selector de ubicación), Secretaría y Dependencia, con botones "Aplicar
         Filtros" y "Limpiar Todo". Debajo, tabla con columnas Legajo, Nombre
@@ -130,7 +130,7 @@ export default function FrontRrhhAsistencia() {
       <Subtitulo>
         Adicionales (AFE / Extras / Resp. Patrimonial / Despacho)
       </Subtitulo>
-      <p className="text-texto leading-relaxed text-xl my-1">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-1">
         Cada una de las 4 secciones comparte la misma estructura, con pestañas
         Crear / Historial / Reportes. En "Crear" se arma una tabla nueva
         (indicando a qué mes se va a guardar), con filtros por Legajo, Área y
@@ -160,7 +160,7 @@ export default function FrontRrhhAsistencia() {
 
       {/* ================= NOTIFICACIONES ================= */}
       <Subtitulo>Notificaciones</Subtitulo>
-      <p className="text-texto leading-relaxed text-xl my-1">
+      <p className="text-texto leading-relaxed text-base sm:text-xl my-1">
         Listado de notificaciones agrupadas por categoría (Licencias, Medicina
         Laboral), con contador de "sin leer" arriba de todo. Las nuevas se
         destacan con una etiqueta "NUEVA" y fondo tenue, con botones "Marcar

@@ -13,7 +13,7 @@ export function Navbars() {
       <div className="flex flex-col gap-2">
         {/* ================= BASICO ================= */}
         <Subtitulo>El Basicon</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Logo, links y boton de ingresar, con menu hamburguesa en el celular.
           Ideal para sistemas internos.
         </p>
@@ -24,7 +24,7 @@ export function Navbars() {
 
         {/* ================= SIMPATICO ================= */}
         <Subtitulo>El Simpatico</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Barra flotante tipo pastilla, link activo resaltado, campanita con
           contador y menu de usuario que saluda segun la hora del dia.
         </p>
@@ -35,7 +35,7 @@ export function Navbars() {
 
         {/* ================= MODERNO ================= */}
         <Subtitulo>El Moderno</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Transparente arriba y efecto vidrio al scrollear, indicador que se
           desliza entre links, buscador con atajo Ctrl K y toggle de tema
           animado. Para sitios publicos.

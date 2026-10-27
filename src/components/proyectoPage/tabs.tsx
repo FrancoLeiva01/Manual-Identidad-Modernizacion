@@ -24,7 +24,7 @@ export function Tabs<T extends string>({
           key={t.id}
           onClick={() => onChange(t.id)}
           className={
-            "px-4 py-2 -mb-px text-lg font-bold rounded-t-md border transition-colors uppercase " +
+            "px-3 py-2 -mb-px text-base sm:px-4 sm:text-lg font-bold rounded-t-md border transition-colors uppercase " +
             (activo === t.id
               ? "border-acento text-acento bg-superficie"
               : "border-transparent text-white/70 hover:text-white")

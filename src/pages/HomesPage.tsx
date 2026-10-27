@@ -13,7 +13,7 @@ export function Homes() {
       <div className="flex flex-col gap-2">
         {/* ================= BASICO ================= */}
         <Subtitulo>El Basicon</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Titulo, 3 indicadores y una tabla con las ultimas cargas. Sin
           animaciones ni degradados: se ve bien en cualquier monitor.
         </p>
@@ -24,7 +24,7 @@ export function Homes() {
 
         {/* ================= SIMPATICO ================= */}
         <Subtitulo>El Simpatico</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Saludo segun la hora, barra de progreso del mes, indicadores con
           iconos, accesos rapidos y un "tip del dia".
         </p>
@@ -35,7 +35,7 @@ export function Homes() {
 
         {/* ================= MODERNO ================= */}
         <Subtitulo>El Moderno</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Grilla tipo bento: hero oscuro con degradados difuminados, grafico de
           visitas y anillo de progreso en SVG puro, timeline de actividad y
           tarjeta de proximo evento. Para sitios publicos.

@@ -14,7 +14,7 @@ export function Footers() {
       <div className="flex flex-col gap-2">
         {/* ================= SIMPLE ================= */}
         <Subtitulo>El Basicon</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Logo, links y copyright en una sola fila. Rapido y sencillo.
         </p>
         <CodeBlockColapsable
@@ -24,7 +24,7 @@ export function Footers() {
 
         {/* ================= HEMEROTECA ================= */}
         <Subtitulo>Hemeroteca</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Footer usado en el proyecto Hemeroteca. Mas claro y con una estetica
           de periodico y tipografia serif.
         </p>
@@ -35,7 +35,7 @@ export function Footers() {
 
         {/* ================= INSTITUCIONAL ================= */}
         <Subtitulo>El Institucional</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Oscuro y en 4 columnas: marca, navegacion, contacto y horario de
           atencion. Franja de colores arriba y boton para volver al inicio.
         </p>
@@ -46,7 +46,7 @@ export function Footers() {
 
         {/* ================= SIMPATICO ================= */}
         <Subtitulo>El Simpatico</Subtitulo>
-        <p className="text-slate-200 leading-relaxed text-xl my-1">
+        <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
           Claro, con una ola arriba, tarjeta para reportar bugs, links tipo
           pastilla e indicador de "sistemas funcionando". Serio, pero no tanto.
         </p>

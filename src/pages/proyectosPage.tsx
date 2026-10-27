@@ -18,7 +18,7 @@ export function ProyectoPage() {
 
   if (!proyecto) {
     return (
-      <div className="px-8 pt-4 pb-12 max-w-full mx-auto">
+      <div className="px-4 pt-20 pb-12 max-w-full mx-auto sm:px-8 md:pt-4">
         <p>Expediente no encontrado. Se lo llevó Mesa de Entradas.</p>
       </div>
     );
@@ -33,14 +33,14 @@ export function ProyectoPage() {
 
       {/* CONTENIDO */}
       <div
-        className="relative px-8 pt-4 pb-12 max-w-350 mx-auto"
+        className="relative px-4 pt-20 pb-12 max-w-350 mx-auto sm:px-8 md:pt-4"
         key={proyecto.id}
       >
         <div className="mb-5">
           <p className="mb-1 text-xs tracking-wide uppercase text-slate-200">
             {proyecto.expediente} · {proyecto.estado}
           </p>
-          <h1 className="mb-1.5 text-5xl flex justify-center mt-5 font-bold text-white drop-shadow-lg">
+          <h1 className="mb-1.5 text-3xl sm:text-5xl text-center mt-5 font-bold text-white drop-shadow-lg">
             {proyecto.nombre}
           </h1>
         </div>
@@ -59,7 +59,7 @@ export function ProyectoPage() {
           />
 
           {tab === "general" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
               <div className="bg-superficie border border-borde p-5 rounded-2xl shadow-md">
                 <p className="mb-2 text-[22px] tracking-wide font-bold uppercase text-acento">
                   Descripción
@@ -113,7 +113,7 @@ export function ProyectoPage() {
 
           {/* Front va dentro de una card para que el texto se lea sobre la foto */}
           {tab !== "general" && (
-            <div className="bg-superficie border border-borde p-6 rounded-2xl shadow-md">
+            <div className="bg-superficie border border-borde p-4 sm:p-6 rounded-2xl shadow-md">
               <Suspense
                 fallback={<p className="text-sm text-texto-suave">Cargando…</p>}
               >

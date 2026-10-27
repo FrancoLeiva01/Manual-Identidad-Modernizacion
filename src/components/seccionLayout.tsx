@@ -21,7 +21,7 @@ export function SeccionLayout({
       <FondoFoto />
 
       {/* CONTENIDO */}
-      <div className="relative px-8 pt-12 pb-12 max-w-full mx-auto">
+      <div className="relative px-4 pt-20 pb-12 max-w-full mx-auto sm:px-8 md:pt-12">
         <Link
           to="/"
           className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white"
@@ -31,16 +31,16 @@ export function SeccionLayout({
 
         <section className="mb-6 max-w-3xl">
           <div className="mb-6 h-1 w-16 rounded-full bg-marca" />
-          <h1 className="text-5xl font-black uppercase leading-[0.9] text-white drop-shadow-lg md:text-7xl">
+          <h1 className="text-4xl font-black uppercase leading-[0.9] text-white drop-shadow-lg sm:text-5xl md:text-7xl">
             {titulo}
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed font-medium text-slate-200">
+          <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed font-medium text-slate-200">
             {descripcion}
           </p>
         </section>
 
         {children ?? (
-          <div className="mt-10 max-w-3xl rounded-xl border border-dashed border-white/30 bg-panel-foto backdrop-blur-md p-8 text-texto">
+          <div className="mt-10 max-w-3xl rounded-xl border border-dashed border-white/30 bg-panel-foto backdrop-blur-md p-5 sm:p-8 text-texto">
             Todavía no hay componentes cargados en esta sección. Pronto...
             (palabra oficial de la administración pública).
           </div>
@@ -52,7 +52,7 @@ export function SeccionLayout({
 
 export function Subtitulo({ children }: { children: string }) {
   return (
-    <p className="mt-10 text-3xl font-bold uppercase tracking-wide text-cyan-400">
+    <p className="mt-10 text-2xl sm:text-3xl font-bold uppercase tracking-wide text-cyan-400">
       {children}
     </p>
   );
