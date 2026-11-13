@@ -13,7 +13,9 @@
   --fondo: #f1f5f9; /* fondo general de la app */
   --superficie: #ffffff; /* cards, paneles, pestaña activa */
   --superficie-suave: #f8fafc; /* placeholders, zonas internas de una card */
-  --vidrio: rgb(255 255 255 / 0.45); /* sidebar flotante */
+  /* En modo claro las cajas van casi sólidas: el vidrio blanco sobre la foto
+     oscura queda grisáceo y se lee mal. En modo oscuro sí son de vidrio. */
+  --vidrio: rgb(241 245 249 / 0.95); /* sidebar flotante: gris suave para que se despeguen sus cajas blancas */
   --hover: #e2e8f0; /* hover de items de navegación */
 
   /* Texto */
@@ -31,10 +33,26 @@
   --activo: #0f172a;
   --activo-texto: #ffffff;
 
-  /* Velo sobre la foto de fondo: azul noche suave, sin lavar la imagen */
-  --velo-desde: rgb(15 23 42 / 0.6);
-  --velo-hasta: rgb(15 23 42 / 0.15);
-  --panel-foto: rgb(255 255 255 / 0.45); /* paneles de vidrio encima de la foto (igual que el sidebar) */
+  /* Fondo fijo (fondoFoto.tsx). Paleta "SaaS elegante" de paletas.ts:
+     Cream #F3EEE3 + Ink Black #111111 + Burnt Orange #D9541E */
+  --fondo-base: #f3eee3;
+  --fondo-grilla: rgb(17 17 17 / 0.05);
+  --barritas-a1: #d9541e; /* campo de arriba a la derecha (y acento de garabatos) */
+  --barritas-a2: #f08a4b;
+  --barritas-b1: #b8441a; /* campo de abajo */
+  --barritas-b2: #e0703a;
+  --brillo-a: rgb(217 84 30 / 0.14);
+  --brillo-b: rgb(217 84 30 / 0.08);
+  --trazo: #111111; /* garabatos */
+  --trazo-opacidad: 0.5;
+
+  /* Texto que va directo sobre el fondo (títulos de hero, subtítulos) */
+  --sobre-fondo: #111111;
+  --sobre-fondo-suave: #3f3a33;
+  --sobre-fondo-borde: rgb(17 17 17 / 0.12);
+
+  --panel-foto: #ffffff; /* paneles encima de la foto: sólidos en claro, vidrio en oscuro */
+  --panel-vidrio: rgb(255 255 255 / 0.94); /* paneles del home: casi sólidos, el fondo es negro en los dos modos */
 }
 
 .dark {
@@ -57,9 +75,25 @@
   --activo: #ffffff;
   --activo-texto: #0f172a;
 
-  --velo-desde: rgb(2 6 23 / 0.85);
-  --velo-hasta: rgb(2 6 23 / 0.6);
+  /* Fondo fijo. Paleta "Tech nocturno" de paletas.ts:
+     Midnight Navy #111827 + Cool White #F3F4F6 + Electric Lime #A3E635 */
+  --fondo-base: #111827;
+  --fondo-grilla: rgb(243 244 246 / 0.03);
+  --barritas-a1: #a3e635;
+  --barritas-a2: #d9f99d;
+  --barritas-b1: #65a30d;
+  --barritas-b2: #a3e635;
+  --brillo-a: rgb(163 230 53 / 0.12);
+  --brillo-b: rgb(163 230 53 / 0.07);
+  --trazo: #f3f4f6;
+  --trazo-opacidad: 0.4;
+
+  --sobre-fondo: #ffffff;
+  --sobre-fondo-suave: #e2e8f0;
+  --sobre-fondo-borde: rgb(255 255 255 / 0.3);
+
   --panel-foto: rgb(2 6 23 / 0.6);
+  --panel-vidrio: rgb(2 6 23 / 0.7);
 }
 
 @theme inline {
@@ -76,6 +110,10 @@
   --color-activo: var(--activo);
   --color-activo-texto: var(--activo-texto);
   --color-panel-foto: var(--panel-foto);
+  --color-panel-vidrio: var(--panel-vidrio);
+  --color-sobre-fondo: var(--sobre-fondo);
+  --color-sobre-fondo-suave: var(--sobre-fondo-suave);
+  --color-sobre-fondo-borde: var(--sobre-fondo-borde);
 }
 
 body {

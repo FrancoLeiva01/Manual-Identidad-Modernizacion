@@ -53,19 +53,19 @@ const equipoRRHH_Asistencia: Miembro[] = [
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Gabi",
     rol: "Front",
-    imagen: "/caricaturas/gabi.png",
+    imagen: "/caricaturas/gabi.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Lucio",
     rol: "El Back-end Definitivo",
-    imagen: "/caricaturas/lucio.png",
+    imagen: "/caricaturas/lucio.webp",
     color: "#FEF3C7",
   },
 ];
@@ -74,19 +74,19 @@ const equipoCajaDeCredito: Miembro[] = [
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Gabi",
     rol: "Front",
-    imagen: "/caricaturas/gabi.png",
+    imagen: "/caricaturas/gabi.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Lucio",
     rol: "El Back-end Definitivo",
-    imagen: "/caricaturas/lucio.png",
+    imagen: "/caricaturas/lucio.webp",
     color: "#FEF3C7",
   },
 ];
@@ -95,19 +95,19 @@ const equipoPatrimonioUrbano: Miembro[] = [
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Lautaro",
     rol: "Back",
-    imagen: "/caricaturas/lautaro.png",
+    imagen: "/caricaturas/lautaro.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Juan",
     rol: "El Jefe",
-    imagen: "/caricaturas/juan.png",
+    imagen: "/caricaturas/juan.webp",
     color: "#FEF3C7",
   },
 ];
@@ -116,13 +116,13 @@ const equipoHemeroteca: Miembro[] = [
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Nahuel",
     rol: "Front",
-    imagen: "/caricaturas/nahuel.png",
+    imagen: "/caricaturas/nahuel.webp",
     color: "#DCFCE7",
   },
 ];
@@ -131,19 +131,19 @@ const equipoRecursosHumanos: Miembro[] = [
   {
     nombre: "Esteban",
     rol: "Front",
-    imagen: "/caricaturas/esteban.png",
+    imagen: "/caricaturas/esteban.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Diego",
     rol: "Back",
-    imagen: "/caricaturas/diego.png",
+    imagen: "/caricaturas/diego.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Reynoso",
     rol: "El Negro",
-    imagen: "/caricaturas/reynoso.png",
+    imagen: "/caricaturas/reynoso.webp",
     color: "#DCFCE7",
   },
 ];
@@ -152,13 +152,13 @@ const equipoCorralon: Miembro[] = [
   {
     nombre: "Nahuel",
     rol: "Front",
-    imagen: "/caricaturas/nahuel.png",
+    imagen: "/caricaturas/nahuel.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Diego",
     rol: "Back",
-    imagen: "/caricaturas/diego.png",
+    imagen: "/caricaturas/diego.webp",
     color: "#DCFCE7",
   },
 ];
@@ -167,19 +167,19 @@ const equipoFoodTruck: Miembro[] = [
   {
     nombre: "Lautaro",
     rol: "Back",
-    imagen: "/caricaturas/lautaro.png",
+    imagen: "/caricaturas/lautaro.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Maxi",
     rol: "Front",
-    imagen: "/caricaturas/maxi.png",
+    imagen: "/caricaturas/maxi.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Gonza",
     rol: "Product Owner",
-    imagen: "/caricaturas/gonza.png",
+    imagen: "/caricaturas/gonza.webp",
     color: "#DCFCE7",
   },
 ];
@@ -189,19 +189,19 @@ const equipoSiprom: Miembro[] = [
   {
     nombre: "Maxi",
     rol: "Front",
-    imagen: "/caricaturas/maxi.png",
+    imagen: "/caricaturas/maxi.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Lautaro",
     rol: "Back",
-    imagen: "/caricaturas/lautaro.png",
+    imagen: "/caricaturas/lautaro.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Gonza",
     rol: "Product Owner",
-    imagen: "/caricaturas/gonza.png",
+    imagen: "/caricaturas/gonza.webp",
     color: "#FEF3C7",
   },
   // Los 2 chicos nuevos: completar nombre, rol e imagen cuando estén
@@ -218,13 +218,13 @@ const equipoDashes: Miembro[] = [
   {
     nombre: "Nahuel",
     rol: "Front",
-    imagen: "/caricaturas/nahuel.png",
+    imagen: "/caricaturas/nahuel.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#FEF3C7",
   },
 ];
@@ -233,13 +233,13 @@ const equipoCapitalDatos: Miembro[] = [
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Nahuel",
     rol: "Front",
-    imagen: "/caricaturas/nahuel.png",
+    imagen: "/caricaturas/nahuel.webp",
     color: "#DCFCE7",
   },
   {
@@ -253,13 +253,13 @@ const equipoMultasEnCalle: Miembro[] = [
   {
     nombre: "Coriotto 1",
     rol: "Frontend",
-    imagen: "/caricaturas/coriotto1.png",
+    imagen: "/caricaturas/coriotto1.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Coriotto 2",
     rol: "Backend",
-    imagen: "/caricaturas/coriotto2.png",
+    imagen: "/caricaturas/coriotto2.webp",
     color: "#FEF3C7",
   },
 
@@ -269,19 +269,19 @@ const equipoRedesTransporte: Miembro[] = [
   {
     nombre: "Maxi",
     rol: "Frontend",
-    imagen: "/caricaturas/maxi.png",
+    imagen: "/caricaturas/maxi.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Lautaro",
     rol: "Backend",
-    imagen: "/caricaturas/lautaro.png",
+    imagen: "/caricaturas/lautaro.webp",
     color: "#FEF3C7",
   },
   {
     nombre: "Gonza",
     rol: "Analista de Sistemas",
-    imagen: "/caricaturas/gonza.png",
+    imagen: "/caricaturas/gonza.webp",
     color: "#DBEAFE",
   },
 ];
@@ -290,19 +290,19 @@ const equipoAGM: Miembro[] = [
   {
     nombre: "Lucio",
     rol: "El Back-end Definitivo",
-    imagen: "/caricaturas/lucio.png",
+    imagen: "/caricaturas/lucio.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Gabi",
     rol: "Front",
-    imagen: "/caricaturas/gabi.png",
+    imagen: "/caricaturas/gabi.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#FEF3C7",
   },
 ];
@@ -311,19 +311,19 @@ const equipoSubsidios: Miembro[] = [
   {
     nombre: "Diego",
     rol: "Back",
-    imagen: "/caricaturas/diego.png",
+    imagen: "/caricaturas/diego.webp",
     color: "#DBEAFE",
   },
   {
     nombre: "Gabi",
     rol: "Front",
-    imagen: "/caricaturas/gabi.png",
+    imagen: "/caricaturas/gabi.webp",
     color: "#DCFCE7",
   },
   {
     nombre: "Franco",
     rol: "Front (Ponele)",
-    imagen: "/caricaturas/franco.png",
+    imagen: "/caricaturas/franco.webp",
     color: "#FEF3C7",
   },
 ];

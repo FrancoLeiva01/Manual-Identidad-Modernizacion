@@ -1,20 +1,14 @@
-import { Suspense, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { proyectos } from "../content/proyectos";
 import { PanelHero } from "../components/home/PanelHero";
 import { MasImagenes } from "../components/proyectoPage/Images";
-import { Tabs } from "../components/proyectoPage/tabs";
-import { contenidoFront } from "../content/registro";
 
 import { FondoFoto } from "../components/home/fondoFoto";
-
-type TabId = "general" | "front";
 
 export function ProyectoPage() {
   const { id } = useParams();
   const proyecto = proyectos.find((p) => p.id === id);
-  const [tab, setTab] = useState<TabId>("general");
 
   if (!proyecto) {
     return (
@@ -23,8 +17,6 @@ export function ProyectoPage() {
       </div>
     );
   }
-
-  const Front = contenidoFront[proyecto.id];
 
   return (
     <div className="relative min-h-screen">
@@ -37,10 +29,10 @@ export function ProyectoPage() {
         key={proyecto.id}
       >
         <div className="mb-5">
-          <p className="mb-1 text-xs tracking-wide uppercase text-slate-200">
+          <p className="mb-1 text-xs tracking-wide uppercase text-sobre-fondo-suave">
             {proyecto.expediente} · {proyecto.estado}
           </p>
-          <h1 className="mb-1.5 text-3xl sm:text-5xl text-center mt-5 font-bold text-white drop-shadow-lg">
+          <h1 className="mb-1.5 text-3xl sm:text-5xl text-center mt-5 font-bold text-sobre-fondo dark:drop-shadow-lg">
             {proyecto.nombre}
           </h1>
         </div>
@@ -49,17 +41,7 @@ export function ProyectoPage() {
         <div className="flex flex-col gap-4">
           <PanelHero proyecto={proyecto} />
 
-          <Tabs
-            tabs={[
-              { id: "general", label: "General" },
-              { id: "front", label: "Front" },
-            ]}
-            activo={tab}
-            onChange={setTab}
-          />
-
-          {tab === "general" && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
               <div className="bg-superficie border border-borde p-5 rounded-2xl shadow-md">
                 <p className="mb-2 text-[22px] tracking-wide font-bold uppercase text-acento">
                   Descripción
@@ -108,26 +90,7 @@ export function ProyectoPage() {
               </div>
 
               <MasImagenes imagenes={proyecto.imagenes} />
-            </div>
-          )}
-
-          {/* Front va dentro de una card para que el texto se lea sobre la foto */}
-          {tab !== "general" && (
-            <div className="bg-superficie border border-borde p-4 sm:p-6 rounded-2xl shadow-md">
-              <Suspense
-                fallback={<p className="text-sm text-texto-suave">Cargando…</p>}
-              >
-                {tab === "front" &&
-                  (Front ? (
-                    <Front />
-                  ) : (
-                    <p className="text-sm text-texto-suave">
-                      Contenido de Front pendiente para este proyecto.
-                    </p>
-                  ))}
-              </Suspense>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

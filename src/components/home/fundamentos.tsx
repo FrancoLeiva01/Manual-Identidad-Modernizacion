@@ -84,7 +84,7 @@ function Titulo({ children }: { children: string }) {
 
 export function Fundamentos() {
   return (
-    <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-5 backdrop-blur-md sm:p-8 md:p-12">
+    <section className="mt-8 rounded-xl border border-sobre-fondo-borde bg-panel-vidrio p-5 sm:p-8 md:p-12">
       <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wide text-texto">
         Fundamentos
       </h2>
@@ -102,7 +102,7 @@ export function Fundamentos() {
             <Muestra key={c.hex} {...c} />
           ))}
         </div>
-        <p className="mt-3 text-xs text-white/75">
+        <p className="mt-3 text-xs text-texto-suave">
           <strong className="text-orange-400">Proporción recomendada:</strong> mucho blanco y gris, azul para lo importante,
           celeste y naranja solo de detalle.
         </p>

@@ -10,6 +10,8 @@ import { Sidebars } from "./pages/SidebarsPage";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Buscador } from "./components/Buscador";
 import { KitUI } from "./pages/KitUIPage";
+import { Tecnologias } from "./pages/TecnologiasPage";
+import { TecnologiaPage } from "./pages/TecnologiaPage";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="/homes" element={<Homes />} />
             <Route path="/sidebars" element={<Sidebars />} />
             <Route path="/ui" element={<KitUI />} />
+            <Route path="/tecnologias" element={<Tecnologias />} />
+            <Route path="/tecnologias/:id" element={<TecnologiaPage />} />
           </Routes>
         </main>
         <Navbar />

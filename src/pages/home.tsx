@@ -80,15 +80,15 @@ const guias = [
 
 // Fotos del equipo para el carrusel: las caricaturas están en /public/caricaturas
 const equipo: FotoEquipo[] = [
-  { nombre: "Franco", rol: "Front", imagen: "/caricaturas/franco.png" },
-  { nombre: "Gabi", rol: "Front", imagen: "/caricaturas/gabi.png" },
-  { nombre: "Lucio", rol: "Back", imagen: "/caricaturas/lucio.png" },
-  { nombre: "Nahuel", rol: "Front", imagen: "/caricaturas/nahuel.png" },
-  { nombre: "Esteban", rol: "Front", imagen: "/caricaturas/esteban.png" },
-  { nombre: "Diego", rol: "Back", imagen: "/caricaturas/diego.png" },
-  { nombre: "Lautaro", rol: "Back", imagen: "/caricaturas/lautaro.png" },
-  { nombre: "Maxi", rol: "Front", imagen: "/caricaturas/maxi.png" },
-  { nombre: "Gonza", rol: "Product Owner", imagen: "/caricaturas/gonza.png" },
+  { nombre: "Franco", rol: "Front", imagen: "/caricaturas/franco.webp" },
+  { nombre: "Gabi", rol: "Front", imagen: "/caricaturas/gabi.webp" },
+  { nombre: "Lucio", rol: "Back", imagen: "/caricaturas/lucio.webp" },
+  { nombre: "Nahuel", rol: "Front", imagen: "/caricaturas/nahuel.webp" },
+  { nombre: "Esteban", rol: "Front", imagen: "/caricaturas/esteban.webp" },
+  { nombre: "Diego", rol: "Back", imagen: "/caricaturas/diego.webp" },
+  { nombre: "Lautaro", rol: "Back", imagen: "/caricaturas/lautaro.webp" },
+  { nombre: "Maxi", rol: "Front", imagen: "/caricaturas/maxi.webp" },
+  { nombre: "Gonza", rol: "Product Owner", imagen: "/caricaturas/gonza.webp" },
   { nombre: "Integrante 10" },
   { nombre: "Integrante 11" },
   { nombre: "Integrante 12" },
@@ -142,19 +142,19 @@ export function Home() {
         <section className="mt-8 max-w-3xl py-8 sm:py-12 md:py-20">
           <div className="mb-6 h-1 w-16 rounded-full bg-marca" />
 
-          <p className="mb-2 text-xs font-bold tracking-[0.25em] text-slate-100">
+          <p className="mb-2 text-xs font-bold tracking-[0.25em] text-sobre-fondo-suave">
             SECRETARÍA DE MODERNIZACIÓN
           </p>
 
           <p className="mb-3 text-lg uppercase tracking-wide font-bold text-marca">
             Te damos la bienvenida al
           </p>
-          <h1 className="text-4xl font-black uppercase leading-[0.9] text-white drop-shadow-lg sm:text-6xl md:text-8xl">
+          <h1 className="text-4xl font-black uppercase leading-[0.9] text-sobre-fondo dark:drop-shadow-lg sm:text-6xl md:text-8xl">
             Manual de
             <br />
             Identidad
           </h1>
-          <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed font-medium text-slate-200">
+          <p className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed font-medium text-sobre-fondo-suave">
             Todos los proyectos de la oficina en un solo lugar: qué estilos
             usamos, qué componentes se pueden reutilizar y quién tiene la culpa
             de cada decisión de diseño. Navegá por el sidebar de la izquierda
@@ -163,7 +163,7 @@ export function Home() {
         </section>
 
         {/* INFO */}
-        <section className="mt-16 grid gap-8 md:mt-40 xl:grid-cols-[1fr_320px] border border-white/30 rounded-xl bg-panel-foto backdrop-blur-md p-5 sm:p-8 md:p-12">
+        <section className="mt-8 grid gap-8 md:mt-10 xl:grid-cols-[1fr_320px] border border-sobre-fondo-borde rounded-xl bg-panel-vidrio p-5 sm:p-8 md:p-12">
           {/* 4 secciones de componentes */}
           <div className="grid gap-4 sm:grid-cols-2">
             {secciones.map((s) => (
@@ -233,7 +233,7 @@ export function Home() {
         </section>
 
         {/* GUÍA: cuánto diseño según quién usa el sistema */}
-        <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-5 backdrop-blur-md sm:p-8 md:p-12">
+        <section className="mt-8 rounded-xl border border-sobre-fondo-borde bg-panel-vidrio p-5 sm:p-8 md:p-12">
           <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wide text-texto">
             Antes de diseñar: ¿quién lo va a usar?
           </h2>
@@ -301,7 +301,7 @@ export function Home() {
         <Fundamentos />
 
         {/* EQUIPO */}
-        <section className="mt-8 rounded-xl border border-white/30 bg-panel-foto p-5 backdrop-blur-md sm:p-8 md:p-12">
+        <section className="mt-8 rounded-xl border border-sobre-fondo-borde bg-panel-vidrio p-5 sm:p-8 md:p-12">
           <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wide text-texto">
             El equipo
           </h2>

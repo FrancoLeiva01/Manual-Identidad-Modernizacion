@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { LayoutTemplate, Search, X } from "lucide-react";
 import { proyectos, type Proyecto } from "../content/proyectos";
+import { tecnologias } from "../content/tecnologias";
 
 // Secciones de componentes que también aparecen en la búsqueda
 const secciones = [
@@ -16,6 +17,7 @@ const secciones = [
   { titulo: "Sidebars", url: "/sidebars", detalle: "Componentes" },
   { titulo: "Homes", url: "/homes", detalle: "Componentes" },
   { titulo: "Kit UI", url: "/ui", detalle: "Botones, formularios, alertas y más" },
+  { titulo: "Tecnologías", url: "/tecnologias", detalle: "Guías y herramientas" },
 ];
 
 interface Resultado {
@@ -49,6 +51,22 @@ const indice: Resultado[] = [
         ...p.stack,
         ...p.componentes,
         ...p.equipo.map((m) => m.nombre),
+      ].join(" "),
+    ),
+  })),
+  ...tecnologias.map((t) => ({
+    titulo: t.nombre,
+    detalle: `Tecnología · ${t.resumen}`,
+    url: `/tecnologias/${t.id}`,
+    icono: t.icono,
+    texto: normalizar(
+      [
+        t.nombre,
+        "tecnologia guia tutorial",
+        t.resumen,
+        t.idealPara,
+        ...t.pasos.map((p) => p.titulo),
+        ...(t.herramientas ?? []).flatMap((g) => [g.grupo, ...g.items.map((h) => h.nombre)]),
       ].join(" "),
     ),
   })),
@@ -128,7 +146,7 @@ export function Buscador() {
         className="absolute top-4 left-18 right-20 md:left-1/2 md:right-auto md:w-[min(36rem,calc(100%-10rem))] md:-translate-x-1/2"
       >
         {/* BARRA: vidrio oscuro para que se siga viendo la foto de fondo */}
-        <label className="flex h-11 items-center gap-2 rounded-full border border-white/25 bg-slate-900/35 px-4 text-white shadow-lg backdrop-blur-md transition-colors focus-within:border-white/60 focus-within:bg-slate-900/55">
+        <label className="flex h-11 items-center gap-2 rounded-full border border-white/25 bg-slate-900/80 dark:bg-slate-900/35 px-4 text-white shadow-lg backdrop-blur-md transition-colors focus-within:border-white/60 focus-within:bg-slate-900/90 dark:focus-within:bg-slate-900/55">
           <Search size={18} className="shrink-0 text-white/80" />
           <input
             ref={inputRef}

@@ -47,7 +47,7 @@ function VistaPrevia({ children }: { children: ReactNode }) {
 
 function Descripcion({ children }: { children: ReactNode }) {
   return (
-    <p className="text-slate-200 leading-relaxed text-base sm:text-xl my-1">
+    <p className="text-sobre-fondo-suave leading-relaxed text-base sm:text-xl my-1">
       {children}
     </p>
   );
@@ -71,7 +71,7 @@ export function KitUI() {
       descripcion="Botones, formularios y piezas chicas que se usan en todos los sistemas. Bajate la carpeta, pegala en tu proyecto e importá lo que necesites."
     >
       {/* CÓMO USARLO */}
-      <div className="rounded-xl border border-white/30 bg-panel-foto p-5 backdrop-blur-md sm:p-8">
+      <div className="rounded-xl border border-sobre-fondo-borde bg-panel-foto p-5 sm:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <ol className="m-0 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed text-texto sm:text-base">
             <li>Descargá el zip y copiá la carpeta <code className="font-semibold">ui</code> dentro de <code className="font-semibold">src/</code> de tu proyecto.</li>
