@@ -12,6 +12,7 @@ import { Buscador } from "./components/Buscador";
 import { KitUI } from "./pages/KitUIPage";
 import { Tecnologias } from "./pages/TecnologiasPage";
 import { TecnologiaPage } from "./pages/TecnologiaPage";
+import { TestingPage } from "./pages/TestingPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/ui" element={<KitUI />} />
             <Route path="/tecnologias" element={<Tecnologias />} />
             <Route path="/tecnologias/:id" element={<TecnologiaPage />} />
+            <Route path="/testing/:id" element={<TestingPage />} />
           </Routes>
         </main>
         <Navbar />

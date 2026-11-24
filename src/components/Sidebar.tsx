@@ -16,11 +16,11 @@ import {
 } from "lucide-react";
 import { proyectos } from "../content/proyectos";
 import { categorias, tecnologias } from "../content/tecnologias";
+import { cursosTesting } from "../content/testing";
 
 type SeccionId = "proyectos" | "tecnologias";
 type Abiertas = Record<SeccionId, boolean>;
 
-// Caja con borde propio que agrupa items del sidebar (así no "flotan" en modo claro)
 const CAJA =
   "flex flex-col gap-0.5 rounded-xl border border-slate-200 bg-white p-1 shadow-sm dark:border-white/10 dark:bg-white/5";
 
@@ -33,9 +33,7 @@ const LOGO_OSCURO = "/-Isologotipo_Catamarca Capital_blanco.png";
 
 export function Sidebar() {
   const [colapsado, setColapsado] = useState(false);
-  // En celular el sidebar es un menú que se abre con el botón hamburguesa
   const [abierto, setAbierto] = useState(false);
-  // El modo colapsado solo aplica en escritorio
   const mini = colapsado && !abierto;
   const cerrar = () => setAbierto(false);
 
@@ -46,13 +44,12 @@ export function Sidebar() {
     setAbiertas((a) => ({ ...a, [id]: !a[id] }));
   }
 
-  // Si se llega a una tecnología por el buscador con la sección plegada, se abre.
-  // (Proyectos no: queda siempre plegado hasta que lo abras a mano.)
-  // Se ajusta durante el render (patrón recomendado por React) en vez de en un efecto.
   const [rutaPrevia, setRutaPrevia] = useState(pathname);
   if (pathname !== rutaPrevia) {
     setRutaPrevia(pathname);
-    if (pathname.startsWith("/tecnologias/") && !abiertas.tecnologias) {
+    const enTecnologias =
+      pathname.startsWith("/tecnologias/") || pathname.startsWith("/testing/");
+    if (enTecnologias && !abiertas.tecnologias) {
       setAbiertas({ ...abiertas, tecnologias: true });
     }
   }
@@ -98,7 +95,11 @@ export function Sidebar() {
             }
           >
             {!mini && (
-              <Link to="/" onClick={cerrar} className="flex min-w-0 items-center">
+              <Link
+                to="/"
+                onClick={cerrar}
+                className="flex min-w-0 items-center"
+              >
                 {/* Modo claro */}
                 <img
                   src={LOGO_CLARO}
@@ -180,14 +181,17 @@ export function Sidebar() {
 
             <Seccion
               titulo="Tecnologías"
-              cantidad={tecnologias.length}
+              cantidad={tecnologias.length + cursosTesting.length}
               abierta={abiertas.tecnologias}
               onToggle={() => alternar("tecnologias")}
               mini={mini}
             >
               {/* Subdivisión por categoría: rótulo + caja propia con sus items */}
               {categorias.map((cat) => (
-                <div key={cat.id} className={mini ? "flex flex-col gap-1" : "mt-1 first:mt-0"}>
+                <div
+                  key={cat.id}
+                  className={mini ? "flex flex-col gap-1" : "mt-1 first:mt-0"}
+                >
                   {!mini && (
                     <p className="mb-1.5 px-1 text-[10px] font-bold uppercase tracking-wider text-texto-suave">
                       {cat.nombre}
@@ -212,6 +216,30 @@ export function Sidebar() {
                   </div>
                 </div>
               ))}
+
+              {/* Testing: mismo formato que las categorías, pero con páginas propias */}
+              <div className={mini ? "flex flex-col gap-1" : "mt-1"}>
+                {!mini && (
+                  <p className="mb-1.5 px-1 text-[10px] font-bold uppercase tracking-wider text-texto-suave">
+                    Testing
+                  </p>
+                )}
+                <div className={mini ? "contents" : CAJA}>
+                  {cursosTesting.map((c) => (
+                    <ItemNav
+                      key={c.id}
+                      to={`/testing/${c.id}`}
+                      icono={c.icono}
+                      color={c.color}
+                      nombre={c.nombre}
+                      title={c.nombre}
+                      mini={mini}
+                      compacto
+                      onClick={cerrar}
+                    />
+                  ))}
+                </div>
+              </div>
             </Seccion>
           </nav>
 
@@ -279,7 +307,9 @@ function Seccion({
           aria-label={`Ver ${titulo.toLowerCase()}`}
           className={
             "relative flex w-full justify-center rounded-lg py-2.5 transition-colors cursor-pointer " +
-            (activaMini ? "bg-activo text-activo-texto" : "text-texto hover:bg-hover")
+            (activaMini
+              ? "bg-activo text-activo-texto"
+              : "text-texto hover:bg-hover")
           }
         >
           <IconoMini size={20} />
@@ -330,7 +360,10 @@ function Seccion({
         }
       >
         <div
-          className={"flex min-h-0 flex-col gap-1 overflow-hidden px-px " + (abierta ? "pb-1" : "")}
+          className={
+            "flex min-h-0 flex-col gap-1 overflow-hidden px-px " +
+            (abierta ? "pb-1" : "")
+          }
           inert={!abierta}
         >
           {children}
@@ -352,7 +385,11 @@ function ItemNav({
   onClick,
 }: {
   to: string;
-  icono: ComponentType<{ size?: number; className?: string; style?: CSSProperties }>;
+  icono: ComponentType<{
+    size?: number;
+    className?: string;
+    style?: CSSProperties;
+  }>;
   nombre: string;
   title: string;
   mini: boolean;

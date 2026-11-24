@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { LayoutTemplate, Search, X } from "lucide-react";
 import { proyectos, type Proyecto } from "../content/proyectos";
 import { tecnologias } from "../content/tecnologias";
+import { cursosTesting } from "../content/testing";
 
 // Secciones de componentes que también aparecen en la búsqueda
 const secciones = [
@@ -56,17 +57,33 @@ const indice: Resultado[] = [
   })),
   ...tecnologias.map((t) => ({
     titulo: t.nombre,
-    detalle: `Tecnología · ${t.resumen}`,
+    detalle: `${t.categoria === "despliegue" ? "Despliegue" : "Tecnología"} · ${t.resumen}`,
     url: `/tecnologias/${t.id}`,
     icono: t.icono,
     texto: normalizar(
       [
         t.nombre,
-        "tecnologia guia tutorial",
+        t.categoria === "despliegue"
+          ? "despliegue deploy subir publicar hosting guia tutorial"
+          : "tecnologia guia tutorial",
         t.resumen,
         t.idealPara,
         ...t.pasos.map((p) => p.titulo),
         ...(t.herramientas ?? []).flatMap((g) => [g.grupo, ...g.items.map((h) => h.nombre)]),
+      ].join(" "),
+    ),
+  })),
+  ...cursosTesting.map((c) => ({
+    titulo: c.nombre,
+    detalle: "Testing · Principios, tester y QA, proceso de pruebas",
+    url: `/testing/${c.id}`,
+    icono: c.icono,
+    texto: normalizar(
+      [
+        c.nombre,
+        "testing qa calidad tester pruebas test",
+        c.resumen,
+        ...c.temas.map((t) => t.titulo),
       ].join(" "),
     ),
   })),

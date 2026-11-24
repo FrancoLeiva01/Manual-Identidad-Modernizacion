@@ -86,7 +86,7 @@ export function Fundamentos() {
   return (
     <section className="mt-8 rounded-xl border border-white/30 bg-panel-vidrio p-5 backdrop-blur-md sm:p-8 md:p-12">
       <h2 className="text-xl sm:text-2xl font-black uppercase tracking-wide text-texto">
-        Fundamentos
+        Fundamentos de la Muni
       </h2>
       <p className="mt-2 max-w-3xl leading-relaxed text-texto">
         La base de una página estilo Muni: fondo blanco, el logo bien puesto,

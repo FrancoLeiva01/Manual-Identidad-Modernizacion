@@ -4,6 +4,7 @@ import {
   Database,
   Hexagon,
   Package,
+  Rocket,
   Palette,
   Server,
   Sparkles,
@@ -12,13 +13,14 @@ import {
 import type { Link } from "./proyectos";
 
 // ACA SE CARGAN LAS TECNOLOGÍAS DEL SIDEBAR
-// Cada una tiene su página en /tecnologias/:id con un paso a paso.
-// En `texto` podés usar `backticks` para marcar código, y \n\n para separar párrafos.
-// `prompt` es lo que se muestra en el bloque "Decile a tu IA" (con botón copiar).
 
-export type CategoriaId = "diseno" | "frameworks" | "datos";
+export type CategoriaId = "diseno" | "frameworks" | "datos" | "despliegue";
 
-export const categorias: { id: CategoriaId; nombre: string; descripcion: string }[] = [
+export const categorias: {
+  id: CategoriaId;
+  nombre: string;
+  descripcion: string;
+}[] = [
   {
     id: "diseno",
     nombre: "Diseño y estilo",
@@ -36,6 +38,13 @@ export const categorias: { id: CategoriaId; nombre: string; descripcion: string 
     nombre: "Datos",
     descripcion:
       "Dónde guardar la información y cómo moverla de un formato a otro.",
+  },
+
+  {
+    id: "despliegue",
+    nombre: "Despliegues",
+    descripcion:
+      "Proceso de hacer que una aplicación esté disponible para los usuarios finales.",
   },
 ];
 
@@ -63,7 +72,11 @@ export interface Tecnologia {
   // Opcional: versión corta para el sidebar si el nombre no entra
   nombreCorto?: string;
   categoria: CategoriaId;
-  icono: ComponentType<{ size?: number; className?: string; style?: CSSProperties }>;
+  icono: ComponentType<{
+    size?: number;
+    className?: string;
+    style?: CSSProperties;
+  }>;
   color: string;
   resumen: string;
   descripcion: string;
@@ -88,7 +101,8 @@ export const tecnologias: Tecnologia[] = [
     categoria: "diseno",
     icono: Sparkles,
     color: "#eab308",
-    resumen: "Animaciones en React con dos props. Lo que le da vida a una página.",
+    resumen:
+      "Animaciones en React con dos props. Lo que le da vida a una página.",
     descripcion:
       "Motion (antes Framer Motion) es la librería de animaciones más usada en React. Cambiás un `<div>` por un `<motion.div>`, le decís cómo empieza y cómo termina, y Motion hace el resto: entradas suaves, hover, aparecer al hacer scroll, listas escalonadas y elementos que salen con animación. Es la que usamos en la Hemeroteca.",
     nivel: "Fácil",
@@ -108,7 +122,8 @@ export const tecnologias: Tecnologia[] = [
     pasos: [
       {
         titulo: "Instalar",
-        texto: "Un solo paquete. Funciona con React 18 y 19, y con Vite sin configurar nada.",
+        texto:
+          "Un solo paquete. Funciona con React 18 y 19, y con Vite sin configurar nada.",
         codigo: [{ lenguaje: "terminal", contenido: "pnpm add motion" }],
       },
       {
@@ -135,7 +150,7 @@ export function Hero() {
           },
         ],
         prompt:
-          "Estoy en React + TypeScript + Tailwind v4 y tengo instalado `motion` (se importa desde \"motion/react\"). Animá la entrada de este hero: el título aparece primero subiendo 20px con fade, después el subtítulo y por último el botón, con 0.15s de diferencia entre cada uno. Usá variants y staggerChildren. Respetá prefers-reduced-motion. Este es mi componente: [pegá tu componente]",
+          'Estoy en React + TypeScript + Tailwind v4 y tengo instalado `motion` (se importa desde "motion/react"). Animá la entrada de este hero: el título aparece primero subiendo 20px con fade, después el subtítulo y por último el botón, con 0.15s de diferencia entre cada uno. Usá variants y staggerChildren. Respetá prefers-reduced-motion. Este es mi componente: [pegá tu componente]',
       },
       {
         titulo: "Hover y click",
@@ -226,12 +241,12 @@ const item = {
           },
         ],
         prompt:
-          "Tengo este modal en React + Tailwind que se abre con un useState. Agregale animación de entrada y salida con AnimatePresence de \"motion/react\": el fondo hace fade y la caja escala de 0.95 a 1. Que cierre con Escape y clic afuera. [pegá tu modal]",
+          'Tengo este modal en React + Tailwind que se abre con un useState. Agregale animación de entrada y salida con AnimatePresence de "motion/react": el fondo hace fade y la caja escala de 0.95 a 1. Que cierre con Escape y clic afuera. [pegá tu modal]',
       },
       {
         titulo: "Respetar a quien no quiere animaciones",
         texto:
-          "Hay personas a las que el movimiento les genera mareo, y lo desactivan en el sistema operativo. Envolviendo la app en `MotionConfig` con `reducedMotion=\"user\"`, Motion apaga los movimientos (deja solo los fades) cuando la persona lo pidió. Una línea y quedás bien con todos.",
+          'Hay personas a las que el movimiento les genera mareo, y lo desactivan en el sistema operativo. Envolviendo la app en `MotionConfig` con `reducedMotion="user"`, Motion apaga los movimientos (deja solo los fades) cuando la persona lo pidió. Una línea y quedás bien con todos.',
         codigo: [
           {
             lenguaje: "tsx",
@@ -255,7 +270,8 @@ const item = {
     categoria: "diseno",
     icono: Palette,
     color: "#00c4cc",
-    resumen: "Imágenes, banners, fondos e ilustraciones propias sin saber Photoshop.",
+    resumen:
+      "Imágenes, banners, fondos e ilustraciones propias sin saber Photoshop.",
     descripcion:
       "Canva es un editor de diseño online. Para nosotros es la forma más rápida de tener imágenes propias en vez de fotos genéricas: la portada del hero, las imágenes de las cards, la imagen que aparece cuando compartís el link por WhatsApp, íconos, fondos con formas y hasta la presentación del proyecto. Tiene miles de plantillas y herramientas de IA (Magic Studio) para generar o editar imágenes.",
     nivel: "Fácil",
@@ -291,7 +307,7 @@ Historia de Instagram                 1080 × 1920`,
       {
         titulo: "Usar los colores del manual",
         texto:
-          "Cargá los colores con su código hex en el selector de color (el + de la paleta). Con Canva Pro podés guardarlos en un Kit de marca; sin Pro, hacé un diseño llamado \"Paleta Muni\" con un cuadrado de cada color y duplicalo como punto de partida.\n\nLos de este manual son: cyan `#0891b2`, naranja `#f97316`, azul noche `#0f172a` y gris `#f1f5f9`.",
+          'Cargá los colores con su código hex en el selector de color (el + de la paleta). Con Canva Pro podés guardarlos en un Kit de marca; sin Pro, hacé un diseño llamado "Paleta Muni" con un cuadrado de cada color y duplicalo como punto de partida.\n\nLos de este manual son: cyan `#0891b2`, naranja `#f97316`, azul noche `#0f172a` y gris `#f1f5f9`.',
       },
       {
         titulo: "Exportar en el formato que corresponde",
@@ -336,7 +352,7 @@ Historia de Instagram                 1080 × 1920`,
       {
         titulo: "Ideas para darle estilo propio",
         texto:
-          "Algunas cosas que en Canva salen en minutos y cambian mucho una página:\n\n• Un fondo con formas suaves (buscá \"blob\" o \"wave\" en Elementos) en los colores del sitio.\n• Fotos recortadas en formas (círculo, arco) con el marco de Elementos → \"Marcos\".\n• Una textura de papel o grano encima de una foto, bajando la transparencia (como la Hemeroteca).\n• Caricaturas o ilustraciones del equipo para la sección Nosotros.",
+          'Algunas cosas que en Canva salen en minutos y cambian mucho una página:\n\n• Un fondo con formas suaves (buscá "blob" o "wave" en Elementos) en los colores del sitio.\n• Fotos recortadas en formas (círculo, arco) con el marco de Elementos → "Marcos".\n• Una textura de papel o grano encima de una foto, bajando la transparencia (como la Hemeroteca).\n• Caricaturas o ilustraciones del equipo para la sección Nosotros.',
       },
     ],
     links: [
@@ -351,7 +367,8 @@ Historia de Instagram                 1080 × 1920`,
     categoria: "diseno",
     icono: SwatchBook,
     color: "#f97316",
-    resumen: "Paletas, tipografías, ilustraciones, fondos y componentes listos. Todo gratis.",
+    resumen:
+      "Paletas, tipografías, ilustraciones, fondos y componentes listos. Todo gratis.",
     descripcion:
       "Una lista curada de páginas que conviene tener a mano cuando arrancás un diseño. Ninguna requiere instalar nada: entrás, elegís y copiás. La idea es que cada página que hagamos (de la Muni o personal) tenga su propia identidad sin tener que ser diseñador.",
     nivel: "Fácil",
@@ -370,46 +387,119 @@ Historia de Instagram                 1080 × 1920`,
       {
         grupo: "Colores",
         items: [
-          { nombre: "Coolors", url: "https://coolors.co", descripcion: "Generador de paletas: tocás espacio y aparece otra. Bloqueás las que te gustan." },
-          { nombre: "UI Colors", url: "https://uicolors.app", descripcion: "Le das un color y te arma la escala 50–950 lista para Tailwind." },
+          {
+            nombre: "Coolors",
+            url: "https://coolors.co",
+            descripcion:
+              "Generador de paletas: tocás espacio y aparece otra. Bloqueás las que te gustan.",
+          },
+          {
+            nombre: "UI Colors",
+            url: "https://uicolors.app",
+            descripcion:
+              "Le das un color y te arma la escala 50–950 lista para Tailwind.",
+          },
         ],
       },
       {
         grupo: "Tipografías",
         items: [
-          { nombre: "Google Fonts", url: "https://fonts.google.com", descripcion: "La biblioteca clásica. Filtrá por categoría y probá con tu propio texto." },
-          { nombre: "Fontshare", url: "https://www.fontshare.com", descripcion: "Fuentes gratuitas de muy buena calidad, menos vistas que las de Google." },
+          {
+            nombre: "Google Fonts",
+            url: "https://fonts.google.com",
+            descripcion:
+              "La biblioteca clásica. Filtrá por categoría y probá con tu propio texto.",
+          },
+          {
+            nombre: "Fontshare",
+            url: "https://www.fontshare.com",
+            descripcion:
+              "Fuentes gratuitas de muy buena calidad, menos vistas que las de Google.",
+          },
         ],
       },
       {
         grupo: "Íconos e ilustraciones",
         items: [
-          { nombre: "Lucide", url: "https://lucide.dev", descripcion: "Los íconos que usa este manual. Buscás, copiás el nombre y lo importás de lucide-react." },
-          { nombre: "unDraw", url: "https://undraw.co", descripcion: "Ilustraciones planas (medio meh) donde elegís el color principal antes de bajarlas." },
-          { nombre: "Storyset", url: "https://storyset.com", descripcion: "Ilustraciones editables y animables, varios estilos." },
+          {
+            nombre: "Lucide",
+            url: "https://lucide.dev",
+            descripcion:
+              "Los íconos que usa este manual. Buscás, copiás el nombre y lo importás de lucide-react.",
+          },
+          {
+            nombre: "unDraw",
+            url: "https://undraw.co",
+            descripcion:
+              "Ilustraciones planas (medio meh) donde elegís el color principal antes de bajarlas.",
+          },
+          {
+            nombre: "Storyset",
+            url: "https://storyset.com",
+            descripcion: "Ilustraciones editables y animables, varios estilos.",
+          },
         ],
       },
       {
         grupo: "Fondos y texturas",
         items: [
-          { nombre: "Haikei", url: "https://haikei.app", descripcion: "Olas, blobs y degradados en SVG con tus colores. Pesan casi nada." },
-          { nombre: "fffuel", url: "https://www.fffuel.co", descripcion: "Generadores de patrones, ruido, gradientes y formas en SVG." },
+          {
+            nombre: "Haikei",
+            url: "https://haikei.app",
+            descripcion:
+              "Olas, blobs y degradados en SVG con tus colores. Pesan casi nada.",
+          },
+          {
+            nombre: "fffuel",
+            url: "https://www.fffuel.co",
+            descripcion:
+              "Generadores de patrones, ruido, gradientes y formas en SVG.",
+          },
         ],
       },
       {
         grupo: "Componentes listos",
         items: [
-          { nombre: "Uiverse", url: "https://uiverse.io", descripcion: "Botones, loaders, toggles y cards hechos por la comunidad, en Tailwind o CSS." },
-          { nombre: "shadcn/ui", url: "https://ui.shadcn.com", descripcion: "Componentes accesibles que se copian a tu proyecto. Muy prolijos." },
-          { nombre: "Magic UI", url: "https://magicui.design", descripcion: "Efectos llamativos (marquees, brillos, partículas) hechos con Motion." },
+          {
+            nombre: "Uiverse",
+            url: "https://uiverse.io",
+            descripcion:
+              "Botones, loaders, toggles y cards hechos por la comunidad, en Tailwind o CSS.",
+          },
+          {
+            nombre: "shadcn/ui",
+            url: "https://ui.shadcn.com",
+            descripcion:
+              "Componentes accesibles que se copian a tu proyecto. Muy prolijos.",
+          },
+          {
+            nombre: "Magic UI",
+            url: "https://magicui.design",
+            descripcion:
+              "Efectos llamativos (marquees, brillos, partículas) hechos con Motion.",
+          },
         ],
       },
       {
         grupo: "Imágenes y animaciones",
         items: [
-          { nombre: "Squoosh", url: "https://squoosh.app", descripcion: "Comprime y convierte imágenes a WebP/AVIF en el navegador." },
-          { nombre: "Unsplash", url: "https://unsplash.com", descripcion: "Fotos libres de alta calidad." },
-          { nombre: "LottieFiles", url: "https://lottiefiles.com", descripcion: "Animaciones livianas (ícono que se dibuja, check animado, etc.)." },
+          {
+            nombre: "Squoosh",
+            url: "https://squoosh.app",
+            descripcion:
+              "Comprime y convierte imágenes a WebP/AVIF en el navegador.",
+          },
+          {
+            nombre: "Unsplash",
+            url: "https://unsplash.com",
+            descripcion: "Fotos libres de alta calidad.",
+          },
+          {
+            nombre: "LottieFiles",
+            url: "https://lottiefiles.com",
+            descripcion:
+              "Animaciones livianas (ícono que se dibuja, check animado, etc.).",
+          },
         ],
       },
     ],
@@ -464,7 +554,7 @@ Historia de Instagram                 1080 × 1920`,
       {
         titulo: "Un fondo que no sea blanco liso",
         texto:
-          "En Haikei elegís un generador (por ejemplo \"Layered Waves\" o \"Blob Scene\"), le ponés tus colores y descargás el SVG. Lo dejás en `public/` y lo usás de fondo de una sección. Pesa 2 o 3 KB y le da muchísimo carácter.",
+          'En Haikei elegís un generador (por ejemplo "Layered Waves" o "Blob Scene"), le ponés tus colores y descargás el SVG. Lo dejás en `public/` y lo usás de fondo de una sección. Pesa 2 o 3 KB y le da muchísimo carácter.',
         codigo: [
           {
             lenguaje: "tsx",
@@ -488,9 +578,10 @@ Historia de Instagram                 1080 × 1920`,
     categoria: "frameworks",
     icono: Hexagon,
     color: "#c026d3",
-    resumen: "El framework de Google que trae todo incluido y te obliga a ser ordenado.",
+    resumen:
+      "El framework de Google que trae todo incluido y te obliga a ser ordenado.",
     descripcion:
-      "Angular es un framework completo: rutas, formularios, llamadas HTTP, validaciones e inyección de dependencias vienen de fábrica, y todos los proyectos tienen la misma estructura. Eso lo hace más \"rígido\" que React, pero justamente por eso es bueno para sistemas grandes donde trabajan varias personas: cualquiera abre el proyecto y sabe dónde está cada cosa. Las versiones nuevas (17 en adelante) son mucho más simples que las viejas: componentes standalone, signals y `@if`/`@for` en los templates.",
+      'Angular es un framework completo: rutas, formularios, llamadas HTTP, validaciones e inyección de dependencias vienen de fábrica, y todos los proyectos tienen la misma estructura. Eso lo hace más "rígido" que React, pero justamente por eso es bueno para sistemas grandes donde trabajan varias personas: cualquiera abre el proyecto y sabe dónde está cada cosa. Las versiones nuevas (17 en adelante) son mucho más simples que las viejas: componentes standalone, signals y `@if`/`@for` en los templates.',
     nivel: "Intermedio",
     idealPara: "Sistemas internos grandes",
     usarCuando: [
@@ -520,7 +611,7 @@ ng serve        # abre en http://localhost:4200`,
       {
         titulo: "Entender la estructura",
         texto:
-          "Lo importante está en `src/app/`:\n\n• `app.ts` (o `app.component.ts` en versiones anteriores): el componente raíz.\n• `app.routes.ts`: qué componente se muestra en cada URL.\n• `app.config.ts`: los \"providers\" globales (rutas, HTTP, etc.).\n\nCada componente es una clase con el decorador `@Component`, que tiene su template (HTML) y sus estilos.",
+          'Lo importante está en `src/app/`:\n\n• `app.ts` (o `app.component.ts` en versiones anteriores): el componente raíz.\n• `app.routes.ts`: qué componente se muestra en cada URL.\n• `app.config.ts`: los "providers" globales (rutas, HTTP, etc.).\n\nCada componente es una clase con el decorador `@Component`, que tiene su template (HTML) y sus estilos.',
         prompt:
           "Soy dev React y estoy arrancando con Angular [versión, mirala en package.json]. Explicame la estructura de este proyecto comparándola con React: qué es un componente standalone, qué son los signals (comparado con useState), cómo funciona la inyección de dependencias (comparado con un hook o un context) y para qué sirve app.config.ts. Ejemplos cortos.",
       },
@@ -558,7 +649,8 @@ export class ListadoAgentes {
       },
       {
         titulo: "Agregar rutas",
-        texto: "En `app.routes.ts` asociás una URL a un componente. En el template del componente raíz tiene que estar `<router-outlet />`, que es donde se dibuja la página actual.",
+        texto:
+          "En `app.routes.ts` asociás una URL a un componente. En el template del componente raíz tiene que estar `<router-outlet />`, que es donde se dibuja la página actual.",
         codigo: [
           {
             lenguaje: "app.routes.ts",
@@ -604,14 +696,17 @@ export class AgentesService {
           },
         ],
         prompt:
-          "Angular [versión], componentes standalone y signals. Tengo el servicio AgentesService con listar() que devuelve un Observable<Agente[]>. Hacé que el componente ListadoAgentes lo use: mostrando \"Cargando…\" mientras espera, un mensaje si falla, y la tabla cuando llegan los datos. Usá toSignal o un signal + subscribe, lo que sea más simple, y @if/@for en el template.",
+          'Angular [versión], componentes standalone y signals. Tengo el servicio AgentesService con listar() que devuelve un Observable<Agente[]>. Hacé que el componente ListadoAgentes lo use: mostrando "Cargando…" mientras espera, un mensaje si falla, y la tabla cuando llegan los datos. Usá toSignal o un signal + subscribe, lo que sea más simple, y @if/@for en el template.',
       },
       {
         titulo: "Sumar Tailwind para usar el mismo estilo",
         texto:
           "Así podés reutilizar las clases y la paleta de este manual. Creá el archivo `.postcssrc.json` en la raíz del proyecto y agregá el import en `src/styles.css`.",
         codigo: [
-          { lenguaje: "terminal", contenido: "npm install tailwindcss @tailwindcss/postcss postcss" },
+          {
+            lenguaje: "terminal",
+            contenido: "npm install tailwindcss @tailwindcss/postcss postcss",
+          },
           {
             lenguaje: ".postcssrc.json",
             contenido: `{
@@ -633,7 +728,8 @@ export class AgentesService {
     categoria: "frameworks",
     icono: Server,
     color: "#e0234e",
-    resumen: "Backend en TypeScript, ordenado por módulos. El que usan RRHH y Asistencia.",
+    resumen:
+      "Backend en TypeScript, ordenado por módulos. El que usan RRHH y Asistencia.",
     descripcion:
       "NestJS es un framework para hacer APIs con Node.js y TypeScript. Está inspirado en Angular: todo se organiza en módulos, controllers (reciben la petición) y services (hacen el trabajo). Es lo que usamos en el back de RRHH y RRHH Asistencia. Si venís del front, es la forma más amable de empezar a hacer backend, porque es el mismo lenguaje.",
     nivel: "Intermedio",
@@ -650,7 +746,8 @@ export class AgentesService {
     pasos: [
       {
         titulo: "Crear el proyecto",
-        texto: "El CLI de Nest crea todo y te pregunta qué gestor de paquetes usar. `start:dev` reinicia solo cada vez que guardás.",
+        texto:
+          "El CLI de Nest crea todo y te pregunta qué gestor de paquetes usar. `start:dev` reinicia solo cada vez que guardás.",
         codigo: [
           {
             lenguaje: "terminal",
@@ -664,22 +761,27 @@ npm run start:dev     # http://localhost:3000`,
       {
         titulo: "Las tres piezas: módulo, controller y service",
         texto:
-          "• El controller define las rutas (`GET /agentes`, `POST /agentes`) y recibe los datos.\n• El service tiene la lógica: consultar la base, calcular, validar reglas.\n• El módulo junta un controller con sus services. Cada \"tema\" del sistema (agentes, licencias, feriados) es un módulo.\n\nRegla de oro: el controller no piensa, solo recibe y le pasa al service.",
+          '• El controller define las rutas (`GET /agentes`, `POST /agentes`) y recibe los datos.\n• El service tiene la lógica: consultar la base, calcular, validar reglas.\n• El módulo junta un controller con sus services. Cada "tema" del sistema (agentes, licencias, feriados) es un módulo.\n\nRegla de oro: el controller no piensa, solo recibe y le pasa al service.',
       },
       {
         titulo: "Un CRUD completo con un comando",
         texto:
-          "`nest g resource` genera módulo, controller, service, DTOs y entidad, con los 5 endpoints armados (listar, ver uno, crear, editar, borrar). Elegí \"REST API\" y decí que sí a los CRUD entry points.",
-        codigo: [{ lenguaje: "terminal", contenido: "nest g resource agentes" }],
+          '`nest g resource` genera módulo, controller, service, DTOs y entidad, con los 5 endpoints armados (listar, ver uno, crear, editar, borrar). Elegí "REST API" y decí que sí a los CRUD entry points.',
+        codigo: [
+          { lenguaje: "terminal", contenido: "nest g resource agentes" },
+        ],
         prompt:
-          "Estoy en NestJS con TypeORM y PostgreSQL. Generé el resource \"agentes\" con nest g resource. Completame: la entidad Agente (id, legajo único, nombre, cuil, area, activo, fechas de creación y actualización), el CreateAgenteDto con class-validator, y el service usando el Repository de TypeORM. En findAll agregá paginación (page, limit) y filtro opcional por area.",
+          'Estoy en NestJS con TypeORM y PostgreSQL. Generé el resource "agentes" con nest g resource. Completame: la entidad Agente (id, legajo único, nombre, cuil, area, activo, fechas de creación y actualización), el CreateAgenteDto con class-validator, y el service usando el Repository de TypeORM. En findAll agregá paginación (page, limit) y filtro opcional por area.',
       },
       {
         titulo: "Conectar a PostgreSQL",
         texto:
-          "Con TypeORM, cada tabla es una clase (\"entidad\"). Ojo: `synchronize: true` crea y modifica las tablas solo, es cómodo para desarrollo pero nunca se usa en producción porque puede borrar columnas.",
+          'Con TypeORM, cada tabla es una clase ("entidad"). Ojo: `synchronize: true` crea y modifica las tablas solo, es cómodo para desarrollo pero nunca se usa en producción porque puede borrar columnas.',
         codigo: [
-          { lenguaje: "terminal", contenido: "npm i @nestjs/typeorm typeorm pg @nestjs/config" },
+          {
+            lenguaje: "terminal",
+            contenido: "npm i @nestjs/typeorm typeorm pg @nestjs/config",
+          },
           {
             lenguaje: "app.module.ts",
             contenido: `@Module({
@@ -727,7 +829,10 @@ export class Agente {
         texto:
           "Nunca confíes en lo que manda el front. Con los decoradores de class-validator en el DTO y un `ValidationPipe` global, Nest rechaza solo cualquier pedido mal armado con un error 400 claro.",
         codigo: [
-          { lenguaje: "terminal", contenido: "npm i class-validator class-transformer" },
+          {
+            lenguaje: "terminal",
+            contenido: "npm i class-validator class-transformer",
+          },
           {
             lenguaje: "create-agente.dto.ts",
             contenido: `import { IsInt, IsOptional, IsString, Length } from "class-validator";
@@ -750,7 +855,7 @@ await app.listen(3000);`,
       {
         titulo: "Probar los endpoints",
         texto:
-          "Con la extensión REST Client de VS Code (o Thunder Client / Postman) probás sin tener el front. Creá un archivo `pruebas.http` y apretá \"Send Request\" arriba de cada pedido.",
+          'Con la extensión REST Client de VS Code (o Thunder Client / Postman) probás sin tener el front. Creá un archivo `pruebas.http` y apretá "Send Request" arriba de cada pedido.',
         codigo: [
           {
             lenguaje: "pruebas.http",
@@ -769,7 +874,10 @@ Content-Type: application/json
     ],
     links: [
       { label: "Documentación oficial", url: "https://docs.nestjs.com" },
-      { label: "Nest + TypeORM", url: "https://docs.nestjs.com/techniques/database" },
+      {
+        label: "Nest + TypeORM",
+        url: "https://docs.nestjs.com/techniques/database",
+      },
     ],
   },
 
@@ -781,7 +889,8 @@ Content-Type: application/json
     categoria: "datos",
     icono: Database,
     color: "#3b82f6",
-    resumen: "La base de datos de los sistemas grandes, y el programa para verla con ventanitas.",
+    resumen:
+      "La base de datos de los sistemas grandes, y el programa para verla con ventanitas.",
     descripcion:
       "PostgreSQL es la base de datos relacional que usamos en los sistemas serios (RRHH, Asistencia). pgAdmin es el programa para manejarla con interfaz gráfica: ver tablas, correr consultas, importar datos y hacer backups sin saber todos los comandos de memoria. Se instalan juntos.",
     nivel: "Intermedio",
@@ -845,14 +954,20 @@ SELECT * FROM agentes WHERE activo = true ORDER BY nombre;`,
       {
         titulo: "Backup y restore",
         texto:
-          "Antes de cualquier cambio grande: click derecho en la base → Backup… → formato Custom. Para volver atrás: click derecho → Restore… y elegís ese archivo. Es tu botón de \"deshacer\".",
+          'Antes de cualquier cambio grande: click derecho en la base → Backup… → formato Custom. Para volver atrás: click derecho → Restore… y elegís ese archivo. Es tu botón de "deshacer".',
         prompt:
           "Tengo esta consulta SQL en PostgreSQL que tarda mucho: [pegá la consulta]. Las tablas tienen esta estructura: [pegá los CREATE TABLE]. ¿Cómo la optimizo? Decime qué índices crear y cómo verificarlo con EXPLAIN ANALYZE.",
       },
     ],
     links: [
-      { label: "Descargar PostgreSQL", url: "https://www.postgresql.org/download/windows/" },
-      { label: "Documentación de pgAdmin", url: "https://www.pgadmin.org/docs/" },
+      {
+        label: "Descargar PostgreSQL",
+        url: "https://www.postgresql.org/download/windows/",
+      },
+      {
+        label: "Documentación de pgAdmin",
+        url: "https://www.pgadmin.org/docs/",
+      },
     ],
   },
   {
@@ -861,7 +976,8 @@ SELECT * FROM agentes WHERE activo = true ORDER BY nombre;`,
     categoria: "datos",
     icono: Package,
     color: "#10b981",
-    resumen: "Un backend completo en un solo archivo: base de datos, login, archivos y panel admin.",
+    resumen:
+      "Un backend completo en un solo archivo: base de datos, login, archivos y panel admin.",
     descripcion:
       "PocketBase es un ejecutable que, cuando lo abrís, te da una base de datos, una API lista para usar, login de usuarios, subida de archivos y un panel de administración web para cargar datos. Cero código de backend. Es perfecto para sitios públicos chicos, prototipos, formularios y proyectos personales: en 10 minutos tenés un back funcionando.",
     nivel: "Fácil",
@@ -910,7 +1026,8 @@ SELECT * FROM agentes WHERE activo = true ORDER BY nombre;`,
       },
       {
         titulo: "Usarlo desde React",
-        texto: "Con el SDK oficial, leer y escribir es una línea. Creá un archivo `pb.ts` con la conexión y usalo desde cualquier componente.",
+        texto:
+          "Con el SDK oficial, leer y escribir es una línea. Creá un archivo `pb.ts` con la conexión y usalo desde cualquier componente.",
         codigo: [
           { lenguaje: "terminal", contenido: "pnpm add pocketbase" },
           {
@@ -939,7 +1056,7 @@ pb.authStore.isValid; // true si está logueado`,
           },
         ],
         prompt:
-          "Uso PocketBase con el SDK de JS (\"pocketbase\") en React + TypeScript + Tailwind. Tengo la colección \"noticias\" con campos: titulo (text), cuerpo (editor), imagen (file), publicada (bool). Creame un hook useNoticias() que traiga las publicadas ordenadas por fecha, con estados de carga y error, y un componente que las muestre en cards con la imagen usando pb.files.getURL. Tipá el record.",
+          'Uso PocketBase con el SDK de JS ("pocketbase") en React + TypeScript + Tailwind. Tengo la colección "noticias" con campos: titulo (text), cuerpo (editor), imagen (file), publicada (bool). Creame un hook useNoticias() que traiga las publicadas ordenadas por fecha, con estados de carga y error, y un componente que las muestre en cards con la imagen usando pb.files.getURL. Tipá el record.',
       },
       {
         titulo: "Llevarlo a un servidor",
@@ -949,7 +1066,10 @@ pb.authStore.isValid; // true si está logueado`,
     ],
     links: [
       { label: "Documentación oficial", url: "https://pocketbase.io/docs/" },
-      { label: "SDK de JavaScript", url: "https://github.com/pocketbase/js-sdk" },
+      {
+        label: "SDK de JavaScript",
+        url: "https://github.com/pocketbase/js-sdk",
+      },
     ],
   },
   {
@@ -959,7 +1079,8 @@ pb.authStore.isValid; // true si está logueado`,
     categoria: "datos",
     icono: Braces,
     color: "#84cc16",
-    resumen: "Pasar un Excel o CSV a JSON y usarlo en tu página. Con conversor incluido.",
+    resumen:
+      "Pasar un Excel o CSV a JSON y usarlo en tu página. Con conversor incluido.",
     descripcion:
       "JSON es el formato en el que viajan casi todos los datos en la web: lo que devuelve una API, lo que guardás en un archivo de configuración, lo que lee tu componente. Muchas veces la información nos llega en Excel (listado de barrios, de dependencias, de feriados) y hay que pasarla a JSON para usarla. Acá tenés cómo hacerlo, y un conversor que funciona dentro de esta misma página.",
     nivel: "Fácil",
@@ -1016,7 +1137,11 @@ pb.authStore.isValid; // true si está logueado`,
         texto:
           "Con SheetJS se lee el archivo directo en el navegador, sin mandarlo al servidor. Así lo hace RRHH Asistencia: lee, muestra para revisar, y recién ahí guarda.",
         codigo: [
-          { lenguaje: "terminal", contenido: "pnpm add https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz" },
+          {
+            lenguaje: "terminal",
+            contenido:
+              "pnpm add https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz",
+          },
           {
             lenguaje: "tsx",
             contenido: `import * as XLSX from "xlsx";
@@ -1042,7 +1167,8 @@ async function leerExcel(archivo: File) {
       },
       {
         titulo: "Traer JSON de una API",
-        texto: "`fetch` + `.json()`. Siempre chequeá `res.ok`, porque fetch no tira error cuando el servidor responde 404 o 500.",
+        texto:
+          "`fetch` + `.json()`. Siempre chequeá `res.ok`, porque fetch no tira error cuando el servidor responde 404 o 500.",
         codigo: [
           {
             lenguaje: "ts",
@@ -1061,8 +1187,105 @@ const feriados: Feriado[] = await res.json();`,
       },
     ],
     links: [
-      { label: "JSON en MDN", url: "https://developer.mozilla.org/es/docs/Learn/JavaScript/Objects/JSON" },
+      {
+        label: "JSON en MDN",
+        url: "https://developer.mozilla.org/es/docs/Learn/JavaScript/Objects/JSON",
+      },
       { label: "SheetJS", url: "https://docs.sheetjs.com" },
+    ],
+  },
+
+  // ══════════════════════════ DESPLIEGUE ══════════════════════════
+  {
+    id: "netlify",
+    nombre: "Netlify",
+    categoria: "despliegue",
+    icono: Rocket,
+    color: "#05bdba",
+    resumen:
+      "Subir tu página a internet gratis, en minutos y sin configurar un servidor.",
+    descripcion:
+      "Netlify agarra la carpeta que genera `pnpm build` y la publica en internet con un link propio (`tu-sitio.netlify.app`), HTTPS incluido. Lo podés usar de dos formas: arrastrando la carpeta `dist` al navegador (ideal para mostrar algo rápido), o conectando tu repositorio de GitHub para que cada `git push` actualice la página sola. El plan gratis alcanza de sobra para portfolios, prototipos y demos para mostrarle a otra área.",
+    nivel: "Fácil",
+    idealPara: "Prototipos, demos y portfolios",
+    usarCuando: [
+      "Querés mostrarle un avance a alguien de otra área con un link, sin que tenga que instalar nada.",
+      "Tu portfolio o página personal: queda online gratis y se actualiza con cada push.",
+      "Sitios hechos con React + Vite (o HTML suelto) que no necesitan un backend propio.",
+    ],
+    evitarCuando: [
+      "Sistemas con backend propio (NestJS, PostgreSQL, PocketBase): Netlify solo sirve el front, el servidor va en otro lado.",
+      "Sistemas oficiales de la Muni o con datos de vecinos y agentes: eso se publica en los servidores de la Muni, coordinado con infraestructura.",
+      "Guardar claves o contraseñas en variables `VITE_`: todo lo que empieza con `VITE_` termina visible en el navegador.",
+    ],
+    pasos: [
+      {
+        titulo: "Crear la cuenta",
+        texto:
+          "Entrá a netlify.com y registrate con tu cuenta de GitHub. Así después podés conectar tus repositorios sin pasos extra. El plan gratis no pide tarjeta: si un mes te pasás del límite, el sitio se pausa hasta el mes siguiente, no te cobran.",
+      },
+      {
+        titulo: "La forma rápida: arrastrar y soltar",
+        texto:
+          "Generá la versión final de tu proyecto. Vite la deja en la carpeta `dist`. Después entrá a `app.netlify.com/drop` y arrastrá esa carpeta entera a la página. En unos segundos te da un link para compartir.\n\nSirve para mostrar algo puntual. La contra es que, cada vez que cambies algo, tenés que volver a hacer el build y arrastrar la carpeta de nuevo.",
+        codigo: [{ lenguaje: "terminal", contenido: "pnpm build" }],
+      },
+      {
+        titulo: "La forma recomendada: conectar GitHub",
+        texto:
+          "En el panel: \"Add new project → Import an existing project → GitHub\" y elegí tu repositorio. Netlify detecta que es Vite y completa los datos solo. Revisá que queden así y tocá \"Deploy\".\n\nA partir de ahí, cada `git push` a `main` vuelve a publicar la página automáticamente. Si el build falla, la versión anterior sigue online, así que nunca queda rota.",
+        codigo: [
+          {
+            lenguaje: "configuración",
+            contenido: `Build command:      pnpm build
+Publish directory:  dist`,
+          },
+        ],
+      },
+      {
+        titulo: "Arreglar el 404 al recargar (React Router)",
+        texto:
+          "Es el error más común: la página anda, pero si recargás en `/tecnologias` o pegás un link directo, aparece \"Page not found\". Pasa porque Netlify busca un archivo con ese nombre y no existe: las rutas las maneja React. Se arregla con un archivo `_redirects` dentro de `public/` que le dice que todo vaya a `index.html`.",
+        codigo: [
+          {
+            lenguaje: "public/_redirects",
+            contenido: "/*    /index.html    200",
+          },
+        ],
+        prompt:
+          "Subí mi proyecto React + Vite + React Router a Netlify y al recargar en una ruta que no es la principal me da 404. Explicame por qué pasa y cómo lo arreglo con un archivo _redirects o un netlify.toml.",
+      },
+      {
+        titulo: "Variables de entorno",
+        texto:
+          "Si tu front usa la URL de una API, no la escribas fija en el código: cargala en \"Project configuration → Environment variables\" con el mismo nombre que en tu `.env` (por ejemplo `VITE_API_URL`) y volvé a hacer el deploy.\n\nOjo: lo que empieza con `VITE_` queda dentro del JavaScript que descarga el usuario. Sirve para URLs públicas, nunca para contraseñas o tokens privados.",
+        codigo: [
+          {
+            lenguaje: "ts",
+            contenido: `const res = await fetch(\`\${import.meta.env.VITE_API_URL}/noticias\`);`,
+          },
+        ],
+      },
+      {
+        titulo: "Nombre del sitio y vistas previas",
+        texto:
+          "Por defecto el link es un nombre al azar. Cambialo en \"Project configuration → Change project name\" por algo claro, como `hemeroteca-demo.netlify.app`.\n\nBonus: si trabajás con Pull Requests, Netlify arma un link aparte para cada uno (Deploy Preview). Así otra persona revisa el cambio funcionando antes de mergearlo.",
+      },
+      {
+        titulo: "Si el deploy falla",
+        texto:
+          "Entrá a \"Deploys\", abrí el que falló y mirá el log. Casi siempre es una de estas: un error de TypeScript que en tu PC ignorabas, un import con mayúsculas distintas al nombre del archivo (Windows no distingue, Linux sí), o la versión de Node. Copiá el log entero y pasáselo a tu IA.",
+        prompt:
+          "Mi deploy en netlify falla. Es un proyecto React + Vite + TypeScript con pnpm. Este es el log completo del build: [pegá el log]. Decime cuál es el error, en qué archivo está y cómo arreglarlo.",
+      },
+    ],
+    links: [
+      { label: "Documentación oficial", url: "https://docs.netlify.com" },
+      { label: "Netlify Drop", url: "https://app.netlify.com/drop" },
+      {
+        label: "Redirects y rutas de SPA",
+        url: "https://docs.netlify.com/routing/redirects/",
+      },
     ],
   },
 ];

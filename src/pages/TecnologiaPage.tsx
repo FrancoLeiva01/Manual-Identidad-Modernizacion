@@ -26,7 +26,7 @@ const ejemplos = {
 const titulosDemo: Record<NonNullable<Tecnologia["demo"]>, string> = {
   motion: "Probalo acá",
   json: "Conversor a JSON",
-  paletas: "Paletas que funcionan",
+  paletas: "Paletas que funcionan para tu próxima página",
 };
 
 export function TecnologiaPage() {
