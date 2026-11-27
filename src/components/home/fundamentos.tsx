@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy, X } from "lucide-react";
+import { Check, Copy, Download, X } from "lucide-react";
 
 // Colores tomados del isologotipo de Catamarca Capital + neutros para una página blanca.
 // Ante cualquier duda, manda el manual oficial que está en el Dropbox.
@@ -134,11 +134,27 @@ export function Fundamentos() {
         <div>
           <Titulo>Logo</Titulo>
           <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-borde">
-            <div className="flex items-center justify-center bg-white p-6">
+            <div className="flex flex-col items-center justify-center gap-4 bg-white p-6">
               <img src={LOGO_COLOR} alt="Isologotipo a color" className="h-12 w-auto object-contain sm:h-14" />
+              <a
+                href={LOGO_COLOR}
+                download="Isologotipo_Catamarca_Capital_color.png"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-[#0B2454]/20 px-3 py-1.5 text-xs font-medium text-[#0B2454] transition-colors hover:bg-[#0B2454] hover:text-white"
+              >
+                <Download size={14} />
+                Descargar PNG
+              </a>
             </div>
-            <div className="flex items-center justify-center bg-[#0B2454] p-6">
+            <div className="flex flex-col items-center justify-center gap-4 bg-[#0B2454] p-6">
               <img src={LOGO_BLANCO} alt="Isologotipo blanco" className="h-12 w-auto object-contain sm:h-14" />
+              <a
+                href={LOGO_BLANCO}
+                download="Isologotipo_Catamarca_Capital_blanco.png"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-white/30 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-white hover:text-[#0B2454]"
+              >
+                <Download size={14} />
+                Descargar PNG
+              </a>
             </div>
           </div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">

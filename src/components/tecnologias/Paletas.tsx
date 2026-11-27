@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Check } from "lucide-react";
-import { paletas, type Color, type Paleta } from "../../content/paletas";
+import { Check, Sparkles } from "lucide-react";
+import { conceptoPaleta, paletas, type Color, type Paleta } from "../../content/paletas";
 
-// Texto oscuro o claro según qué tan luminoso es el color de fondo
+const CONCEPTO = "concepto";
+
 function textoSobre(hex: string) {
   const n = parseInt(hex.slice(1), 16);
   const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
@@ -30,15 +31,17 @@ function Muestra({ color, rol, onCopiar, copiado }: { color: Color; rol: string;
 function TarjetaPaleta({ p }: { p: Paleta }) {
   const [copiado, setCopiado] = useState<string | null>(null);
 
-  async function copiar(hex: string) {
+  async function copiar(clave: string) {
     try {
-      await navigator.clipboard.writeText(hex);
-      setCopiado(hex);
-      setTimeout(() => setCopiado(null), 1200);
+      await navigator.clipboard.writeText(clave === CONCEPTO ? conceptoPaleta(p) : clave);
+      setCopiado(clave);
+      setTimeout(() => setCopiado(null), clave === CONCEPTO ? 2000 : 1200);
     } catch {
-      // sin permiso de portapapeles
     }
   }
+
+  const muestras: [string, Color][] = [["Fondo", p.fondo], ["Texto", p.texto], ["Acento", p.acento]];
+  if (p.acento2) muestras.push(["Acento 2", p.acento2]);
 
   return (
     <div className="flex flex-col overflow-hidden rounded-2xl border border-borde bg-superficie shadow-lg">
@@ -84,7 +87,7 @@ function TarjetaPaleta({ p }: { p: Paleta }) {
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex gap-2">
-          {([["Fondo", p.fondo], ["Texto", p.texto], ["Acento", p.acento]] as const).map(([rol, c]) => (
+          {muestras.map(([rol, c]) => (
             <Muestra key={rol} rol={rol} color={c} copiado={copiado === c.hex} onCopiar={() => copiar(c.hex)} />
           ))}
         </div>
@@ -92,6 +95,23 @@ function TarjetaPaleta({ p }: { p: Paleta }) {
           <p className="font-semibold text-texto">{p.sensacion}</p>
           <p className="text-texto-suave">Ideal para: {p.idealPara}</p>
         </div>
+        <button
+          type="button"
+          onClick={() => copiar(CONCEPTO)}
+          title="Copia colores, vibra y estilo en un texto listo para pegarle a tu IA"
+          style={copiado === CONCEPTO ? undefined : { borderColor: p.acento.hex }}
+          className={`mt-auto flex items-center justify-center gap-2 rounded-xl border-2 px-3 py-2 text-sm font-bold transition-colors cursor-pointer ${
+            copiado === CONCEPTO
+              ? "border-green-600 bg-green-600 text-white"
+              : "bg-transparent text-texto hover:bg-black/5 dark:hover:bg-white/10"
+          }`}
+        >
+          {copiado === CONCEPTO ? (
+            <><Check size={16} /> ¡Concepto copiado! Pegáselo a tu IA</>
+          ) : (
+            <><Sparkles size={16} /> Copiar concepto</>
+          )}
+        </button>
       </div>
     </div>
   );
@@ -104,7 +124,9 @@ export function Paletas() {
         <p className="font-bold">La receta de todas: 60 · 30 · 10</p>
         <p className="mt-1 text-texto-suave">
           60% un fondo tranquilo, 30% el color del texto y 10% un acento que grite (botones, una palabra, un detalle).
-          Si querés que se vea "caro", poné una palabra del título en serif itálica. Tocá un color para copiarlo.
+          Si querés que se vea "caro", poné una palabra del título en serif itálica. Tocá un color para copiarlo, o
+          usá <b className="text-texto">Copiar concepto</b> para llevarte colores, vibra y estilo en un texto listo para
+          pegarle a tu IA.
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

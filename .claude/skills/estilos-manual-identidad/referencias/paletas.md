@@ -25,8 +25,16 @@ Todas las paletas son de **tres colores**:
 | Póster cálido | Crimson Red `#BE123C` | Warm Cream `#FFF7ED` | Peach Orange `#FDBA74` | Enérgica, artesanal | Campañas, talleres | [ver](inspiracion/paleta-poster-calido.png) |
 | Interiorismo | Verde bosque `#2E4A3A` | Lino `#E9E1D6` | Terracota `#E0904A` | Natural, cálida | Vivienda, ambiente | [ver](inspiracion/landing-interiorismo-verde.png) |
 | Amigable | Amarillo sol `#FFC81E` | Grafito `#1F1F1F` | Blanco `#FFFFFF` | Alegre, cercana | Zoonosis, adopciones, escuelas | [ver](inspiracion/landing-veterinaria-amarillo.png) |
+| Deportivo | Celeste suave `#B3DEE9` | Azul marino `#002740` | Naranja coral `#FD6B6B` | Activa, limpia | Deportes, torneos, polideportivos | [ver](inspiracion/paleta-deportivo.jpg) |
+| Tech contraste | Negro `#070201` | Celeste `#B5DFF5` | Rojo amapola `#E1081F` | Futurista, alto contraste | Innovación, startups | [ver](inspiracion/paleta-tech-contraste.jpg) |
+| Producto nocturno | Ink Heather `#262A33` | Putty Grey `#CDC8BC` | Canary Flash `#FFE014` | Premium, de producto | Lanzamientos, apps | [ver](inspiracion/paleta-producto-nocturno.jpg) |
+| Librería nocturna | Azul noche `#1B1A2E` | Blanco marfil `#F4EDE1` | Dorado `#E3B65B` (+ Rojo lacre `#C8372D` en botones) | Íntima, literaria | Bibliotecas, cultura | [ver](inspiracion/paleta-libreria-nocturna.jpg) |
+| Militar arena | Arena desierto `#CFB994` | Verde oliva `#3F432A` | Amarillo señal `#FFD21F` | Robusta, técnica | Defensa civil, emergencias | [ver](inspiracion/paleta-militar-arena.jpg) |
+| Cafetería | Latte cream `#EFE2CF` | Coffee brown `#4A2C1D` | Mustard `#E0A526` | Cálida, artesanal | Gastronomía, ferias | [ver](inspiracion/paleta-cafeteria.jpg) |
 
-Los hex de Interiorismo y Amigable son aproximados (sacados a ojo de la captura); el resto vienen escritos en el video.
+Los hex de Interiorismo y Amigable son aproximados (sacados a ojo de la captura), igual que el fondo y el texto de Producto nocturno y Militar arena (muestreados de la landing); el resto vienen escritos en el video.
+
+Cada paleta de `src/content/paletas.ts` tiene además una lista `estilo` y la card tiene un botón **Copiar concepto** que arma un prompt (colores + vibra + estilo + reglas) para pegarle a una IA.
 
 Ojo: **Arquitectura** usa el naranja `#F97316` del manual y **Editorial costero** un teal casi igual al cyan del manual: son las más fáciles de combinar con la identidad de la Muni.
 
